@@ -1,0 +1,15 @@
+{
+  "name": "movieapp",
+  "version": "1.0.0",
+  "description": "An app to test my skills with the most advance javascript tools",
+  "main": "index.html",
+  "author": "Stiven Bautista <stivenb1994@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "live-server"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
