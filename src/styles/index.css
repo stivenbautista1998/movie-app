@@ -1,0 +1,34 @@
+:root {
+    --main-dark: #000;
+    --main-red: #f24343;
+    --main-yellow: #fbe337;
+    --white: #FFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.header-section {
+    border: 1px solid;
+    display: flex;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1rem;
+}
+
+.first-movie-section {
+    height: 320px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
