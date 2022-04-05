@@ -14,6 +14,7 @@
 html {
     font-size: 62.5%;
     font-family: 'Quicksand', sans-serif;
+    background-color: var(--main-dark);
 }
 
 .header-section {
@@ -24,11 +25,56 @@ html {
     align-items: center;
     justify-content: space-around;
     font-size: 1rem;
+    color: var(--white);
+}
+
+.first-movie-section, .movie-image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .first-movie-section {
     height: 320px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+}
+
+.general-section {
+    margin: 1.5em;
+}
+
+.tittle-section {
+    margin-bottom: .5em;
+    color: var(--white);
+}
+
+.movie-container {
+    display: grid;
+    grid-template-rows: 160px;
+    grid-auto-columns: 95px;
+    grid-auto-flow: column;
+    grid-gap: 5px;
+    overflow-x: auto;
+}
+
+.movie-image {
+    height: 135px;
+}
+
+.movie-text {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+    font-size: .8rem;
+    color: var(--white);
+}
+
+.movie-rate {
+    font-size: 1.2rem;
+    color: var(--main-yellow);
+    display: inline-block;
+    margin: 0.2em;
+}
+
+.movie-container::-webkit-scrollbar {
+    width: 0;
 }

@@ -38,4 +38,16 @@ async function getTopMovies(limit = 3) {
     }
 }
 
-export { getMovieById, getTopMovies };
+async function getAllGenres() {
+    const endPoint = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
+
+    try {
+        const result = await fetch(endPoint);
+        const data = await result.json();
+        return data;
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
+export { getMovieById, getTopMovies, getAllGenres };
