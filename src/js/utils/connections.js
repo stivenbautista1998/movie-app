@@ -9,7 +9,7 @@ async function getMovieById(movieId) {
         let data = await result.json();
         return data;
     } catch (err) {
-        console.error(err.message);
+        console.warn(err.message);
     }
 }
 
@@ -21,20 +21,20 @@ async function getTrending() {
         const data = await result.json();
         return data.results;
     } catch (err) {
-        console.error(err.message);
+        console.warn(err.message);
     }
 }
 
-async function getTopMovies(limit = 3) {
+async function getTopMovies() {
 
     try {
         const result = await getTrending();
-        const moviesSelected = result.slice(0, limit);
-        const movieFetches = moviesSelected.map((movie) => getMovieById(movie.id));
+        // const moviesSelected = result.slice(0, limit);
+        const movieFetches = result.map((movie) => getMovieById(movie.id));
         let moviesInfo = await Promise.all(movieFetches);
         return moviesInfo;
     } catch (err) {
-        console.error(err.message);
+        console.warn(err.message);
     }
 }
 
@@ -46,8 +46,20 @@ async function getAllGenres() {
         const data = await result.json();
         return data;
     } catch (err) {
-        console.log(err.message);
+        console.warn(err.message);
     }
 }
 
-export { getMovieById, getTopMovies, getAllGenres };
+async function getMoviesByGenre(genreId) {
+    const endPoint = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreId}`;
+
+    try {
+        const result = await fetch(endPoint);
+        const data = await result.json();
+        return data.results;
+    } catch (err) {
+        console.warn(err.message);
+    }
+}
+
+export { getMovieById, getTopMovies, getAllGenres, getMoviesByGenre };

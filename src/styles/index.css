@@ -35,16 +35,20 @@ html {
 }
 
 .first-movie-section {
-    height: 320px;
+    height: 300px;
 }
 
 .general-section {
-    margin: 1.5em;
+    margin: 0 1.5em;
 }
 
-.tittle-section {
+.tittle-section, .first-tittle {
     margin-bottom: .5em;
     color: var(--white);
+}
+
+.first-tittle {
+    margin: .5em 0;
 }
 
 .movie-container {
@@ -52,8 +56,9 @@ html {
     grid-template-rows: 160px;
     grid-auto-columns: 95px;
     grid-auto-flow: column;
-    grid-gap: 5px;
+    grid-column-gap: 10px;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .movie-image {

@@ -1,17 +1,22 @@
-import { getMovieById, getTopMovies, getAllGenres } from './utils/connections.js';
-let divFirstMovie, divTrendingMovies;
+import { getMovieById, getTopMovies, getAllGenres, getMoviesByGenre } from './utils/connections.js';
+let divFirstMovie, divTrendingMovies, divRomanticMovies;
+
+const GENRESTOSHOW = {
+    romance: 10749,
+    animation: 16,
+    comedy: 35,
+    horror: 27,
+    Fantasy: 14
+}
 
 window.addEventListener("load", () => {
-    console.log("working carajo!!");
     divFirstMovie = document.querySelector("#js-first-movie-section");
     divTrendingMovies = document.querySelector("#js-trending-movies");
+    divRomanticMovies = document.querySelector("#js-romantic-movies");
     
-    // first movie to show.
-    renderFirstMovie();
-
+    renderFirstMovie(); // first movie to show.
     renderTopMovies();
-
-    renderGenres();
+    renderRomanceMovies();
 });
 
 async function renderFirstMovie() {
@@ -19,12 +24,12 @@ async function renderFirstMovie() {
     divFirstMovie.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${data.poster_path}')`;
 }
 
-async function renderTopMovies() {
+function renderMovies(moviesInfo) {
     let movieList = "";
-    const movies = await getTopMovies(6);
-    console.log(movies);
-    movies.forEach(movie => {
-        if(movie?.id) {
+    
+    console.log(moviesInfo);
+    moviesInfo.forEach(movie => { 
+        if(movie?.poster_path) {
             movieList += 
             `<div class="movie-info">
                 <div class="movie-image" style="background-image: url('https://image.tmdb.org/t/p/w500${movie.poster_path}');">
@@ -36,10 +41,24 @@ async function renderTopMovies() {
             </div>`;
         }
     });
-    divTrendingMovies.innerHTML = movieList;
+    return movieList;
 }
 
-async function renderGenres() {
-    const genres = await getAllGenres();
-    console.log(genres);
+async function renderTopMovies() {
+    const movies = await getTopMovies();
+    const bestTrendingMovies = renderMovies(movies);
+
+    divTrendingMovies.innerHTML = bestTrendingMovies;
 }
+
+
+async function renderRomanceMovies() {
+    const moviesInfo = await getMoviesByGenre(GENRESTOSHOW.romance);
+    const romanceMovies = renderMovies(moviesInfo);
+    
+    divRomanticMovies.innerHTML = romanceMovies;
+}
+
+// const genresList = await getAllGenres();
+// console.log(genresList.genres);
+
