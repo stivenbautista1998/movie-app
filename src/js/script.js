@@ -1,5 +1,7 @@
-import { getMovieById, getTopMovies, getMoviesByGenre } from './utils/connections.js';
-let divFirstMovie, divTrendingMovies, divRomanticMovies, divAnimationMovies, divHorrorMovies, divMysteryMovies;
+import { getMovieById, getTopMovies, getMoviesByGenre, getAllGenres } from './utils/connections.js';
+import { registerMovie } from './utils/observer.js'
+let divFirstMovie, divTrendingMovies, divRomanticMovies, divAnimationMovies, 
+divHorrorMovies, divMysteryMovies, menuBtn, menuTab, closeBtn, categoryList;
 
 const GENRESTOSHOW = {
     romance: 10749,
@@ -15,6 +17,13 @@ window.addEventListener("load", () => {
     divAnimationMovies = document.querySelector("#js-animation-movies");
     divHorrorMovies = document.querySelector("#js-horror-movies");
     divMysteryMovies = document.querySelector("#js-mystery-movies");
+    menuBtn = document.querySelector("#js-menu");
+    menuTab = document.querySelector("#js-menu-tab");
+    closeBtn = document.querySelector("#js-close-menu");
+    categoryList = document.querySelector("#js-category-list");
+
+    menuBtn.onclick = showMenu;
+    closeBtn.onclick = closeMenu;
     
     renderFirstMovie(); // first movie to show.
     renderTopMovies();
@@ -22,7 +31,35 @@ window.addEventListener("load", () => {
     renderAnimationMovies();
     renderMysteryMovies();
     renderHorrorMovies();
+
+    loadMenuGenres();
 });
+
+function showMenu() {
+    console.log("clicked!! ok");
+    document.body.classList.add("no-scroll");
+    menuTab.classList.add("visible");
+}
+
+function closeMenu() {
+    document.body.classList.remove("no-scroll");
+    menuTab.classList.remove("visible");
+}
+
+async function loadMenuGenres() {
+    const  dataList = await getAllGenres();
+    const genresList = generateCategoryList(dataList.genres);
+    categoryList.innerHTML = genresList;
+}
+
+function generateCategoryList(data) {
+    let categoryList = "";
+    data.forEach((item) => {
+        categoryList += `<li data-id="${item.id}" class="category-item">${item.name}</li>`
+    });
+
+    return categoryList;
+}
 
 async function renderFirstMovie() {
     const data = await getMovieById("406759"); // 76341 naruto: 317442
@@ -33,10 +70,10 @@ function renderMovies(moviesInfo) {
     let movieList = "";
     
     moviesInfo.forEach(movie => { 
-        if(movie?.poster_path) {
+        if(movie?.poster_path) { // we add the img info to the dataset to use it with the Intersection Observer.
             movieList += 
             `<div class="movie-info">
-                <div class="movie-image" style="background-image: url('https://image.tmdb.org/t/p/w500${movie.poster_path}');">
+                <div data-img-url="url('https://image.tmdb.org/t/p/w500${movie.poster_path}')" class="movie-image">
                 </div>
                 <div class="movie-text">
                     <h3 class="movie-name">${movie.original_title}</h3>
@@ -53,6 +90,7 @@ async function renderTopMovies() {
     const bestTrendingMovies = renderMovies(movies);
 
     divTrendingMovies.innerHTML = bestTrendingMovies;
+    observingMovies(); // this is added here bc for some reason "renderTopMovies" is the last function to be execute.
 }
 
 
@@ -84,6 +122,8 @@ async function renderHorrorMovies() {
     divHorrorMovies.innerHTML = horrorMovies;
 }
 
-// const genresList = await getAllGenres();
-// console.log(genresList.genres);
+function observingMovies() {
+    let imageMovies = document.querySelectorAll(".movie-image");
+    imageMovies.forEach((movieImg) => registerMovie(movieImg));
+}
 

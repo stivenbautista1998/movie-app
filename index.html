@@ -9,10 +9,48 @@
     <script src="/src/js/script.js" type="module"></script>
 </head>
 <body>
+    <div id="js-menu-tab" class="menu-tab">
+        <div>
+            <div class="menu-header">
+                <h2 class="menu-tittle">MovieApp</h2>
+                <img id="js-close-menu" src="./src/assets/icons/close.svg" alt="close icon">
+            </div>
+            <div class="menu-user-info">
+                <img id="js-close-menu" class="menu-avatar" src="./src/assets/imgs/avatar.jpeg" alt="close icon">
+                <div class="menu-avatar__text">
+                    <div>
+                        <p class="menu-user__greeting">Welcome</p>
+                        <p class="menu-user__name">Stiven Bautista</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-category">
+            <h2 class="menu-second-tittle">Categories</h2>
+            <ul id="js-category-list" class="list-category">
+                <li class="category-item">Romance</li>
+                <li class="category-item">Terror</li>
+            </ul>
+        </div>
+        <div class="menu-user">
+            <div class="menu-user__container">
+                <img src="./src/assets/icons/favorite-menu.svg" alt="">
+                <p class="menu-user__item">Your List</p>
+            </div>
+            <div class="menu-user__container">
+                <img src="./src/assets/icons/user-icon.svg" alt="">
+                <p class="menu-user__item">Profile</p>
+            </div>
+            <div class="menu-user__container">
+                <img src="./src/assets/icons/log-out.svg" alt="">
+                <p class="menu-user__item">Log Out</p>
+            </div>
+        </div>
+    </div>
     <div class="wrapper">
         <header class="header-section">
             <div class="header-menu">
-                <img src="./src/assets/icons/menu.svg" alt="menu image">
+                <img id="js-menu" src="./src/assets/icons/menu.svg" alt="menu image">
             </div>
             <div class="header-tittle">
                 <h1>MovieApp</h1>
