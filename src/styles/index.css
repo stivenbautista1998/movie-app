@@ -3,6 +3,7 @@
     --main-red: #f24343;
     --main-yellow: #fbe337;
     --white: #FFF;
+    --second-dark: #1b1a1a;
 }
 
 * {
@@ -36,6 +37,7 @@ html {
 
 .first-movie-section {
     height: 300px;
+    background-color: #22276b;
 }
 
 .general-section {
@@ -93,11 +95,11 @@ html {
     position: fixed;
     width: 90vw;
     height: 100vh;
-    background-color: #22276b;
-    padding: 3em;
+    padding: 2em 3em;
     transform: translateX(-90vw);
     transition: transform .2s;
     color: var(--white);
+    background-color: var(--second-dark);
 }
 
 .visible {
