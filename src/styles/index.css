@@ -70,6 +70,7 @@ html {
 .movie-image {
     height: 132px;
     background-color: #22276b;
+    position: relative;
 }
 
 .movie-text {
@@ -82,7 +83,7 @@ html {
     padding: 0.6em;
 }
 
-.movie-name {
+.movie-name { /* fixing the overflow text problem */
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -111,6 +112,7 @@ html {
     transition: transform .2s;
     color: var(--white);
     background-color: var(--second-dark);
+    z-index: 1;
 }
 
 .visible {

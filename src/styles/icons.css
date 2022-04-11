@@ -8,11 +8,26 @@
     color: #AAA;
 }
 
-.selected-item .icon-movies {
+/* .selected-item .icon-movies {
     color: #FFF;
-}
+} */
 
 .icon-star {
     width: 1em;
     height: 1em;
+}
+
+.icon-watchlist {
+    width: 3em;
+    height: 3em;
+    position: absolute;
+    right: 2px;
+}
+
+.icon-favorite {
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    right: 7px;
+    top: 3px;
 }

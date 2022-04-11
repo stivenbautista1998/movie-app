@@ -74,6 +74,8 @@ function renderMovies(moviesInfo) {
             movieList += 
             `<div class="movie-info">
                 <div data-img-url="url('https://image.tmdb.org/t/p/w500${movie.poster_path}')" class="movie-image">
+                    <img class="icon-watchlist" src="./src/assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
+                    <img class="icon-favorite" src="./src/assets/icons/favorite.svg" alt="favorite icon">
                 </div>
                 <div class="movie-text">
                     <h3 class="movie-name">${movie.title}</h3>
