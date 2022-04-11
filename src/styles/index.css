@@ -55,7 +55,7 @@ html {
 
 .movie-container {
     display: grid;
-    grid-template-rows: 160px;
+    grid-template-rows: 175px;
     grid-auto-columns: 90px;
     grid-auto-flow: column;
     grid-column-gap: 10px;
@@ -75,9 +75,18 @@ html {
 .movie-text {
     display: flex;
     justify-content: space-between;
-    height: 25px;
+    height: 40px;
     font-size: .8rem;
     color: var(--white);
+    background-color: #222;
+    padding: 0.6em;
+}
+
+.movie-name {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
 }
 
 .movie-rate {
@@ -85,6 +94,8 @@ html {
     color: var(--main-yellow);
     display: inline-block;
     margin: 0.2em;
+    text-align: center;
+    max-width: 17px;
 }
 
 .movie-container::-webkit-scrollbar {

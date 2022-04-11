@@ -11,3 +11,8 @@
 .selected-item .icon-movies {
     color: #FFF;
 }
+
+.icon-star {
+    width: 1em;
+    height: 1em;
+}

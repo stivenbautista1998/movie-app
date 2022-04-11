@@ -76,8 +76,11 @@ function renderMovies(moviesInfo) {
                 <div data-img-url="url('https://image.tmdb.org/t/p/w500${movie.poster_path}')" class="movie-image">
                 </div>
                 <div class="movie-text">
-                    <h3 class="movie-name">${movie.original_title}</h3>
-                    <span class="movie-rate">${movie.vote_average}</span>
+                    <h3 class="movie-name">${movie.title}</h3>
+                    <span class="movie-rate">
+                    <img class="icon-star" src="./src/assets/icons/star.svg" alt="star icon">
+                        ${movie.vote_average}
+                    </span>
                 </div>
             </div>`;
         }
@@ -87,6 +90,7 @@ function renderMovies(moviesInfo) {
 
 async function renderTopMovies() {
     const movies = await getTopMovies();
+    console.log(movies);
     const bestTrendingMovies = renderMovies(movies);
 
     divTrendingMovies.innerHTML = bestTrendingMovies;
