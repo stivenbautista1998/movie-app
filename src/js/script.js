@@ -55,7 +55,7 @@ async function loadMenuGenres() {
 function generateCategoryList(data) {
     let categoryList = "";
     data.forEach((item) => {
-        categoryList += `<li data-id="${item.id}" class="category-item">${item.name}</li>`
+        categoryList += `<a href="#" data-id="${item.id}" class="category-item">${item.name}</a>`
     });
 
     return categoryList;

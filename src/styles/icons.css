@@ -1,0 +1,13 @@
+
+.icon-facebook, .icon-instagram, .icon-twitter {
+    width: 2em;
+    height: 2em;
+}
+
+.icon-movies, .icon-tv, .icon-favorite-menu, .icon-user, .icon-log-out {
+    color: #AAA;
+}
+
+.selected-item .icon-movies {
+    color: #FFF;
+}
