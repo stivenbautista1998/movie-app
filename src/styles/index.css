@@ -19,7 +19,7 @@ html {
 }
 
 .header-section {
-    border-bottom: 1px solid;
+    box-shadow: 0px 0px 7px #777;
     display: flex;
     width: 100%;
     height: 50px;
@@ -235,4 +235,35 @@ html {
 
 .header-hidden {
     transform: translateY(-50px);
+}
+
+.search-container {
+    width: 90%;
+    height: 80%;
+    background-color: rgb(47 47 47 / 80%);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.search-input {
+    width: 80%;
+    font-size: 1.5rem;
+    background-color: transparent;
+    border: none;
+    color: var(--white);
+}
+
+.search-input::placeholder {
+    color: #c7c7c7;
+}
+
+.search-input:focus-visible {
+    outline: none;
+}
+
+.hide-element {
+    display: none;
 }

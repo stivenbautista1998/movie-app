@@ -15,7 +15,7 @@
         <div>
             <div class="menu-header">
                 <h2 class="menu-tittle">MovieApp</h2>
-                <img id="js-close-menu" src="./src/assets/icons/close.svg" alt="close icon">
+                <img id="js-close-menu" class="icon-close" src="./src/assets/icons/close.svg" alt="close icon">
             </div>
             <div class="menu-user-info">
                 <img id="js-close-menu" class="menu-avatar" src="./src/assets/imgs/avatar.jpeg" alt="close icon">
@@ -68,14 +68,19 @@
     </div>
     <div class="wrapper">
         <header id="js-header" class="header-section">
+            <div id="js-search-container" class="search-container hide-element">
+                <img class="icon-search" src="./src/assets/icons/search.svg" alt="search image">
+                <input id="js-search-input" class="search-input" type="text" placeholder="search...">
+                <img id="js-close-search" class="icon-close" src="./src/assets/icons/close.svg" alt="close icon">
+            </div>
             <div class="header-menu">
                 <img id="js-menu" src="./src/assets/icons/menu.svg" alt="menu image">
             </div>
-            <div class="header-tittle">
+            <div id="js-nav-tittle" class="header-tittle">
                 <h1>MovieApp</h1>
             </div>
             <div class="header-search">
-                <img src="./src/assets/icons/search.svg" alt="search image">
+                <img id="js-search-btn" class="icon-search" src="./src/assets/icons/search.svg" alt="search image">
             </div>
         </header>
 

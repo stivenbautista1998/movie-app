@@ -31,3 +31,8 @@
     right: 7px;
     top: 3px;
 }
+
+.icon-search, .icon-close {
+    width: 2em;
+    height: 2em;
+}
