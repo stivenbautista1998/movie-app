@@ -1,7 +1,8 @@
 import { getMovieById, getTopMovies, getMoviesByGenre, getAllGenres } from './utils/connections.js';
 import { registerMovie } from './utils/observer.js'
 let divFirstMovie, divTrendingMovies, divRomanticMovies, divAnimationMovies, 
-divHorrorMovies, divMysteryMovies, menuBtn, menuTab, closeBtn, categoryList;
+divHorrorMovies, divMysteryMovies, menuBtn, menuTab, closeBtn, categoryList, 
+headerPage;
 
 const GENRESTOSHOW = {
     romance: 10749,
@@ -21,6 +22,7 @@ window.addEventListener("load", () => {
     menuTab = document.querySelector("#js-menu-tab");
     closeBtn = document.querySelector("#js-close-menu");
     categoryList = document.querySelector("#js-category-list");
+    headerPage = document.querySelector("#js-header");
 
     menuBtn.onclick = showMenu;
     closeBtn.onclick = closeMenu;
@@ -33,7 +35,23 @@ window.addEventListener("load", () => {
     renderHorrorMovies();
 
     loadMenuGenres();
+
+    scrollHeader();
 });
+
+function scrollHeader() {
+    let lastScrollY = window.scrollY;
+
+    window.onscroll = () => {
+        if(lastScrollY < window.scrollY) {
+            headerPage.classList.add("header-hidden");
+        } else {
+            headerPage.classList.remove("header-hidden");
+        }
+
+        lastScrollY = window.scrollY;
+    }
+}
 
 function showMenu() {
     console.log("clicked!! ok");

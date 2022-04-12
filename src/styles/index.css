@@ -27,6 +27,11 @@ html {
     justify-content: space-around;
     font-size: 1rem;
     color: var(--white);
+    position: fixed;
+    background-color: rgba(0,0,0,0.8);
+    top: 0;
+    z-index: 1;
+    transition: transform .2s;
 }
 
 .first-movie-section, .movie-image {
@@ -36,7 +41,7 @@ html {
 }
 
 .first-movie-section {
-    height: 300px;
+    height: 350px;
     background-color: #22276b;
 }
 
@@ -112,7 +117,7 @@ html {
     transition: transform .2s;
     color: var(--white);
     background-color: var(--second-dark);
-    z-index: 1;
+    z-index: 2;
 }
 
 .visible {
@@ -226,4 +231,8 @@ html {
 
 .selected-item {
     color: var(--white);
+}
+
+.header-hidden {
+    transform: translateY(-50px);
 }
