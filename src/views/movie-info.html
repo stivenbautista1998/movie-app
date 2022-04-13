@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieApp</title>
+    <link rel="shortcut icon" href="../assets/imgs/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/icons.css">
+    <script src="../js/scripts/header.js" type="module"></script>
+    <script src="../js/scripts/movie-info.js" type="module"></script>
+</head>
+<body>
+    <div id="js-menu-tab" class="menu-tab">
+        <div>
+            <div class="menu-header">
+                <h2 class="menu-tittle">MovieApp</h2>
+                <img id="js-close-menu" class="icon-close" src="../assets/icons/close.svg" alt="close icon">
+            </div>
+            <div class="menu-user-info">
+                <img id="js-close-menu" class="menu-avatar" src="../assets/imgs/avatar.jpeg" alt="close icon">
+                <div class="menu-avatar__text">
+                    <div>
+                        <p class="menu-user__greeting">Welcome</p>
+                        <p class="menu-user__name">Stiven Bautista</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-user">
+            <a class="menu-user__container selected-item" href="#">
+                <img class="icon-movies" src="../assets/icons/movie-icon.svg" alt="movie icon">
+                <p class="menu-user__item">Movies</p>
+            </a>
+            <a class="menu-user__container" href="#">
+                <img class="icon-tv" src="../assets/icons/tv.svg" alt="tv icon">
+                <p class="menu-user__item">Tv Shows</p>
+            </a>
+            <a class="menu-user__container" href="#">
+                <img class="icon-favorite-menu" src="../assets/icons/favorite-menu.svg" alt="list icon">
+                <p class="menu-user__item">Your List</p>
+            </a>
+            <a class="menu-user__container" href="#">
+                <img class="icon-user" src="../assets/icons/user-icon.svg" alt="profile icon">
+                <p class="menu-user__item">Profile</p>
+            </a>
+            <a class="menu-user__container" href="#">
+                <img class="icon-log-out" src="../assets/icons/log-out.svg" alt="log out icon">
+                <p class="menu-user__item">Log Out</p>
+            </a>
+        </div>
+        <div class="menu-category">
+            <h2 class="menu-second-tittle">Categories</h2>
+            <ul id="js-category-list" class="list-category">
+                <li class="category-item">Loading...</li>
+                <li class="category-item">Loading...</li>
+                <li class="category-item">Loading...</li>
+            </ul>
+        </div>
+        <div>
+            <div class="social-items">
+                <img class="icon-facebook" src="../assets/icons/facebook.svg" alt="Facebook icon">
+                <img class="icon-instagram" src="../assets/icons/instagram.svg" alt="Instagram icon">
+                <img class="icon-twitter" src="../assets/icons/twitter.svg" alt="Twitter icon">
+            </div>
+            <span class="copyright-text">© Stiven Bautista</span>
+        </div>
+    </div>
+    <div class="wrapper">
+        <header id="js-header" class="header-section">
+            <div id="js-search-container" class="search-container hide-element">
+                <img class="icon-search" src="../assets/icons/search.svg" alt="search image">
+                <input id="js-search-input" class="search-input" type="text" placeholder="search...">
+                <img id="js-close-search" class="icon-close" src="../assets/icons/close.svg" alt="close icon">
+            </div>
+            <div class="header-menu">
+                <img id="js-menu" src="../assets/icons/menu.svg" alt="menu image">
+            </div>
+            <div id="js-nav-tittle" class="header-tittle">
+                <h1>MovieApp</h1>
+            </div>
+            <div class="header-search">
+                <img id="js-search-btn" class="icon-search" src="../assets/icons/search.svg" alt="search image">
+            </div>
+        </header>
+
+        <main>
+            <section class="general-section">
+                <h2 class="first-tittle">Movie Name</h2>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

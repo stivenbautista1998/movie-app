@@ -1,15 +1,14 @@
-import { getMovieById, getTopMovies, getMoviesByGenre, getAllGenres } from './utils/connections.js';
-import { registerMovie } from './utils/observer.js'
+import { getMovieById, getTopMovies, getMoviesByGenre } from '../utils/connections.js';
+import { registerMovie } from '../utils/observer.js'
 let divFirstMovie, divTrendingMovies, divRomanticMovies, divAnimationMovies, 
-divHorrorMovies, divMysteryMovies, menuBtn, menuTab, closeBtn, categoryList, 
-headerPage, searchBtn, menuTittle, searchContainer, closeSearch, searchInput;
+divHorrorMovies, divMysteryMovies;
 
 const GENRESTOSHOW = {
     romance: 10749,
     animation: 16,
     horror: 27,
     mystery: 9648
-}
+};
 
 window.addEventListener("load", () => {
     divFirstMovie = document.querySelector("#js-first-movie-section");
@@ -17,22 +16,7 @@ window.addEventListener("load", () => {
     divRomanticMovies = document.querySelector("#js-romantic-movies");
     divAnimationMovies = document.querySelector("#js-animation-movies");
     divHorrorMovies = document.querySelector("#js-horror-movies");
-    divMysteryMovies = document.querySelector("#js-mystery-movies");
-    menuBtn = document.querySelector("#js-menu");
-    menuTittle = document.querySelector("#js-nav-tittle");
-    searchBtn = document.querySelector("#js-search-btn");
-    menuTab = document.querySelector("#js-menu-tab");
-    closeBtn = document.querySelector("#js-close-menu");
-    categoryList = document.querySelector("#js-category-list");
-    headerPage = document.querySelector("#js-header");
-    searchContainer = document.querySelector("#js-search-container");
-    closeSearch = document.querySelector("#js-close-search");
-    searchInput = document.querySelector("#js-search-input");
-
-    menuBtn.onclick = showMenu;
-    closeBtn.onclick = closeMenu;
-    searchBtn.onclick = showSearchInput;
-    closeSearch.onclick = closeSearchInput;
+    divMysteryMovies = document.querySelector("#js-mystery-movies");    
     
     renderFirstMovie(); // first movie to show.
     renderTopMovies();
@@ -40,65 +24,7 @@ window.addEventListener("load", () => {
     renderAnimationMovies();
     renderMysteryMovies();
     renderHorrorMovies();
-
-    loadMenuGenres();
-
-    scrollHeader();
 });
-
-function scrollHeader() {
-    let lastScrollY = window.scrollY;
-
-    window.onscroll = () => {
-        if(lastScrollY < window.scrollY) {
-            headerPage.classList.add("header-hidden");
-        } else {
-            headerPage.classList.remove("header-hidden");
-        }
-
-        lastScrollY = window.scrollY;
-    }
-}
-
-function showMenu() {
-    document.body.classList.add("no-scroll");
-    menuTab.classList.add("visible");
-}
-
-function closeMenu() {
-    document.body.classList.remove("no-scroll");
-    menuTab.classList.remove("visible");
-}
-
-function showSearchInput() {
-    menuBtn.classList.add("hide-element");
-    menuTittle.classList.add("hide-element");
-    searchBtn.classList.add("hide-element");
-    searchContainer.classList.remove("hide-element");
-    searchInput.focus();
-}
-
-function closeSearchInput() {
-    searchContainer.classList.add("hide-element");
-    menuBtn.classList.remove("hide-element");
-    menuTittle.classList.remove("hide-element");
-    searchBtn.classList.remove("hide-element");
-}
-
-async function loadMenuGenres() {
-    const  dataList = await getAllGenres();
-    const genresList = generateCategoryList(dataList.genres);
-    categoryList.innerHTML = genresList;
-}
-
-function generateCategoryList(data) {
-    let categoryList = "";
-    data.forEach((item) => {
-        categoryList += `<a href="#" data-id="${item.id}" class="category-item">${item.name}</a>`
-    });
-
-    return categoryList;
-}
 
 async function renderFirstMovie() {
     const data = await getMovieById("406759"); // 76341 naruto: 317442
