@@ -1,0 +1,38 @@
+.wrapper {
+    margin-top: 60px;
+    color: var(--white);
+}
+
+.menu-tab {
+    top: 0;
+}
+
+.movie-info {
+    max-width: 900px;
+}
+
+.movie-info__tittle {
+    margin: 0.5em;
+    font-size: 2rem;
+}
+
+.movie-info__image-wrapper {
+    position: relative;
+}
+
+.movie-info__bg-image {
+    width: 100%;
+}
+
+.movie-info__image {
+    width: 30%;
+    position: absolute;
+    bottom: -45px;
+    left: 10px;
+}
+
+.movie-info__sub-info {
+    text-align: right;
+    font-size: 1.5rem;
+    margin: 0.2em 0.5em;
+}
