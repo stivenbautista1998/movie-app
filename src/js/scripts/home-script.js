@@ -1,4 +1,4 @@
-import { getMovieById, getTopMovies, getMoviesByGenre } from '../utils/connections.js';
+import { getMovieById, getTopMovies, getMoviesByGenre, IMAGE_URL } from '../utils/connections.js';
 import { registerMovie } from '../utils/observer.js'
 let divFirstMovie, divTrendingMovies, divRomanticMovies, divAnimationMovies, 
 divHorrorMovies, divMysteryMovies;
@@ -28,7 +28,7 @@ window.addEventListener("load", () => {
 
 async function renderFirstMovie() {
     const data = await getMovieById("406759"); // 76341 naruto: 317442
-    divFirstMovie.style.backgroundImage = `url('https://image.tmdb.org/t/p/w500${data.poster_path}')`;
+    divFirstMovie.style.backgroundImage = `url('${IMAGE_URL}${data.poster_path}')`;
 }
 
 function renderMovies(moviesInfo) {
@@ -39,7 +39,7 @@ function renderMovies(moviesInfo) {
             movieList += 
             `<div class="movie-info">
                 <a href="http://127.0.0.1:8080/src/views/movie-info.html?movieId=${movie.id}">
-                    <div data-img-url="url('https://image.tmdb.org/t/p/w500${movie.poster_path}')" class="movie-image">
+                    <div data-img-url="url('${IMAGE_URL}${movie.poster_path}')" class="movie-image">
                         <img class="icon-watchlist" src="./src/assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="./src/assets/icons/favorite.svg" alt="favorite icon">
                     </div>

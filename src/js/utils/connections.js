@@ -1,4 +1,5 @@
 const API_KEY = "7518e90bd9bc2a6fa53eef1c15f77b7d";
+const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
 async function getFetchInfo(myEndPoint) {
     try {
@@ -12,6 +13,12 @@ async function getFetchInfo(myEndPoint) {
 
 async function getMovieById(movieId) {
     const endpoint = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
+    const data = await getFetchInfo(endpoint);
+    return data;
+}
+
+async function getFullMovieInfo(movieId) {
+    const endpoint = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&append_to_response=videos`;
     const data = await getFetchInfo(endpoint);
     return data;
 }
@@ -46,4 +53,11 @@ async function getMoviesByGenre(genreId) {
     if(data?.results) return data.results;
 }
 
-export { getMovieById, getTopMovies, getAllGenres, getMoviesByGenre };
+export { 
+    getMovieById, 
+    getTopMovies, 
+    getAllGenres, 
+    getMoviesByGenre, 
+    getFullMovieInfo,
+    IMAGE_URL
+};
