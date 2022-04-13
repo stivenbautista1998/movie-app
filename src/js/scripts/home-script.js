@@ -38,10 +38,12 @@ function renderMovies(moviesInfo) {
         if(movie?.poster_path) { // we add the img info to the dataset to use it with the Intersection Observer.
             movieList += 
             `<div class="movie-info">
-                <div data-img-url="url('https://image.tmdb.org/t/p/w500${movie.poster_path}')" class="movie-image">
-                    <img class="icon-watchlist" src="./src/assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
-                    <img class="icon-favorite" src="./src/assets/icons/favorite.svg" alt="favorite icon">
-                </div>
+                <a href="http://127.0.0.1:8080/src/views/movie-info.html?movieId=${movie.id}">
+                    <div data-img-url="url('https://image.tmdb.org/t/p/w500${movie.poster_path}')" class="movie-image">
+                        <img class="icon-watchlist" src="./src/assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
+                        <img class="icon-favorite" src="./src/assets/icons/favorite.svg" alt="favorite icon">
+                    </div>
+                </a>
                 <div class="movie-text">
                     <h3 class="movie-name">${movie.title}</h3>
                     <span class="movie-rate">
@@ -94,6 +96,12 @@ async function renderHorrorMovies() {
 
 function observingMovies() {
     let imageMovies = document.querySelectorAll(".movie-image");
-    imageMovies.forEach((movieImg) => registerMovie(movieImg));
+    imageMovies.forEach((movieImg) => {
+        registerMovie(movieImg); // tracking every movie card with the observer
+        /* movieImg.onclick = () => redirectToPage(movieImg.dataset.id); */
+    });
 }
 
+/* function redirectToPage(movieId) {
+    console.log(movieId);
+} */
