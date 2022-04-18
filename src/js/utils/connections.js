@@ -18,7 +18,7 @@ async function getMovieById(movieId) {
 }
 
 async function getFullMovieInfo(movieId) {
-    const endpoint = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&append_to_response=videos`;
+    const endpoint = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&append_to_response=videos,similar,credits`;
     const data = await getFetchInfo(endpoint);
     return data;
 }
