@@ -76,9 +76,11 @@ function getCast(data, amountToShow) {
     let castList = "";
     for (let index = 0; index < amountToShow; index++) {
         const cast = data[index];
+        let datasetImage = `data-img-url="url('${IMAGE_URL}${cast.profile_path}')"`;
+        
         castList += 
         `<div class="movie-info">
-            <div data-img-url="url('${IMAGE_URL}${cast.profile_path}')" class="movie-image">
+            <div ${cast.profile_path !== null ? datasetImage : ""} class="movie-image">
             </div>
             <div class="movie-text cast-text">
                 <h3 class="cast-name">${cast.name}</h3>
@@ -95,10 +97,11 @@ function getMovieRelated(data) {
     console.log(data);
     let movieList = "";
     data.forEach((movie) => {
+        let datasetImage = `data-img-url="url('${IMAGE_URL}${movie.poster_path}')"`;
         movieList += 
             `<div class="movie-info">
                 <a href="http://127.0.0.1:8080/src/views/movie-info.html?movieId=${movie.id}">
-                    <div data-img-url="url('${IMAGE_URL}${movie.poster_path}')" class="movie-image">
+                    <div ${movie.poster_path !== null ? datasetImage : ""} class="movie-image">
                         <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
                     </div>
