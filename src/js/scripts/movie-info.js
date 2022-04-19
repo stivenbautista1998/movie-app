@@ -50,11 +50,11 @@ function createDomMovieInfo(movie) {
             <article class="general-section cast-section">
                 <h2 class="tittle-section">Casting</h2>
                 <div id="js-cast-movies" class="movie-container">
-                    ${getCast(movie.credits.cast, 10)}
+                    ${movie.credits.cast.length !== 0 ? getCast(movie.credits.cast, 10) : ""}
                 </div>
             </article>
             <article class="general-section">
-                <h2 class="tittle-section">Related Movies</h2>
+                <h2 class="tittle-section">Similar Movies</h2>
                 <div id="js-related-movies" class="movie-container">
                     ${getMovieRelated(movie.similar.results)}
                 </div>
@@ -76,29 +76,32 @@ function getCast(data, amountToShow) {
     let castList = "";
     for (let index = 0; index < amountToShow; index++) {
         const cast = data[index];
-        let datasetImage = `data-img-url="url('${IMAGE_URL}${cast.profile_path}')"`;
         
-        castList += 
-        `<div class="movie-info">
-            <div ${cast.profile_path !== null ? datasetImage : ""} class="movie-image">
-            </div>
-            <div class="movie-text cast-text">
-                <h3 class="cast-name">${cast.name}</h3>
-                <span class="cast-character">
-                    ${cast.character}
-                </span>
-            </div>
-        </div>`;
+        if(cast?.id) {            
+            let datasetImage = `data-img-url="url('${IMAGE_URL}${cast.profile_path}')"`;
+        
+            castList +=
+            `<div class="movie-info">
+                <div ${cast.profile_path !== null ? datasetImage : ""} class="movie-image">
+                </div>
+                <div class="movie-text cast-text">
+                    <h3 class="cast-name">${cast.name}</h3>
+                    <span class="cast-character">
+                        ${cast.character}
+                    </span>
+                </div>
+            </div>`;
+        }
     }
     return castList;
 }
 
 function getMovieRelated(data) {
-    console.log(data);
     let movieList = "";
     data.forEach((movie) => {
-        let datasetImage = `data-img-url="url('${IMAGE_URL}${movie.poster_path}')"`;
-        movieList += 
+        if(movie?.id) {
+            let datasetImage = `data-img-url="url('${IMAGE_URL}${movie.poster_path}')"`;
+            movieList += 
             `<div class="movie-info">
                 <a href="http://127.0.0.1:8080/src/views/movie-info.html?movieId=${movie.id}">
                     <div ${movie.poster_path !== null ? datasetImage : ""} class="movie-image">
@@ -114,6 +117,7 @@ function getMovieRelated(data) {
                     </span>
                 </div>
             </div>`;
+        }
     });
     return movieList;
 }

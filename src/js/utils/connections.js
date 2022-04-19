@@ -53,11 +53,18 @@ async function getMoviesByGenre(genreId) {
     if(data?.results) return data.results;
 }
 
+async function queryWithWord(wordToSearch) {
+    const endPoint = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${wordToSearch}`;
+    const data = await getFetchInfo(endPoint);
+    if(data?.results) return data.results;
+}
+
 export { 
     getMovieById, 
     getTopMovies, 
     getAllGenres, 
     getMoviesByGenre, 
     getFullMovieInfo,
+    queryWithWord,
     IMAGE_URL
 };
