@@ -55,8 +55,9 @@ async function getMoviesByGenre(genreId) {
     if(data?.results) return data.results;
 }
 
-async function queryWithWord(wordToSearch) {
-    const endPoint = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${wordToSearch}`;
+async function queryWithWord(query, content) {
+    let type = (content === "movie" ? "movie" : "tv");
+    const endPoint = `https://api.themoviedb.org/3/search/${type}?api_key=${API_KEY}&query=${query}`;
     const data = await getFetchInfo(endPoint);
     if(data?.results) return data.results;
 }

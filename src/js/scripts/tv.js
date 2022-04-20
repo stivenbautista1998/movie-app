@@ -1,7 +1,12 @@
-import { getTvById, getTvByGenre, IMAGE_URL } from '../utils/connections.js';
+import { 
+    getTvById, 
+    getTvByGenre, 
+    queryWithWord, 
+    IMAGE_URL 
+} from '../utils/connections.js';
 import { registerMovie } from '../utils/observer.js';
 let divFirstMovie, divActionAdventureTv, divAnimationTv, divComedyTv, 
-divDrama, divWarAndPolitics;
+divDrama, divWarAndPolitics, searchInput, rootSearch;
 
 window.addEventListener("load", () => {
     divFirstMovie = document.querySelector("#js-first-movie-section");
@@ -10,6 +15,8 @@ window.addEventListener("load", () => {
     divComedyTv = document.querySelector("#js-comedy");
     divDrama = document.querySelector("#js-drama");
     divWarAndPolitics = document.querySelector("#js-war-politics");
+    searchInput = document.querySelector("#js-search-input");
+    rootSearch = document.querySelector("#js-search-root");
     
     renderFirstMovie();
 
@@ -23,6 +30,7 @@ window.addEventListener("load", () => {
         observingMovies();
     });
 
+    searchInput.addEventListener("keydown", searchMovie);
 });
 
 const GENRESTOSHOW = {
@@ -98,6 +106,40 @@ async function renderWarAndPoliticsTv() {
     const warAndPoliticsTv = renderMovies(moviesInfo);
     
     divWarAndPolitics.innerHTML = warAndPoliticsTv;
+}
+
+async function searchMovie(event) {
+    if(event.keyCode === 13) {      
+        let { value } = event.target; 
+        if(value !== "") {
+            const data = await queryWithWord(value, "tv");
+
+            if(data.length !== 0) {
+                const movieResults = renderMovies(data);
+                rootSearch.innerHTML = `
+                <section class="general-section">
+                    <h2 class="first-tittle">Series Results</h2>
+                    <div class="movie-search-items">
+                        ${movieResults}
+                    </div>
+                </section>`;
+                observingMovies();
+                divFirstMovie.style.display = "none";
+                rootSearch.style.paddingTop = "5em";
+                console.log(data);
+            } else {
+                rootSearch.innerHTML = `
+                <section class="general-section">
+                    <div class="not-found-section">
+                        <img class="not-found-image" src="../assets/imgs/not-found.png" alt="not found image">
+                    </div>
+                </section>`;
+                divFirstMovie.style.display = "none";
+                rootSearch.style.paddingTop = "5em";
+                console.log(data);
+            }
+        }
+    }
 }
 
 
