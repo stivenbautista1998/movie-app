@@ -275,3 +275,8 @@ html {
 .hide-element {
     display: none;
 }
+
+.no-link-style {
+    text-decoration: none;
+    color: var(--white);
+}
