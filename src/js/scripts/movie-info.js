@@ -1,11 +1,19 @@
-import { getMovieById, getFullMovieInfo, IMAGE_URL } from '../utils/connections.js'
-import { registerMovie } from "../utils/observer.js"
-let rootApp;
+import { 
+    getFullMovieInfo, 
+    queryWithWord, 
+    IMAGE_URL 
+} from '../utils/connections.js';
+import { registerMovie } from "../utils/observer.js";
+let rootApp, searchInput;
 
 window.addEventListener("load", () => {
     rootApp = document.querySelector("#app");
+    searchInput = document.querySelector("#js-search-input");
+
     const movieId = getParameters("movieId");
-    renderMovieInfo(movieId);
+    renderMovieInfo(movieId); // execute the whole movie info section.
+
+    searchInput.addEventListener("keydown", searchMovie);
 });
 
 async function renderMovieInfo(id) {
@@ -128,4 +136,51 @@ function observingCast() {
         registerMovie(castImg); // tracking every movie card with the observer
         /* movieImg.onclick = () => redirectToPage(movieImg.dataset.id); */
     });
+}
+
+function renderMovies(moviesInfo) {
+    let movieList = "";
+    
+    moviesInfo.forEach(movie => { 
+        if(movie?.id) {
+            let datasetImage = `data-img-url="url('${IMAGE_URL}${movie.poster_path}')"`; // we add the img info to the dataset to use it with the Intersection Observer.
+            movieList += 
+            `<div class="movie-info">
+                <a href="http://127.0.0.1:8080/src/views/movie-info.html?movieId=${movie.id}">
+                    <div ${movie.poster_path !== null ? datasetImage : ""} class="movie-image">
+                        <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
+                        <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
+                    </div>
+                </a>
+                <div class="movie-text">
+                    <h3 class="movie-name">${movie.title}</h3>
+                    <span class="movie-rate">
+                    <img class="icon-star" src="../assets/icons/star.svg" alt="star icon">
+                        ${movie.vote_average}
+                    </span>
+                </div>
+            </div>`;
+        }
+    });
+    return movieList;
+}
+
+async function searchMovie(event) {
+    if(event.keyCode === 13) {      
+        let { value } = event.target; 
+        if(value !== "") {
+            const data = await queryWithWord(value);
+            const movieResults = renderMovies(data);
+
+            rootApp.innerHTML = `
+            <section class="general-section">
+                <h2 class="first-tittle">Movie Results</h2>
+                <div class="movie-search-items">
+                    ${movieResults}
+                </div>
+            </section>`;
+            observingCast();
+            console.log(data);
+        }
+    }
 }
