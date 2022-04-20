@@ -41,8 +41,14 @@ async function getTopMovies() {
     }
 }
 
-async function getAllGenres() {
+async function getMovieGenres() {
     const endPoint = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
+    const data = await getFetchInfo(endPoint);
+    return data;
+}
+
+async function getTvGenre() {
+    const endPoint = `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}`;
     const data = await getFetchInfo(endPoint);
     return data;
 }
@@ -62,7 +68,8 @@ async function queryWithWord(wordToSearch) {
 export { 
     getMovieById, 
     getTopMovies, 
-    getAllGenres, 
+    getMovieGenres, 
+    getTvGenre,
     getMoviesByGenre, 
     getFullMovieInfo,
     queryWithWord,

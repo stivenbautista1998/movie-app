@@ -1,4 +1,4 @@
-import { getAllGenres } from '../utils/connections.js'
+import { getMovieGenres } from '../utils/connections.js'
 let categoryList, menuBtn, menuTittle, searchBtn, closeBtn, closeSearch,
 menuTab, searchContainer, searchInput, headerPage;
 
@@ -38,7 +38,7 @@ function scrollHeader() {
 }
 
 async function loadMenuGenres() {
-    const  dataList = await getAllGenres();
+    const  dataList = await getMovieGenres();
     const genresList = generateCategoryList(dataList.genres);
     categoryList.innerHTML = genresList;
 }
