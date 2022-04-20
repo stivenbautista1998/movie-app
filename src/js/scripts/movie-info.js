@@ -170,17 +170,27 @@ async function searchMovie(event) {
         let { value } = event.target; 
         if(value !== "") {
             const data = await queryWithWord(value);
-            const movieResults = renderMovies(data);
 
-            rootApp.innerHTML = `
-            <section class="general-section">
-                <h2 class="first-tittle">Movie Results</h2>
-                <div class="movie-search-items">
-                    ${movieResults}
-                </div>
-            </section>`;
-            observingCast();
-            console.log(data);
+            if(data.length !== 0) {
+                const movieResults = renderMovies(data);
+
+                rootApp.innerHTML = `
+                <section class="general-section">
+                    <h2 class="first-tittle">Movie Results</h2>
+                    <div class="movie-search-items">
+                        ${movieResults}
+                    </div>
+                </section>`;
+                observingCast();
+                console.log(data);
+            } else {
+                rootApp.innerHTML = `
+                <section class="general-section">
+                    <div class="not-found-section">
+                        <img class="not-found-image" src="../assets/imgs/not-found.png" alt="not found image">
+                    </div>
+                </section>`;
+            }
         }
     }
 }
