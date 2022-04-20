@@ -1,6 +1,8 @@
 const API_KEY = "7518e90bd9bc2a6fa53eef1c15f77b7d";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
+// ============  movies  ================
+
 async function getFetchInfo(myEndPoint) {
     try {
         let result = await fetch(myEndPoint);
@@ -47,12 +49,6 @@ async function getMovieGenres() {
     return data;
 }
 
-async function getTvGenre() {
-    const endPoint = `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}`;
-    const data = await getFetchInfo(endPoint);
-    return data;
-}
-
 async function getMoviesByGenre(genreId) {
     const endPoint = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`;
     const data = await getFetchInfo(endPoint);
@@ -65,13 +61,37 @@ async function queryWithWord(wordToSearch) {
     if(data?.results) return data.results;
 }
 
+
+// ============  tv  ================
+
+async function getTvById(tvId) {
+    const endpoint = `https://api.themoviedb.org/3/tv/${tvId}?api_key=${API_KEY}`;
+    const data = await getFetchInfo(endpoint);
+    return data;
+}
+
+async function getTvGenres() {
+    const endPoint = `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}`;
+    const data = await getFetchInfo(endPoint);
+    return data;
+}
+
+async function getTvByGenre(genreId) {
+    const endPoint = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=${genreId}`;
+    const data = await getFetchInfo(endPoint);
+    if(data?.results) return data.results;
+}
+
+
 export { 
     getMovieById, 
     getTopMovies, 
     getMovieGenres, 
-    getTvGenre,
     getMoviesByGenre, 
     getFullMovieInfo,
     queryWithWord,
+    getTvGenres,
+    getTvById,
+    getTvByGenre,
     IMAGE_URL
 };

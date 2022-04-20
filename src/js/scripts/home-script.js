@@ -27,11 +27,17 @@ window.addEventListener("load", () => {
     rootSearch = document.querySelector("#js-search-root");
     
     renderFirstMovie(); // first movie to show.
-    renderTopMovies();
-    renderRomanceMovies();
-    renderAnimationMovies();
-    renderMysteryMovies();
-    renderHorrorMovies();
+
+    // executing all the async functions that render the series cards and then running the observer function. 
+    Promise.all([
+        renderTopMovies(),
+        renderRomanceMovies(),
+        renderAnimationMovies(),
+        renderMysteryMovies(),
+        renderHorrorMovies()
+    ]).then(() => {
+        observingMovies();
+    });
 
     searchInput.addEventListener("keydown", searchMovie);
 });
@@ -107,7 +113,6 @@ async function renderTopMovies() {
     const bestTrendingMovies = renderMovies(movies);
 
     divTrendingMovies.innerHTML = bestTrendingMovies;
-    observingMovies(); // this is added here bc for some reason "renderTopMovies" is the last function to be execute.
 }
 
 

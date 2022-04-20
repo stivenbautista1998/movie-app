@@ -1,4 +1,4 @@
-import { getMovieGenres } from '../utils/connections.js'
+import { getMovieGenres, getTvGenres } from '../utils/connections.js'
 let categoryList, menuBtn, menuTittle, searchBtn, closeBtn, closeSearch,
 menuTab, searchContainer, searchInput, headerPage;
 
@@ -38,9 +38,18 @@ function scrollHeader() {
 }
 
 async function loadMenuGenres() {
-    const  dataList = await getMovieGenres();
-    const genresList = generateCategoryList(dataList.genres);
-    categoryList.innerHTML = genresList;
+    
+    if(window.location.pathname === "/") {
+        const  dataList = await getMovieGenres();
+        const genresList = generateCategoryList(dataList.genres);
+        categoryList.innerHTML = genresList;
+
+    } else if(window.location.pathname === "/src/views/tv.html") {
+        const  dataList = await getTvGenres();
+        const genresList = generateCategoryList(dataList.genres);
+        categoryList.innerHTML = genresList;
+    }
+    
 }
 
 function generateCategoryList(data) {
