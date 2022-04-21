@@ -111,7 +111,7 @@ function getMovieRelated(data) {
             let datasetImage = `data-img-url="url('${IMAGE_URL}${movie.poster_path}')"`;
             movieList += 
             `<div class="movie-info">
-                <a href="http://127.0.0.1:8080/src/views/movie-info.html?movieId=${movie.id}">
+                <a href="/src/views/movie-info.html?movieId=${movie.id}">
                     <div ${movie.poster_path !== null ? datasetImage : ""} class="movie-image">
                         <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">

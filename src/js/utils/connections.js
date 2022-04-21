@@ -83,6 +83,12 @@ async function getTvByGenre(genreId) {
     if(data?.results) return data.results;
 }
 
+async function getFullTvInfo(tvId) {
+    const endpoint = `https://api.themoviedb.org/3/tv/${tvId}?api_key=${API_KEY}&append_to_response=videos,similar,credits`;
+    const data = await getFetchInfo(endpoint);
+    return data;
+}
+
 
 export { 
     getMovieById, 
@@ -94,5 +100,6 @@ export {
     getTvGenres,
     getTvById,
     getTvByGenre,
+    getFullTvInfo,
     IMAGE_URL
 };

@@ -39,17 +39,16 @@ function scrollHeader() {
 
 async function loadMenuGenres() {
     
-    if(window.location.pathname === "/") {
+    if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-info.html")) {
         const  dataList = await getMovieGenres();
         const genresList = generateCategoryList(dataList.genres);
         categoryList.innerHTML = genresList;
 
-    } else if(window.location.pathname === "/src/views/tv.html") {
+    } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-info.html")) {
         const  dataList = await getTvGenres();
         const genresList = generateCategoryList(dataList.genres);
         categoryList.innerHTML = genresList;
     }
-    
 }
 
 function generateCategoryList(data) {
