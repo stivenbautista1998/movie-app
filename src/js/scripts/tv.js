@@ -4,12 +4,12 @@ import {
     queryWithWord, 
     IMAGE_URL 
 } from '../utils/connections.js';
-import { registerMovie } from '../utils/observer.js';
-let divFirstMovie, divActionAdventureTv, divAnimationTv, divComedyTv, 
+import { registerMovie as registerTvSerie } from '../utils/observer.js';
+let divFirstTvSerie, divActionAdventureTv, divAnimationTv, divComedyTv, 
 divDrama, divWarAndPolitics, searchInput, rootSearch;
 
 window.addEventListener("load", () => {
-    divFirstMovie = document.querySelector("#js-first-movie-section");
+    divFirstTvSerie = document.querySelector("#js-first-movie-section");
     divActionAdventureTv = document.querySelector("#js-action-adventure");
     divAnimationTv = document.querySelector("#js-animation");
     divComedyTv = document.querySelector("#js-comedy");
@@ -18,7 +18,7 @@ window.addEventListener("load", () => {
     searchInput = document.querySelector("#js-search-input");
     rootSearch = document.querySelector("#js-search-root");
     
-    renderFirstMovie();
+    renderFirstTvSerie();
 
     Promise.all([
         renderActionAdventureTv(), 
@@ -27,10 +27,10 @@ window.addEventListener("load", () => {
         renderDramaTv(),
         renderWarAndPoliticsTv()
     ]).then(() => {
-        observingMovies();
+        observingTvSerie();
     });
 
-    searchInput.addEventListener("keydown", searchMovie);
+    searchInput.addEventListener("keydown", searchTvSerie);
 });
 
 const GENRESTOSHOW = {
@@ -41,9 +41,9 @@ const GENRESTOSHOW = {
     warAndPolitics: 10768
 };
 
-async function renderFirstMovie() {
+async function renderFirstTvSerie() {
     const data = await getTvById("1399"); // game of thrones.
-    divFirstMovie.style.backgroundImage = `url('${IMAGE_URL}${data.poster_path}')`;
+    divFirstTvSerie.style.backgroundImage = `url('${IMAGE_URL}${data.poster_path}')`;
 }
 
 function renderSeries(tvInfo) {
@@ -74,57 +74,57 @@ function renderSeries(tvInfo) {
 }
 
 async function renderActionAdventureTv() {
-    const moviesInfo = await getTvByGenre(GENRESTOSHOW.actionAndAdventure);
-    const actionTv = renderSeries(moviesInfo);
+    const tvInfo = await getTvByGenre(GENRESTOSHOW.actionAndAdventure);
+    const actionTvSeries = renderSeries(tvInfo);
     
-    divActionAdventureTv.innerHTML = actionTv;
+    divActionAdventureTv.innerHTML = actionTvSeries;
 }
 
 async function renderAnimationTv() {
-    const moviesInfo = await getTvByGenre(GENRESTOSHOW.animation);
-    const animationTv = renderSeries(moviesInfo);
+    const tvInfo = await getTvByGenre(GENRESTOSHOW.animation);
+    const animationTvSeries = renderSeries(tvInfo);
     
-    divAnimationTv.innerHTML = animationTv;
+    divAnimationTv.innerHTML = animationTvSeries;
 }
 
 async function renderComedyTv() {
-    const moviesInfo = await getTvByGenre(GENRESTOSHOW.comedy);
-    const comedyTv = renderSeries(moviesInfo);
+    const tvInfo = await getTvByGenre(GENRESTOSHOW.comedy);
+    const comedyTvSeries = renderSeries(tvInfo);
     
-    divComedyTv.innerHTML = comedyTv;
+    divComedyTv.innerHTML = comedyTvSeries;
 }
 
 async function renderDramaTv() {
-    const moviesInfo = await getTvByGenre(GENRESTOSHOW.drama);
-    const dramaTv = renderSeries(moviesInfo);
+    const tvInfo = await getTvByGenre(GENRESTOSHOW.drama);
+    const dramaTvSeries = renderSeries(tvInfo);
     
-    divDrama.innerHTML = dramaTv;
+    divDrama.innerHTML = dramaTvSeries;
 }
 
 async function renderWarAndPoliticsTv() {
-    const moviesInfo = await getTvByGenre(GENRESTOSHOW.warAndPolitics);
-    const warAndPoliticsTv = renderSeries(moviesInfo);
+    const tvInfo = await getTvByGenre(GENRESTOSHOW.warAndPolitics);
+    const warAndPoliticsTvSeries = renderSeries(tvInfo);
     
-    divWarAndPolitics.innerHTML = warAndPoliticsTv;
+    divWarAndPolitics.innerHTML = warAndPoliticsTvSeries;
 }
 
-async function searchMovie(event) {
+async function searchTvSerie(event) {
     if(event.keyCode === 13) {      
         let { value } = event.target; 
         if(value !== "") {
             const data = await queryWithWord(value, "tv");
 
             if(data.length !== 0) {
-                const movieResults = renderSeries(data);
+                const tvResults = renderSeries(data);
                 rootSearch.innerHTML = `
                 <section class="general-section">
                     <h2 class="first-tittle">Series Results</h2>
                     <div class="movie-search-items">
-                        ${movieResults}
+                        ${tvResults}
                     </div>
                 </section>`;
-                observingMovies();
-                divFirstMovie.style.display = "none";
+                observingTvSerie();
+                divFirstTvSerie.style.display = "none";
                 rootSearch.style.paddingTop = "5em";
                 console.log(data);
             } else {
@@ -134,7 +134,7 @@ async function searchMovie(event) {
                         <img class="not-found-image" src="../assets/imgs/not-found.png" alt="not found image">
                     </div>
                 </section>`;
-                divFirstMovie.style.display = "none";
+                divFirstTvSerie.style.display = "none";
                 rootSearch.style.paddingTop = "5em";
                 console.log(data);
             }
@@ -143,10 +143,10 @@ async function searchMovie(event) {
 }
 
 
-function observingMovies() {
-    let imageMovies = document.querySelectorAll(".movie-image");
-    imageMovies.forEach((movieImg) => {
-        registerMovie(movieImg); // tracking every movie card with the observer
+function observingTvSerie() {
+    let imageTvSerie = document.querySelectorAll(".movie-image");
+    imageTvSerie.forEach((tvImgSerie) => {
+        registerTvSerie(tvImgSerie); // tracking every movie card with the observer
         /* movieImg.onclick = () => redirectToPage(movieImg.dataset.id); */
     });
 }

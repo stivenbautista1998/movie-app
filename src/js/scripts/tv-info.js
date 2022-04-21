@@ -1,22 +1,26 @@
 import { 
     getFullTvInfo, 
+    queryWithWord,
     IMAGE_URL 
 } from '../utils/connections.js';
 import { registerMovie as registerTvSerie  } from '../utils/observer.js'
-let rootApp;
+let rootApp, searchInput;
 
 window.addEventListener("load", () => {
     rootApp = document.querySelector("#app");
-    const movieId = getParameters("tvId");
-    renderMovieInfo(movieId); // execute the whole movie info section.
+    searchInput = document.querySelector("#js-search-input");
+    const tvSerieId = getParameters("tvId");
+    renderTvSeriesInfo(tvSerieId); // execute the whole movie info section.
+
+    searchInput.addEventListener("keydown", searchTvSerie);
 });
 
-async function renderMovieInfo(id) {
+async function renderTvSeriesInfo(id) {
     if(id !== null) {
-        let movieInfo = await getFullTvInfo(id);
-        console.log(movieInfo);
+        let tvInfo = await getFullTvInfo(id);
+        console.log(tvInfo);
 
-        createDomMovieInfo(movieInfo);
+        createDomTvInfo(tvInfo);
         observingTv();
     }
 }
@@ -26,44 +30,44 @@ function getParameters( parameterName ) {
     return parameter.get(parameterName);
 }
 
-function createDomMovieInfo(movie) {
-    let htmlMovieInfo = `
+function createDomTvInfo(tvSerie) {
+    let htmlTvSerieInfo = `
         <section>
-            <h2 class="movie-info__tittle">${movie.name}</h2>
+            <h2 class="movie-info__tittle">${tvSerie.name}</h2>
             <div class="movie-info__image-wrapper">
                 <div>
-                    <img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL}${movie.poster_path}" alt="main movie image">
+                    <img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL}${tvSerie.poster_path}" alt="main movie image">
                 </div>
                 <div class="image-bg">
-                    <img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">
+                    <img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">
                 </div>
             </div>
             <div class="movie-info__sub-info">                
-                <span class="release-info">${movie.first_air_date}</span>
-                <span class="language-info">${movie.original_language}</span>                
+                <span class="release-info">${tvSerie.first_air_date}</span>
+                <span class="language-info">${tvSerie.original_language}</span>                
                 <div class="start-vote">
                     <img class="icon-star" src="../assets/icons/star.svg" alt="star icon">
-                    ${movie.vote_average}
+                    ${tvSerie.vote_average}
                 </div>
             </div>
             <div class="genres-section">
-                ${tvSerieGenreList(movie.genres)}
+                ${tvSerieGenreList(tvSerie.genres)}
             </div>
-            <div class="overview-section">${movie.overview}</div>
+            <div class="overview-section">${tvSerie.overview}</div>
             <article class="general-section cast-section">
                 <h2 class="tittle-section">Casting</h2>
                 <div id="js-cast-movies" class="movie-container">
-                    ${movie.credits.cast.length !== 0 ? getCast(movie.credits.cast, 10) : ""}
+                    ${tvSerie.credits.cast.length !== 0 ? getCast(tvSerie.credits.cast, 10) : ""}
                 </div>
             </article>
             <article class="general-section">
                 <h2 class="tittle-section">Similar Series</h2>
                 <div id="js-related-movies" class="movie-container">
-                    ${getTvSeriesRelated(movie.similar.results)}
+                    ${getTvSeriesRelated(tvSerie.similar.results)}
                 </div>
             </article>
         </section>`;
-    rootApp.innerHTML = htmlMovieInfo;
+    rootApp.innerHTML = htmlTvSerieInfo;
 }
 
 function tvSerieGenreList(tvGenres) {
@@ -122,6 +126,62 @@ function getTvSeriesRelated(data) {
         }
     });
     return tvList;
+}
+
+function renderSeries(tvInfo) {
+    let tvList = "";
+    
+    tvInfo.forEach(tv => { 
+        if(tv?.id) {
+            let datasetImage = `data-img-url="url('${IMAGE_URL}${tv.poster_path}')"`; // we add the img info to the dataset to use it with the Intersection Observer.
+            tvList += 
+            `<div class="movie-info">
+                <a href="/src/views/tv-info.html?tvId=${tv.id}">
+                    <div ${tv.poster_path !== null ? datasetImage : ""} class="movie-image">
+                        <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
+                        <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
+                    </div>
+                </a>
+                <div class="movie-text">
+                    <h3 class="movie-name">${tv.name}</h3>
+                    <span class="movie-rate">
+                    <img class="icon-star" src="../assets/icons/star.svg" alt="star icon">
+                        ${tv.vote_average}
+                    </span>
+                </div>
+            </div>`;
+        }
+    });
+    return tvList;
+}
+
+async function searchTvSerie(event) {
+    if(event.keyCode === 13) {
+        let { value } = event.target; 
+        if(value !== "") {
+            const data = await queryWithWord(value, "tv");
+
+            if(data.length !== 0) {
+                const tvResults = renderSeries(data);
+
+                rootApp.innerHTML = `
+                <section class="general-section">
+                    <h2 class="first-tittle">Series Results</h2>
+                    <div class="movie-search-items">
+                        ${tvResults}
+                    </div>
+                </section>`;
+                observingTv();
+            } else {
+                rootApp.innerHTML = `
+                <section class="general-section">
+                    <div class="not-found-section">
+                        <img class="not-found-image" src="../assets/imgs/not-found.png" alt="not found image">
+                    </div>
+                </section>`;
+            }
+        }
+    }
 }
 
 function observingTv() {

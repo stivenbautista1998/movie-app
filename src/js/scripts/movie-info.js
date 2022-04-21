@@ -182,7 +182,6 @@ async function searchMovie(event) {
                     </div>
                 </section>`;
                 observingCast();
-                console.log(data);
             } else {
                 rootApp.innerHTML = `
                 <section class="general-section">
