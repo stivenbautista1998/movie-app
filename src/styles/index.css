@@ -164,7 +164,7 @@ html {
 }
 
 .social-items {
-    height: 18vh;
+    height: 13vh;
     padding: 1em;
     display: flex;
     align-items: flex-end;
@@ -172,17 +172,17 @@ html {
 }
 
 .category-item {
-    margin: .2em;
+    margin: .2em .1em;
     display: inline-block;
     text-decoration: none;
     border: 1px solid #555;
-    padding: 0.2em;
+    padding: .2em;
     border-radius: 5px;
     font-size: 1.3rem;
     color: #aaa;
 }
 
-.category-item:hover {
+.category-item:hover, .selected-genre {
     color: var(--white);
     border: 1px solid var(--white);
 }

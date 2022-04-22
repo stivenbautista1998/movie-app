@@ -1,4 +1,4 @@
-import { getMovieGenres, getTvGenres } from '../utils/connections.js'
+import { getMovieGenres, getTvGenres } from '../utils/connections.js';
 let categoryList, menuBtn, menuTittle, searchBtn, closeBtn, closeSearch,
 menuTab, searchContainer, searchInput, headerPage;
 
@@ -38,26 +38,44 @@ function scrollHeader() {
 }
 
 async function loadMenuGenres() {
-    
+    let dataList, genreId = null;
     if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-info.html")) {
-        const  dataList = await getMovieGenres();
-        const genresList = generateCategoryList(dataList.genres);
-        categoryList.innerHTML = genresList;
+        dataList = await getMovieGenres();
+    } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-info.html") || (window.location.pathname === "/src/views/tv-filter.html")) {
+        dataList = await getTvGenres();
 
-    } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-info.html")) {
-        const  dataList = await getTvGenres();
-        const genresList = generateCategoryList(dataList.genres);
-        categoryList.innerHTML = genresList;
+        if(window.location.pathname === "/src/views/tv-filter.html") {
+            genreId = getParameters("genreId");
+        }
     }
+
+    const genresList = generateCategoryList(dataList.genres, genreId);
+    categoryList.innerHTML = genresList;
 }
 
-function generateCategoryList(data) {
-    let categoryList = "";
+function generateCategoryList(data, genreId) {
+    let categoryList = "", selectedGenre = false;
     data.forEach((item) => {
-        categoryList += `<a href="#" data-id="${item.id}" class="category-item">${item.name}</a>`
+        if(genreId !== null) {
+            if(item.id == genreId) {
+                selectedGenre = true;
+            }
+        }
+        categoryList += `
+        <a class="no-link-style" href="/src/views/tv-filter.html?genreId=${item.id}&genreName=${item.name}">
+            <li class="category-item ${selectedGenre ? "selected-genre" : ""}" data-id="${item.id}">
+                ${item.name}
+            </li>
+        </a>`;
+        selectedGenre = false;
     });
 
     return categoryList;
+}
+
+function getParameters( parameterName ) {
+    let parameter = new URLSearchParams(window.location.search);
+    return parameter.get(parameterName);
 }
 
 function showMenu() {

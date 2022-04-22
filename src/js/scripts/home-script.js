@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
 });
 
 async function searchMovie(event) {
-    if(event.keyCode === 13) {      
+    if(event.keyCode === 13) {
         let { value } = event.target; 
         if(value !== "") {
             const data = await queryWithWord(value, "movie");
