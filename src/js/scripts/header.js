@@ -39,8 +39,12 @@ function scrollHeader() {
 
 async function loadMenuGenres() {
     let dataList, genreId = null;
-    if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-info.html")) {
+    if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-info.html") || (window.location.pathname === "/src/views/movie-filter.html")) {
         dataList = await getMovieGenres();
+
+        if(window.location.pathname === "/src/views/movie-filter.html") {
+            genreId = getParameters("genreId");
+        }
     } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-info.html") || (window.location.pathname === "/src/views/tv-filter.html")) {
         dataList = await getTvGenres();
 
@@ -54,15 +58,23 @@ async function loadMenuGenres() {
 }
 
 function generateCategoryList(data, genreId) {
-    let categoryList = "", selectedGenre = false;
+    let categoryList = "", selectedGenre = false, pageType = null;
     data.forEach((item) => {
+
         if(genreId !== null) {
             if(item.id == genreId) {
                 selectedGenre = true;
             }
         }
+
+        if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-filter.html") || (window.location.pathname === "/src/views/movie-info.html")) {
+            pageType = "movie-filter.html";
+        } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-filter.html") || (window.location.pathname === "/src/views/tv-info.html")) {
+            pageType = "tv-filter.html";
+        }
+
         categoryList += `
-        <a class="no-link-style" href="/src/views/tv-filter.html?genreId=${item.id}&genreName=${item.name}">
+        <a class="no-link-style" href="/src/views/${pageType}?genreId=${item.id}&genreName=${item.name}">
             <li class="category-item ${selectedGenre ? "selected-genre" : ""}" data-id="${item.id}">
                 ${item.name}
             </li>

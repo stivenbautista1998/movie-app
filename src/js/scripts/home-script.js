@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
 });
 
 async function searchMovie(event) {
-    if(event.keyCode === 13) {
+    if(event.keyCode === 13) {      
         let { value } = event.target; 
         if(value !== "") {
             const data = await queryWithWord(value, "movie");
@@ -60,7 +60,6 @@ async function searchMovie(event) {
                 observingMovies();
                 divFirstMovie.style.display = "none";
                 rootSearch.style.paddingTop = "5em";
-                console.log(data);
             } else {
                 rootSearch.innerHTML = `
                 <section class="general-section">
@@ -70,7 +69,6 @@ async function searchMovie(event) {
                 </section>`;
                 divFirstMovie.style.display = "none";
                 rootSearch.style.paddingTop = "5em";
-                console.log(data);
             }
         }
     }
@@ -84,7 +82,7 @@ async function renderFirstMovie() {
 function renderMovies(moviesInfo) {
     let movieList = "";
     
-    moviesInfo.forEach(movie => { 
+    moviesInfo.forEach(movie => {
         if(movie?.id) {
             let datasetImage = `data-img-url="url('${IMAGE_URL}${movie.poster_path}')"`; // we add the img info to the dataset to use it with the Intersection Observer.
             movieList += 

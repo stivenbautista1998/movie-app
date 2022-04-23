@@ -1,13 +1,49 @@
-import { getTvByGenre, IMAGE_URL } from '../utils/connections.js';
+import { 
+    getTvByGenre, 
+    queryWithWord, 
+    IMAGE_URL 
+} from '../utils/connections.js';
 import { registerMovie as registerTvSerie } from '../utils/observer.js';
-let rootApp;
+let rootApp, searchInput;
 
 window.addEventListener("load", () => {
     rootApp = document.querySelector("#app");
+    searchInput = document.querySelector("#js-search-input");
     const genreId = getParameters("genreId");
     const genreName  = getParameters("genreName");
     showTvSeriesByGenreSelected(genreId, genreName);
+
+    searchInput.addEventListener("keydown", searchTvSerie);
 });
+
+async function searchTvSerie(event) {
+    if(event.keyCode === 13) {
+        let { value } = event.target; 
+        if(value !== "") {
+            const data = await queryWithWord(value, "tv");
+
+            if(data.length !== 0) {
+                const tvResults = renderSeries(data);
+
+                rootApp.innerHTML = `
+                <section class="general-section">
+                    <h2 class="first-tittle">Series Results</h2>
+                    <div class="movie-search-items">
+                        ${tvResults}
+                    </div>
+                </section>`;
+                observingTvSerie();
+            } else {
+                rootApp.innerHTML = `
+                <section class="general-section">
+                    <div class="not-found-section">
+                        <img class="not-found-image" src="../assets/imgs/not-found.png" alt="not found image">
+                    </div>
+                </section>`;
+            }
+        }
+    }
+}
 
 async function showTvSeriesByGenreSelected(genreId, genreName) {
     const tvInfo = await getTvByGenre(genreId);

@@ -169,7 +169,7 @@ async function searchMovie(event) {
     if(event.keyCode === 13) {      
         let { value } = event.target; 
         if(value !== "") {
-            const data = await queryWithWord(value);
+            const data = await queryWithWord(value, "movie");
 
             if(data.length !== 0) {
                 const movieResults = renderMovies(data);
