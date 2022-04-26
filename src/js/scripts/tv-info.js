@@ -39,7 +39,7 @@ function createDomTvInfo(tvSerie) {
                     <img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL}${tvSerie.poster_path}" alt="main movie image">
                 </div>
                 <div class="image-bg">
-                    <img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">
+                    ${tvSerie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
                 </div>
             </div>
             <div class="movie-info__sub-info">                

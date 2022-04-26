@@ -4,6 +4,7 @@
     --main-yellow: #fbe337;
     --white: #FFF;
     --second-dark: #1b1a1a;
+    --back-content: #22276b;
 }
 
 * {
@@ -82,7 +83,7 @@ html {
 
 .movie-image {
     height: 132px;
-    background-color: #22276b;
+    background-color: var(--back-content);
     position: relative;
 }
 
