@@ -60,6 +60,12 @@ function createDomTvInfo(tvSerie) {
                     ${tvSerie.credits.cast.length !== 0 ? getCast(tvSerie.credits.cast, 10) : ""}
                 </div>
             </article>
+            <article class="general-section seasons-section">
+                <h2 class="tittle-section">Seasons</h2>
+                <div id="js-cast-movies" class="season-container">
+                    ${tvSerie.seasons.length !== 0 ? showSeasons(tvSerie.seasons) : ""}
+                </div>
+            </article>
             <article class="general-section">
                 <h2 class="tittle-section">Similar Series</h2>
                 <div id="js-related-movies" class="movie-container">
@@ -69,6 +75,31 @@ function createDomTvInfo(tvSerie) {
         </section>`;
     rootApp.innerHTML = htmlTvSerieInfo;
 }
+
+function showSeasons(seasonsData) {
+    let seasonDOM = "";
+    seasonsData.forEach((season) => {
+        console.log(season);
+        if(season?.season_number >= 1) {
+            seasonDOM += `
+            <div id="${season.id}" class="season-item">
+                <div class="season-img-wrapper">
+                    ${season?.poster_path ? `<img class="season-img img" src="${IMAGE_URL + season.poster_path}" alt="season image"></img>` : '<div class="center-message">No Image</div>'}
+                </div>
+                <div class="season-text">
+                    <h3 class="season-tittle">${season.name}</h3>
+                    <div class="season-text-content">${season.overview === '' ? "No Description" : season.overview}</div>
+                    <span class="season-info">Ep. ${season.episode_count}</span>
+                    <span class="season-info">Rlsd. ${season.air_date}</span>
+                </div>
+            </div>`;
+        }
+    });
+
+    return seasonDOM;
+}
+// <div class=""></div>
+
 
 function tvSerieGenreList(tvGenres) {
     let genreList = "";
@@ -88,7 +119,7 @@ function getCast(data, amountToShow) {
         
             castList +=
             `<div class="movie-info">
-                <div ${cast.profile_path !== null ? datasetImage : ""} class="movie-image">
+                <div ${cast.profile_path !== null ? datasetImage : ""} class="movie-image img">
                 </div>
                 <div class="movie-text cast-text">
                     <h3 class="cast-name">${cast.name}</h3>
@@ -110,7 +141,7 @@ function getTvSeriesRelated(data) {
             tvList += 
             `<div class="movie-info">
                 <a href="/src/views/tv-info.html?tvId=${tvSerie.id}">
-                    <div ${tvSerie.poster_path !== null ? datasetImage : ""} class="movie-image">
+                    <div ${tvSerie.poster_path !== null ? datasetImage : ""} class="movie-image img">
                         <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
                     </div>
@@ -137,7 +168,7 @@ function renderSeries(tvInfo) {
             tvList += 
             `<div class="movie-info">
                 <a href="/src/views/tv-info.html?tvId=${tv.id}">
-                    <div ${tv.poster_path !== null ? datasetImage : ""} class="movie-image">
+                    <div ${tv.poster_path !== null ? datasetImage : ""} class="movie-image img">
                         <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
                     </div>
@@ -185,9 +216,13 @@ async function searchTvSerie(event) {
 }
 
 function observingTv() {
-    let imageTv = document.querySelectorAll(".movie-image");
+    let imageTv = document.querySelectorAll(".img");
     imageTv.forEach((tvImg) => {
         registerTvSerie(tvImg); // tracking every movie card with the observer
         /* movieImg.onclick = () => redirectToPage(movieImg.dataset.id); */
     });
 }
+
+// number_of_seasons, seasons, number_of_episodes, networks, last_episode_to_air, next_episode_to_air, 
+// popular:  https://api.themoviedb.org/3/tv/popular?api_key=<<api_key>>
+// top rated:  https://api.themoviedb.org/3/tv/top_rated?api_key=<<api_key>>

@@ -121,3 +121,71 @@
     margin: .3em;
     color: var(--main-yellow);
 }
+
+.season-img {
+    width: 100%;
+    height: 100%;
+    background-color: #22276b;
+    position: relative;
+}
+
+.season-container {
+    display: grid;
+    grid-template-rows: 135px;
+    grid-auto-columns: 220px;
+    grid-auto-flow: column;
+    grid-gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 1.5em;
+}
+
+.season-img-wrapper, .season-text {
+    display: inline-block;
+}
+
+.season-img-wrapper {
+    background-color: #22276b;
+    overflow: hidden;
+}
+
+.season-text {
+    padding: 0.5em;
+ }
+
+.season-tittle {
+    font-size: 1.3rem;
+    margin-bottom: 0.2em;
+    color: var(--main-yellow);
+}
+
+.season-item {
+    display: grid;
+    grid-template-columns: 90px 140px;
+    grid-template-rows: 135px;
+}
+
+.season-text-content {
+    max-height: 80px;
+    overflow: hidden;
+    margin-bottom: 0.4em;
+}
+
+.season-info {
+    color: var(--main-yellow);
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 0.1em 0.2em;
+}
+
+.season-container::-webkit-scrollbar {
+    width: 0;
+}
+
+.center-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
