@@ -81,10 +81,12 @@ function showSeasons(seasonsData) {
     seasonsData.forEach((season) => {
         console.log(season);
         if(season?.season_number >= 1) {
+            let datasetImage = `data-img-url="url('${IMAGE_URL + season.poster_path}')"`;
+
             seasonDOM += `
             <div id="${season.id}" class="season-item">
-                <div class="season-img-wrapper">
-                    ${season?.poster_path ? `<img class="season-img img" src="${IMAGE_URL + season.poster_path}" alt="season image"></img>` : '<div class="center-message">No Image</div>'}
+                <div class="season-img-wrapper movie-image" ${season?.poster_path ? datasetImage : ""}>
+                    ${season?.poster_path ? "" : '<div class="center-message">No Image</div>'}
                 </div>
                 <div class="season-text">
                     <h3 class="season-tittle">${season.name}</h3>
@@ -119,7 +121,7 @@ function getCast(data, amountToShow) {
         
             castList +=
             `<div class="movie-info">
-                <div ${cast.profile_path !== null ? datasetImage : ""} class="movie-image img">
+                <div ${cast.profile_path !== null ? datasetImage : ""} class="movie-image">
                 </div>
                 <div class="movie-text cast-text">
                     <h3 class="cast-name">${cast.name}</h3>
@@ -141,7 +143,7 @@ function getTvSeriesRelated(data) {
             tvList += 
             `<div class="movie-info">
                 <a href="/src/views/tv-info.html?tvId=${tvSerie.id}">
-                    <div ${tvSerie.poster_path !== null ? datasetImage : ""} class="movie-image img">
+                    <div ${tvSerie.poster_path !== null ? datasetImage : ""} class="movie-image">
                         <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
                     </div>
@@ -168,7 +170,7 @@ function renderSeries(tvInfo) {
             tvList += 
             `<div class="movie-info">
                 <a href="/src/views/tv-info.html?tvId=${tv.id}">
-                    <div ${tv.poster_path !== null ? datasetImage : ""} class="movie-image img">
+                    <div ${tv.poster_path !== null ? datasetImage : ""} class="movie-image">
                         <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
                     </div>
@@ -216,7 +218,7 @@ async function searchTvSerie(event) {
 }
 
 function observingTv() {
-    let imageTv = document.querySelectorAll(".img");
+    let imageTv = document.querySelectorAll(".movie-image");
     imageTv.forEach((tvImg) => {
         registerTvSerie(tvImg); // tracking every movie card with the observer
         /* movieImg.onclick = () => redirectToPage(movieImg.dataset.id); */
