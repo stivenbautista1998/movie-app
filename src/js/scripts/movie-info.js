@@ -40,7 +40,7 @@ function createDomMovieInfo(movie) {
                     <img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL}${movie.poster_path}" alt="main movie image">
                 </div>
                 <div class="image-bg">
-                    <img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">
+                    ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
                 </div>
             </div>
             <div class="movie-info__sub-info">                
@@ -146,7 +146,7 @@ function renderMovies(moviesInfo) {
             let datasetImage = `data-img-url="url('${IMAGE_URL}${movie.poster_path}')"`; // we add the img info to the dataset to use it with the Intersection Observer.
             movieList += 
             `<div class="movie-info">
-                <a href="http://127.0.0.1:8080/src/views/movie-info.html?movieId=${movie.id}">
+                <a href="/src/views/movie-info.html?movieId=${movie.id}">
                     <div ${movie.poster_path !== null ? datasetImage : ""} class="movie-image">
                         <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
