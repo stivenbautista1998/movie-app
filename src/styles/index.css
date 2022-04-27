@@ -298,7 +298,7 @@ html {
     position: absolute;
     top: 45px;
     max-height: 500px;
-    background-color: var(--back-content);
+    background-color: #222222;
 }
 
 .query-list {
@@ -309,6 +309,7 @@ html {
 
 .query-list-img {
     width: 50px;
+    height: 75px;
     justify-self: center;
     align-self: center;
 }
@@ -324,4 +325,24 @@ html {
     font-size: 1.5rem;
     padding: 0.5em;
     text-align: center;
+}
+
+.center-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.white-message {
+    color: var(--white);
+}
+
+.query-message {
+    width: 260px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
 }

@@ -7,7 +7,8 @@ import {
 } from '../utils/connections.js';
 import { registerMovie } from '../utils/observer.js'
 let divFirstMovie, divTrendingMovies, divRomanticMovies, divAnimationMovies, 
-divHorrorMovies, divMysteryMovies, searchInput, rootSearch, searchResultContainer;
+divHorrorMovies, divMysteryMovies, searchInput, rootSearch, searchResultContainer,
+showAllMovieInfo;
 
 const GENRESTOSHOW = {
     romance: 10749,
@@ -48,36 +49,23 @@ async function searchMovie(event) {
     if(event.keyCode === 13) {
         console.log("key!!");
         if(value !== "") {
-            const data = await queryWithWord(value, "movie");
-
-            if(data.length !== 0) {
-                const movieResults = renderMovies(data);
-                rootSearch.innerHTML = `
-                <section class="general-section">
-                    <h2 class="first-tittle">Movie Results</h2>
-                    <div class="movie-search-items">
-                        ${movieResults}
-                    </div>
-                </section>`;
-                observingMovies();
-                divFirstMovie.style.display = "none";
-                rootSearch.style.paddingTop = "5em";
-            } else {
-                rootSearch.innerHTML = `
-                <section class="general-section">
-                    <div class="not-found-section">
-                        <img class="not-found-image" src="./src/assets/imgs/not-found.png" alt="not found image">
-                    </div>
-                </section>`;
-                divFirstMovie.style.display = "none";
-                rootSearch.style.paddingTop = "5em";
-            }
+            showMoviesFilteredBySearch(value);
         }
     } else if(value !== "") {
         let queryResult = await queryOfInput(value, 5);
 
-        if(queryResult !== null) {
+        if(queryResult !== null && queryResult !== undefined) {
             searchResultContainer.innerHTML = queryResult;
+
+            if(queryResult !== `<div class="query-message">No results found</div>`) {
+                observingMovies();
+                showAllMovieInfo = document.querySelector("#js-view-all-btn");
+                showAllMovieInfo.onclick = () => {
+                    console.log("it has been clicked!!");
+                    showMoviesFilteredBySearch(value);
+                };
+            }
+
         } else {
             searchResultContainer.innerHTML = "";
         }
@@ -94,7 +82,7 @@ async function queryOfInput(inputText, limite) {
             const movieSearchList = showSearchList(result);
             return movieSearchList;
         } else {
-            return "No results found";
+            return `<div class="query-message">No results found</div>`;
         }
     } else {
         return null;
@@ -103,24 +91,55 @@ async function queryOfInput(inputText, limite) {
 
 function showSearchList(data) {
     let queryList = "";
-    console.log("List: ");
 
     data.forEach((movieInfo) => {
-        console.log(movieInfo);
+        let datasetImage = `data-img-url="url('${IMAGE_URL + movieInfo.poster_path}')"`;
+
         queryList += `
-        <a href="/src/views/movie-info.html?movieId=${movieInfo.id}">
+        <a class="no-link-style" href="/src/views/movie-info.html?movieId=${movieInfo.id}">
             <div class="query-list">
-                <img class="query-list-img" src="${IMAGE_URL + movieInfo.poster_path}" alt="movie image">
+                <div class="movie-image query-list-img" ${movieInfo.poster_path !== null ? datasetImage : ""}>
+                    ${movieInfo.poster_path !== null ? "" : `<span class="center-message white-message">No Image</span>`}
+                </div>
                 <div class="query-list-title">${movieInfo.title}</div>
             </div>
         </a>`;
     });
     return `
         ${queryList}
-        <div class="query-list-btn">View all results</div>
+        <div id="js-view-all-btn" class="query-list-btn">View all results</div>
     `;
 }
 // <div class=""></div>
+
+async function showMoviesFilteredBySearch(value) {
+    const data = await queryWithWord(value, "movie");
+
+    if(data.length !== 0) { // showing the info when there is a value to search
+        const movieResults = renderMovies(data);
+        rootSearch.innerHTML = `
+        <section class="general-section">
+            <h2 class="first-tittle">Movie Results</h2>
+            <div class="movie-search-items">
+                ${movieResults}
+            </div>
+        </section>`;
+        observingMovies();
+        divFirstMovie.style.display = "none";
+        rootSearch.style.paddingTop = "5em";
+        searchResultContainer.innerHTML = "";
+    } else { // showing the user when there is no result found.
+        rootSearch.innerHTML = `
+        <section class="general-section">
+            <div class="not-found-section">
+                <img class="not-found-image" src="./src/assets/imgs/not-found.png" alt="not found image">
+            </div>
+        </section>`;
+        divFirstMovie.style.display = "none";
+        rootSearch.style.paddingTop = "5em";
+        searchResultContainer.innerHTML = "";
+    }
+}
 
 async function renderFirstMovie() {
     const data = await getMovieById("406759"); // 76341 naruto: 317442

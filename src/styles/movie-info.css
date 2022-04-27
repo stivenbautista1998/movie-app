@@ -183,13 +183,6 @@
     width: 0;
 }
 
-.center-message {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
 .medium-font-size {
     font-size: 1.3rem;
 }
