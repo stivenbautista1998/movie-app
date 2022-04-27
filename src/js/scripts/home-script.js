@@ -110,7 +110,6 @@ function showSearchList(data) {
         <div id="js-view-all-btn" class="query-list-btn">View all results</div>
     `;
 }
-// <div class=""></div>
 
 async function showMoviesFilteredBySearch(value) {
     const data = await queryWithWord(value, "movie");
