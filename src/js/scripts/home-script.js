@@ -7,7 +7,7 @@ import {
 } from '../utils/connections.js';
 import { registerMovie } from '../utils/observer.js'
 let divFirstMovie, divTrendingMovies, divRomanticMovies, divAnimationMovies, 
-divHorrorMovies, divMysteryMovies, searchInput, rootSearch;
+divHorrorMovies, divMysteryMovies, searchInput, rootSearch, searchResultContainer;
 
 const GENRESTOSHOW = {
     romance: 10749,
@@ -25,6 +25,7 @@ window.addEventListener("load", () => {
     divMysteryMovies = document.querySelector("#js-mystery-movies");
     searchInput = document.querySelector("#js-search-input");
     rootSearch = document.querySelector("#js-search-root");
+    searchResultContainer = document.querySelector("#js-search-results");
     
     renderFirstMovie(); // first movie to show.
 
@@ -39,12 +40,13 @@ window.addEventListener("load", () => {
         observingMovies();
     });
 
-    searchInput.addEventListener("keydown", searchMovie);
+    searchInput.addEventListener("keyup", searchMovie);
 });
 
 async function searchMovie(event) {
-    if(event.keyCode === 13) {      
-        let { value } = event.target; 
+    let { value } = event.target; 
+    if(event.keyCode === 13) {
+        console.log("key!!");
         if(value !== "") {
             const data = await queryWithWord(value, "movie");
 
@@ -71,8 +73,54 @@ async function searchMovie(event) {
                 rootSearch.style.paddingTop = "5em";
             }
         }
+    } else if(value !== "") {
+        let queryResult = await queryOfInput(value, 5);
+
+        if(queryResult !== null) {
+            searchResultContainer.innerHTML = queryResult;
+        } else {
+            searchResultContainer.innerHTML = "";
+        }
+    } else {
+        searchResultContainer.innerHTML = "";
     }
 }
+
+async function queryOfInput(inputText, limite) {
+    if(inputText.length > 3) {
+        const data = await queryWithWord(inputText, "movie");    
+        if(data.length !== 0) {
+            const result = data.slice(0, limite);
+            const movieSearchList = showSearchList(result);
+            return movieSearchList;
+        } else {
+            return "No results found";
+        }
+    } else {
+        return null;
+    }
+}
+
+function showSearchList(data) {
+    let queryList = "";
+    console.log("List: ");
+
+    data.forEach((movieInfo) => {
+        console.log(movieInfo);
+        queryList += `
+        <a href="/src/views/movie-info.html?movieId=${movieInfo.id}">
+            <div class="query-list">
+                <img class="query-list-img" src="${IMAGE_URL + movieInfo.poster_path}" alt="movie image">
+                <div class="query-list-title">${movieInfo.title}</div>
+            </div>
+        </a>`;
+    });
+    return `
+        ${queryList}
+        <div class="query-list-btn">View all results</div>
+    `;
+}
+// <div class=""></div>
 
 async function renderFirstMovie() {
     const data = await getMovieById("406759"); // 76341 naruto: 317442

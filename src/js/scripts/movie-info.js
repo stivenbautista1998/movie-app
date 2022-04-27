@@ -70,7 +70,6 @@ function createDomMovieInfo(movie) {
         </section>`;
     rootApp.innerHTML = htmlMovieInfo;
 }
-// <div></div>
 
 function movieGenreList(movieGenres) {
     let genreList = "";
