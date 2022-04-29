@@ -327,6 +327,10 @@ html {
     text-align: center;
 }
 
+.color-yellow {
+    color: var(--main-yellow);
+}
+
 .center-message {
     display: flex;
     justify-content: center;
@@ -345,4 +349,37 @@ html {
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
+}
+
+.movie-pagination {
+    text-align: center;
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+    padding: 0.5em;
+    background-color: #262626;
+}
+
+.pagination {
+    display: inline-block;
+    padding: 0.3em 0.5em;
+    border: 1px solid;
+    font-size: 1.5rem;
+    border-radius: 4px;
+    margin: 0 .1em;
+}
+
+.selected-page {
+    background-color: var(--main-yellow);
+    color: var(--main-dark);
+    border: 1px solid var(--main-yellow);
+}
+
+.auto-center {
+    padding: 0;
+    height: 28.5px;
+    width: 25px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }

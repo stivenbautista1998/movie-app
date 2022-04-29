@@ -141,9 +141,9 @@ async function searchTvSerie(event) {
 
 async function queryOfInput(inputText, limite) {
     if(inputText.length > 3) {
-        const data = await queryWithWord(inputText, "tv");    
-        if(data.length !== 0) {
-            const result = data.slice(0, limite);
+        const data = await queryWithWord(inputText, 1, "tv");    
+        if(data.results.length !== 0) {
+            const result = data.results.slice(0, limite);
             const movieSearchList = showSearchList(result);
             return movieSearchList;
         } else {
@@ -177,10 +177,10 @@ function showSearchList(data) {
 }
 
 async function showTvSeriesFilteredBySearch(value) {
-    const data = await queryWithWord(value, "tv");
+    const data = await queryWithWord(value, 1, "tv");
 
-    if(data.length !== 0) {
-        const tvResults = renderSeries(data);
+    if(data.results.length !== 0) {
+        const tvResults = renderSeries(data.results);
         rootSearch.innerHTML = `
         <section class="general-section">
             <h2 class="first-tittle">Series Results</h2>

@@ -39,13 +39,13 @@ function scrollHeader() {
 
 async function loadMenuGenres() {
     let dataList, genreId = null;
-    if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-info.html") || (window.location.pathname === "/src/views/movie-filter.html")) {
+    if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-info.html") || (window.location.pathname === "/src/views/movie-filter.html") || (window.location.pathname === "/src/views/movie-search.html")) {
         dataList = await getMovieGenres();
 
         if(window.location.pathname === "/src/views/movie-filter.html") {
             genreId = getParameters("genreId");
         }
-    } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-info.html") || (window.location.pathname === "/src/views/tv-filter.html")) {
+    } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-info.html") || (window.location.pathname === "/src/views/tv-filter.html") || (window.location.pathname === "/src/views/tv-search.html")) {
         dataList = await getTvGenres();
 
         if(window.location.pathname === "/src/views/tv-filter.html") {
@@ -67,9 +67,9 @@ function generateCategoryList(data, genreId) {
             }
         }
 
-        if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-filter.html") || (window.location.pathname === "/src/views/movie-info.html")) {
+        if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-filter.html") || (window.location.pathname === "/src/views/movie-info.html") || (window.location.pathname === "/src/views/movie-search.html")) {
             pageType = "movie-filter.html";
-        } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-filter.html") || (window.location.pathname === "/src/views/tv-info.html")) {
+        } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-filter.html") || (window.location.pathname === "/src/views/tv-info.html") || (window.location.pathname === "/src/views/tv-search.html")) {
             pageType = "tv-filter.html";
         }
 

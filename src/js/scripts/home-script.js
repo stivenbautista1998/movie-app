@@ -7,7 +7,7 @@ import {
 } from '../utils/connections.js';
 import { registerMovie } from '../utils/observer.js'
 let divFirstMovie, divTrendingMovies, divRomanticMovies, divAnimationMovies, 
-divHorrorMovies, divMysteryMovies, searchInput, rootSearch, searchResultContainer,
+divHorrorMovies, divMysteryMovies, searchInput, searchResultContainer,
 showAllMovieInfo;
 
 const GENRESTOSHOW = {
@@ -25,7 +25,6 @@ window.addEventListener("load", () => {
     divHorrorMovies = document.querySelector("#js-horror-movies");
     divMysteryMovies = document.querySelector("#js-mystery-movies");
     searchInput = document.querySelector("#js-search-input");
-    rootSearch = document.querySelector("#js-search-root");
     searchResultContainer = document.querySelector("#js-search-results");
     
     renderFirstMovie(); // first movie to show.
@@ -49,7 +48,7 @@ async function searchMovie(event) {
     if(event.keyCode === 13) {
         console.log("key!!");
         if(value !== "") {
-            showMoviesFilteredBySearch(value);
+            window.location.href = `/src/views/movie-search.html?query=${value}&page=1`;
         }
     } else if(value !== "") {
         let queryResult = await queryOfInput(value, 5);
@@ -62,23 +61,18 @@ async function searchMovie(event) {
                 showAllMovieInfo = document.querySelector("#js-view-all-btn");
                 showAllMovieInfo.onclick = () => {
                     console.log("it has been clicked!!");
-                    showMoviesFilteredBySearch(value);
+                    window.location.href = `/src/views/movie-search.html?query=${value}&page=1`;
                 };
             }
-
-        } else {
-            searchResultContainer.innerHTML = "";
         }
-    } else {
-        searchResultContainer.innerHTML = "";
     }
 }
 
 async function queryOfInput(inputText, limite) {
     if(inputText.length > 3) {
-        const data = await queryWithWord(inputText, "movie");    
-        if(data.length !== 0) {
-            const result = data.slice(0, limite);
+        const data = await queryWithWord(inputText, 1, "movie");    
+        if(data.results.length !== 0) {
+            const result = data.results.slice(0, limite);
             const movieSearchList = showSearchList(result);
             return movieSearchList;
         } else {
@@ -109,35 +103,6 @@ function showSearchList(data) {
         ${queryList}
         <div id="js-view-all-btn" class="query-list-btn">View all results</div>
     `;
-}
-
-async function showMoviesFilteredBySearch(value) {
-    const data = await queryWithWord(value, "movie");
-
-    if(data.length !== 0) { // showing the info when there is a value to search
-        const movieResults = renderMovies(data);
-        rootSearch.innerHTML = `
-        <section class="general-section">
-            <h2 class="first-tittle">Movie Results</h2>
-            <div class="movie-search-items">
-                ${movieResults}
-            </div>
-        </section>`;
-        observingMovies();
-        divFirstMovie.style.display = "none";
-        rootSearch.style.paddingTop = "5em";
-        searchResultContainer.innerHTML = "";
-    } else { // showing the user when there is no result found.
-        rootSearch.innerHTML = `
-        <section class="general-section">
-            <div class="not-found-section">
-                <img class="not-found-image" src="./src/assets/imgs/not-found.png" alt="not found image">
-            </div>
-        </section>`;
-        divFirstMovie.style.display = "none";
-        rootSearch.style.paddingTop = "5em";
-        searchResultContainer.innerHTML = "";
-    }
 }
 
 async function renderFirstMovie() {
@@ -212,10 +177,5 @@ function observingMovies() {
     let imageMovies = document.querySelectorAll(".movie-image");
     imageMovies.forEach((movieImg) => {
         registerMovie(movieImg); // tracking every movie card with the observer
-        /* movieImg.onclick = () => redirectToPage(movieImg.dataset.id); */
     });
 }
-
-/* function redirectToPage(movieId) {
-    console.log(movieId);
-} */

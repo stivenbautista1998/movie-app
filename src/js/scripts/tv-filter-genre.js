@@ -48,9 +48,9 @@ async function searchTvSerie(event) {
 
 async function queryOfInput(inputText, limite) {
     if(inputText.length > 3) {
-        const data = await queryWithWord(inputText, "tv");    
-        if(data.length !== 0) {
-            const result = data.slice(0, limite);
+        const data = await queryWithWord(inputText, 1, "tv");    
+        if(data.results.length !== 0) {
+            const result = data.results.slice(0, limite);
             const movieSearchList = showSearchList(result);
             return movieSearchList;
         } else {
@@ -73,7 +73,7 @@ function showSearchList(data) {
                 <div class="movie-image query-list-img" ${tvSerieInfo.poster_path !== null ? datasetImage : ""}>
                     ${tvSerieInfo.poster_path !== null ? "" : `<span class="center-message white-message">No Image</span>`}
                 </div>
-                <div class="query-list-title">${tvSerieInfo.title}</div>
+                <div class="query-list-title">${tvSerieInfo.name}</div>
             </div>
         </a>`;
     });
@@ -84,10 +84,10 @@ function showSearchList(data) {
 }
 
 async function showTvSeriesFilteredBySearch(value) {
-    const data = await queryWithWord(value, "tv");
+    const data = await queryWithWord(value, 1, "tv");
 
-    if(data.length !== 0) {
-        const tvResults = renderSeries(data);
+    if(data.results.length !== 0) {
+        const tvResults = renderSeries(data.results);
 
         rootApp.innerHTML = `
         <section class="general-section">
