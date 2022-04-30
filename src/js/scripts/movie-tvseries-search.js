@@ -4,7 +4,7 @@ import {
 } from '../utils/connections.js';
 import { registerMovie } from "../utils/observer.js";
 let rootApp, searchInput, searchResultContainer, showAllMovieInfo, pageNumber,
-userRequest;
+userRequest, pageType;;
 
 window.addEventListener("load", () => {
     rootApp = document.querySelector("#app");
@@ -36,7 +36,7 @@ async function searchMovie(event) {
     let { value } = event.target; 
     if(event.keyCode === 13) {
         if(value !== "") {
-            window.location.href = `/src/views/movie-search.html?query=${value}&page=1`;
+            window.location.href = `/src/views/${pageType}-search.html?query=${value}&page=1`;
         }
     } else if(value !== "") {
         let queryResult = await queryOfInput(value, 5);
@@ -49,20 +49,20 @@ async function searchMovie(event) {
                 showAllMovieInfo = document.querySelector("#js-view-all-btn");
                 showAllMovieInfo.onclick = () => {
                     console.log("it has been clicked!!");
-                    window.location.href = `/src/views/movie-search.html?query=${value}&page=1`;
+                    window.location.href = `/src/views/${pageType}-search.html?query=${value}&page=1`;
                 };
             }
-
-        } else {
-            searchResultContainer.innerHTML = "";
         }
-    } else {
-        searchResultContainer.innerHTML = "";
     }
 }
 
-async function showMoviesFilteredBySearch(value) {
-    const data = await queryWithWord(value, pageNumber, "movie");
+async function showMoviesFilteredBySearch(value) {    
+    if(window.location.pathname === "/src/views/movie-search.html") {
+        pageType = "movie";
+    } else if(window.location.pathname === "/src/views/tv-search.html") {
+        pageType = "tv";
+    }
+    const data = await queryWithWord(value, pageNumber, pageType);
 
     if(data.results.length !== 0) { // showing the info when there is a value to search
         const movieResults = renderMovies(data.results);
@@ -102,14 +102,14 @@ function renderMovies(moviesInfo) {
             let datasetImage = `data-img-url="url('${IMAGE_URL}${movie.poster_path}')"`; // we add the img info to the dataset to use it with the Intersection Observer.
             movieList += 
             `<div class="movie-info">
-                <a href="/src/views/movie-info.html?movieId=${movie.id}">
+                <a href="/src/views/${pageType}-info.html?${pageType === "movie" ? "movieId" : "tvId"}=${movie.id}">
                     <div ${movie.poster_path !== null ? datasetImage : ""} class="movie-image">
                         <img class="icon-watchlist" src="/src/assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="/src/assets/icons/favorite.svg" alt="favorite icon">
                     </div>
                 </a>
                 <div class="movie-text">
-                    <h3 class="movie-name">${movie.title}</h3>
+                    <h3 class="movie-name">${movie.title ? movie.title : movie.name}</h3>
                     <span class="movie-rate">
                     <img class="icon-star" src="/src/assets/icons/star.svg" alt="star icon">
                         ${movie.vote_average}
@@ -123,7 +123,7 @@ function renderMovies(moviesInfo) {
 
 async function queryOfInput(inputText, limite) {
     if(inputText.length > 3) {
-        const data = await queryWithWord(inputText, 1, "movie");    
+        const data = await queryWithWord(inputText, 1, pageType);    
         if(data.results.length !== 0) {
             const result = data.results.slice(0, limite);
             const movieSearchList = showSearchList(result);
@@ -143,12 +143,12 @@ function showSearchList(data) {
         let datasetImage = `data-img-url="url('${IMAGE_URL + movieInfo.poster_path}')"`;
 
         queryList += `
-        <a class="no-link-style" href="/src/views/movie-info.html?movieId=${movieInfo.id}">
+        <a class="no-link-style" href="/src/views/${pageType}-info.html?${pageType === "tv" ? "tvId" : "movieId"}=${movieInfo.id}">
             <div class="query-list">
                 <div class="movie-image query-list-img" ${movieInfo.poster_path !== null ? datasetImage : ""}>
                     ${movieInfo.poster_path !== null ? "" : `<span class="center-message white-message">No Image</span>`}
                 </div>
-                <div class="query-list-title">${movieInfo.title}</div>
+                <div class="query-list-title">${movieInfo.title ? movieInfo.title : movieInfo.name}</div>
             </div>
         </a>`;
     });
@@ -160,7 +160,7 @@ function showSearchList(data) {
 
 
 function createPagination(maxPages) {
-    const arrowLeftLink = `href="/src/views/movie-search.html?query=${userRequest}&page=${pageNumber > 1 ? (pageNumber - 1) : pageNumber}"`;
+    const arrowLeftLink = `href="/src/views/${pageType}-search.html?query=${userRequest}&page=${pageNumber > 1 ? (pageNumber - 1) : pageNumber}"`;
     let listNavigation = `
         <a ${pageNumber > 1 ? arrowLeftLink : ""} class="no-link-style">
             <div class="pagination auto-center">
@@ -172,7 +172,7 @@ function createPagination(maxPages) {
         if(maxPages >= 5) {
             for (let index = 1; index <= 5; index++) {
                 listNavigation += `
-                <a href="/src/views/movie-search.html?query=${userRequest}&page=${index}" class="no-link-style">
+                <a href="/src/views/${pageType}-search.html?query=${userRequest}&page=${index}" class="no-link-style">
                     <div class="pagination ${pageNumber === index ? "selected-page" : ""}">
                         ${index}
                     </div>
@@ -181,7 +181,7 @@ function createPagination(maxPages) {
         } else {
             for (let index = 1; index <= maxPages; index++) {
                 listNavigation += `
-                <a href="/src/views/movie-search.html?query=${userRequest}&page=${index}" class="no-link-style">
+                <a href="/src/views/${pageType}-search.html?query=${userRequest}&page=${index}" class="no-link-style">
                     <div class="pagination ${pageNumber === index ? "selected-page" : ""}">
                         ${index}
                     </div>
@@ -192,7 +192,7 @@ function createPagination(maxPages) {
         if((pageNumber + 2) <= maxPages) {
             for (let index = -2; index <= 2; index++) {
                 listNavigation += `
-                <a href="/src/views/movie-search.html?query=${userRequest}&page=${pageNumber + index}" class="no-link-style">
+                <a href="/src/views/${pageType}-search.html?query=${userRequest}&page=${pageNumber + index}" class="no-link-style">
                     <div class="pagination ${pageNumber === (pageNumber + index) ? "selected-page" : ""}">
                         ${pageNumber + index}
                     </div>
@@ -201,7 +201,7 @@ function createPagination(maxPages) {
         } else {
             for (let index = -2; index <= (maxPages - pageNumber); index++) {
                 listNavigation += `
-                <a href="/src/views/movie-search.html?query=${userRequest}&page=${pageNumber + index}" class="no-link-style">
+                <a href="/src/views/${pageType}-search.html?query=${userRequest}&page=${pageNumber + index}" class="no-link-style">
                     <div class="pagination ${pageNumber === (pageNumber + index) ? "selected-page" : ""}">
                         ${pageNumber + index}
                     </div>
@@ -211,7 +211,7 @@ function createPagination(maxPages) {
         
     }
 
-    const arrowRightLink = `href="/src/views/movie-search.html?query=${userRequest}&page=${pageNumber < maxPages ? (pageNumber + 1) : pageNumber}"`;
+    const arrowRightLink = `href="/src/views/${pageType}-search.html?query=${userRequest}&page=${pageNumber < maxPages ? (pageNumber + 1) : pageNumber}"`;
     listNavigation += `
         <a ${pageNumber < maxPages ? arrowRightLink : ""} class="no-link-style">
             <div class="pagination auto-center">
@@ -226,6 +226,5 @@ function observingMovies() {
     let imageMovies = document.querySelectorAll(".movie-image");
     imageMovies.forEach((movieImg) => {
         registerMovie(movieImg); // tracking every movie card with the observer
-        /* movieImg.onclick = () => redirectToPage(movieImg.dataset.id); */
     });
 }

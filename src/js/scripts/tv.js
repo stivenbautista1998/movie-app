@@ -6,7 +6,7 @@ import {
 } from '../utils/connections.js';
 import { registerMovie as registerTvSerie } from '../utils/observer.js';
 let divFirstTvSerie, divActionAdventureTv, divAnimationTv, divComedyTv, 
-divDrama, divWarAndPolitics, searchInput, rootSearch, searchResultContainer,
+divDrama, divWarAndPolitics, searchInput, searchResultContainer,
 showAllMovieInfo;
 
 window.addEventListener("load", () => {
@@ -17,7 +17,6 @@ window.addEventListener("load", () => {
     divDrama = document.querySelector("#js-drama");
     divWarAndPolitics = document.querySelector("#js-war-politics");
     searchInput = document.querySelector("#js-search-input");
-    rootSearch = document.querySelector("#js-search-root");
     searchResultContainer = document.querySelector("#js-search-results");
     
     renderFirstTvSerie();
@@ -114,7 +113,7 @@ async function searchTvSerie(event) {
     let { value } = event.target;
     if(event.keyCode === 13) {
         if(value !== "") {
-            showTvSeriesFilteredBySearch(value);
+            window.location.href = `/src/views/tv-search.html?query=${value}&page=1`;
         }
     } else if(value !== "") {
         let queryResult = await queryOfInput(value, 5);
@@ -127,15 +126,10 @@ async function searchTvSerie(event) {
                 showAllMovieInfo = document.querySelector("#js-view-all-btn");
                 showAllMovieInfo.onclick = () => {
                     console.log("it has been clicked!!");
-                    showTvSeriesFilteredBySearch(value);
+                    window.location.href = `/src/views/tv-search.html?query=${value}&page=1`;
                 };
             }
-
-        } else {
-            searchResultContainer.innerHTML = "";
         }
-    } else {
-        searchResultContainer.innerHTML = "";
     }
 }
 
@@ -176,42 +170,10 @@ function showSearchList(data) {
     `;
 }
 
-async function showTvSeriesFilteredBySearch(value) {
-    const data = await queryWithWord(value, 1, "tv");
-
-    if(data.results.length !== 0) {
-        const tvResults = renderSeries(data.results);
-        rootSearch.innerHTML = `
-        <section class="general-section">
-            <h2 class="first-tittle">Series Results</h2>
-            <div class="movie-search-items">
-                ${tvResults}
-            </div>
-        </section>`;
-        observingTvSerie();
-        divFirstTvSerie.style.display = "none";
-        rootSearch.style.paddingTop = "5em";
-        searchResultContainer.innerHTML = "";
-        console.log(data);
-    } else {
-        rootSearch.innerHTML = `
-        <section class="general-section">
-            <div class="not-found-section">
-                <img class="not-found-image" src="../assets/imgs/not-found.png" alt="not found image">
-            </div>
-        </section>`;
-        divFirstTvSerie.style.display = "none";
-        rootSearch.style.paddingTop = "5em";
-        searchResultContainer.innerHTML = "";
-        console.log(data);
-    }
-}
-
 
 function observingTvSerie() {
     let imageTvSerie = document.querySelectorAll(".movie-image");
     imageTvSerie.forEach((tvImgSerie) => {
         registerTvSerie(tvImgSerie); // tracking every movie card with the observer
-        /* movieImg.onclick = () => redirectToPage(movieImg.dataset.id); */
     });
 }

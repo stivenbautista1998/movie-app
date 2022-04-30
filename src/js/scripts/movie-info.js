@@ -134,7 +134,6 @@ function observingCast() {
     let imageCast = document.querySelectorAll(".movie-image");
     imageCast.forEach((castImg) => {
         registerMovie(castImg); // tracking every movie card with the observer
-        /* movieImg.onclick = () => redirectToPage(movieImg.dataset.id); */
     });
 }
 

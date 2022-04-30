@@ -127,6 +127,5 @@ function observingMovies() {
     let imageMovies = document.querySelectorAll(".movie-image");
     imageMovies.forEach((movieImg) => {
         registerMovie(movieImg); // tracking every movie card with the observer
-        /* movieImg.onclick = () => redirectToPage(movieImg.dataset.id); */
     });
 }
