@@ -125,7 +125,6 @@ async function searchTvSerie(event) {
                 observingTvSerie();
                 showAllMovieInfo = document.querySelector("#js-view-all-btn");
                 showAllMovieInfo.onclick = () => {
-                    console.log("it has been clicked!!");
                     window.location.href = `/src/views/tv-search.html?query=${value}&page=1`;
                 };
             }

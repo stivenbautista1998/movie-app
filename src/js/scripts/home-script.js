@@ -46,7 +46,6 @@ window.addEventListener("load", () => {
 async function searchMovie(event) {
     let { value } = event.target; 
     if(event.keyCode === 13) {
-        console.log("key!!");
         if(value !== "") {
             window.location.href = `/src/views/movie-search.html?query=${value}&page=1`;
         }
@@ -60,7 +59,6 @@ async function searchMovie(event) {
                 observingMovies();
                 showAllMovieInfo = document.querySelector("#js-view-all-btn");
                 showAllMovieInfo.onclick = () => {
-                    console.log("it has been clicked!!");
                     window.location.href = `/src/views/movie-search.html?query=${value}&page=1`;
                 };
             }

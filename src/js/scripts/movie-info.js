@@ -33,12 +33,25 @@ function getParameters( parameterName ) {
 }
 
 function createDomMovieInfo(movie) {
+    const mainImage = (movie.poster_path ? `<img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL + movie.poster_path}" alt="main movie image">` 
+    : `<div class="empty-img"><span class="center-message medium-font-size">No Image</span></div>`);
+
+    const showCast = 
+    `<div id="js-cast-movies" class="movie-container">
+        ${getCast(movie.credits.cast, 10)}
+    </div>`;
+
+    const showSimilar = 
+    `<div id="js-related-movies" class="movie-container">
+        ${getMovieRelated(movie.similar.results)}
+    </div>`;
+
     let htmlMovieInfo = `
         <section>
             <h2 class="movie-info__tittle">${movie.title}</h2>
             <div class="movie-info__image-wrapper">
                 <div>
-                    <img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL}${movie.poster_path}" alt="main movie image">
+                    ${mainImage}
                 </div>
                 <div class="image-bg">
                     ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
@@ -53,20 +66,18 @@ function createDomMovieInfo(movie) {
                 </div>
             </div>
             <div class="genres-section">
-                ${movieGenreList(movie.genres)}
+                ${movie.genres.length !== 0 ? movieGenreList(movie.genres) : '<span class="genre-movie">No genre found</span>'}
             </div>
-            <div class="overview-section">${movie.overview}</div>
+            <div class="overview-section">
+                ${movie.overview !== "" ? movie.overview : "This serie has no overview registered."}
+            </div>
             <article class="general-section cast-section">
                 <h2 class="tittle-section">Casting</h2>
-                <div id="js-cast-movies" class="movie-container">
-                    ${movie.credits.cast.length !== 0 ? getCast(movie.credits.cast, 10) : ""}
-                </div>
+                ${movie.credits.cast.length !== 0 ? showCast : `<div class='empty-section'><span class="center-message white-message">No Cast Found</span></div>`}
             </article>
             <article class="general-section">
                 <h2 class="tittle-section">Similar Movies</h2>
-                <div id="js-related-movies" class="movie-container">
-                    ${getMovieRelated(movie.similar.results)}
-                </div>
+                ${movie.similar.results.length !== 0 ? showSimilar : `<div class='empty-section'><span class="center-message white-message">No Similar Series Found</span></div>`}
             </article>
         </section>`;
     rootApp.innerHTML = htmlMovieInfo;
@@ -153,7 +164,6 @@ async function searchMovie(event) {
                 observingCast();
                 showAllMovieInfo = document.querySelector("#js-view-all-btn");
                 showAllMovieInfo.onclick = () => {
-                    console.log("it has been clicked!!");
                     window.location.href = `/src/views/movie-search.html?query=${value}&page=1`;
                 };
             }

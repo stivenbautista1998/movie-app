@@ -13,8 +13,6 @@ window.addEventListener("load", () => {
 
     userRequest = getParameters("query");
     pageNumber = parseInt(getParameters("page"));
-    console.log("user request #", userRequest);
-    console.log("page #", pageNumber);
     renderMovieInfo(userRequest); // execute the whole movie info section.
 
     searchInput.addEventListener("keyup", searchMovie);
@@ -48,7 +46,6 @@ async function searchMovie(event) {
                 observingMovies();
                 showAllMovieInfo = document.querySelector("#js-view-all-btn");
                 showAllMovieInfo.onclick = () => {
-                    console.log("it has been clicked!!");
                     window.location.href = `/src/views/${pageType}-search.html?query=${value}&page=1`;
                 };
             }

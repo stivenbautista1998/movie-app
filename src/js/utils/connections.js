@@ -59,7 +59,6 @@ async function queryWithWord(query, pageNumber, content) {
     let type = (content === "movie" ? "movie" : "tv");
     const endPoint = `https://api.themoviedb.org/3/search/${type}?api_key=${API_KEY}&query=${query}&page=${pageNumber}`;
     const data = await getFetchInfo(endPoint);
-    console.log(data);
     return data;
 }
 

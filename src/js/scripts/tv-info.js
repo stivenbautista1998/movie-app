@@ -32,12 +32,25 @@ function getParameters( parameterName ) {
 }
 
 function createDomTvInfo(tvSerie) {
+    const mainImage = (tvSerie.poster_path ? `<img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL + tvSerie.poster_path}" alt="main movie image">` 
+    : `<div class="empty-img"><span class="center-message medium-font-size">No Image</span></div>`);
+
+    const showCast = 
+    `<div id="js-cast-movies" class="movie-container">
+        ${getCast(tvSerie.credits.cast, 10)}
+    </div>`;
+
+    const showSimilar = 
+    `<div id="js-related-movies" class="movie-container">
+        ${getTvSeriesRelated(tvSerie.similar.results)}
+    </div>`;
+    
     let htmlTvSerieInfo = `
         <section>
             <h2 class="movie-info__tittle">${tvSerie.name}</h2>
             <div class="movie-info__image-wrapper">
                 <div>
-                    <img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL}${tvSerie.poster_path}" alt="main movie image">
+                    ${mainImage}
                 </div>
                 <div class="image-bg">
                     ${tvSerie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
@@ -52,14 +65,14 @@ function createDomTvInfo(tvSerie) {
                 </div>
             </div>
             <div class="genres-section">
-                ${tvSerieGenreList(tvSerie.genres)}
+                ${tvSerie.genres.length !== 0 ? tvSerieGenreList(tvSerie.genres) : '<span class="genre-movie">No genre found</span>'}
             </div>
-            <div class="overview-section">${tvSerie.overview}</div>
+            <div class="overview-section">
+                ${tvSerie.overview !== "" ? tvSerie.overview : "This serie has no overview registered."}
+            </div>
             <article class="general-section cast-section">
                 <h2 class="tittle-section">Casting</h2>
-                <div id="js-cast-movies" class="movie-container">
-                    ${tvSerie.credits.cast.length !== 0 ? getCast(tvSerie.credits.cast, 10) : ""}
-                </div>
+                ${tvSerie.credits.cast.length !== 0 ? showCast : `<div class='empty-section'><span class="center-message white-message">No Cast Found</span></div>`}
             </article>
             <article class="general-section seasons-section">
                 <h2 class="tittle-section">Seasons</h2>
@@ -69,9 +82,7 @@ function createDomTvInfo(tvSerie) {
             </article>
             <article class="general-section">
                 <h2 class="tittle-section">Similar Series</h2>
-                <div id="js-related-movies" class="movie-container">
-                    ${getTvSeriesRelated(tvSerie.similar.results)}
-                </div>
+                ${tvSerie.similar.results.length !== 0 ? showSimilar : `<div class='empty-section'><span class="center-message white-message">No Similar Series Found</span></div>`}
             </article>
         </section>`;
     rootApp.innerHTML = htmlTvSerieInfo;
@@ -80,7 +91,6 @@ function createDomTvInfo(tvSerie) {
 function showSeasons(seasonsData) {
     let seasonDOM = "";
     seasonsData.forEach((season) => {
-        console.log(season);
         if(season?.season_number >= 1) {
             let datasetImage = `data-img-url="url('${IMAGE_URL + season.poster_path}')"`;
 
