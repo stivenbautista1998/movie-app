@@ -4,15 +4,17 @@ import {
     IMAGE_URL 
 } from '../utils/connections.js';
 import { registerMovie } from '../utils/observer.js';
-let rootApp, searchInput, searchResultContainer, showAllMovieInfo;
+let rootApp, searchInput, searchResultContainer, showAllMovieInfo, 
+pageNumber, genreId, genreName;
 
 window.addEventListener("load", () => {
     rootApp = document.querySelector("#app");
     searchInput = document.querySelector("#js-search-input");
     searchResultContainer = document.querySelector("#js-search-results");
-    const genreId = getParameters("genreId");
-    const genreName  = getParameters("genreName");
-    showMovieByGenreSelected(genreId, genreName);
+    genreId = getParameters("genreId");
+    genreName  = getParameters("genreName");
+    pageNumber = parseInt(getParameters("page"));
+    showMovieByGenreSelected();
 
     searchInput.addEventListener("keyup", searchMovie);
 });
@@ -78,15 +80,24 @@ function showSearchList(data) {
     `;
 }
 
-async function showMovieByGenreSelected(genreId, genreName) {
-    const movieInfo = await getMoviesByGenre(genreId);
-    const movieList = renderMovies(movieInfo);
+async function showMovieByGenreSelected() {
+    const movieInfo = await getMoviesByGenre(genreId, pageNumber);
+    const movieList = renderMovies(movieInfo.results);
+
+    const pagination = createPagination(movieInfo.total_pages);
+        const domPagination = `
+        <div class="movie-pagination">
+            ${pagination}
+        </div>`;
+
     rootApp.innerHTML = `
     <section class="general-section">
+        ${domPagination}
         <h2 class="first-tittle">Filtered By ${genreName}</h2>
         <div class="movie-search-items">
             ${movieList}
         </div>
+        ${domPagination}
     </section>`;
     observingMovies();
 }
@@ -121,6 +132,70 @@ function renderMovies(movieInfo) {
         }
     });
     return moviesList;
+}
+
+// function that returns the pagination elements as a string.
+function createPagination(maxPages) {
+    const arrowLeftLink = `href="/src/views/movie-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber > 1 ? (pageNumber - 1) : pageNumber}"`;
+    let listNavigation = `
+        <a ${pageNumber > 1 ? arrowLeftLink : ""} class="no-link-style">
+            <div class="pagination auto-center">
+                <img class="arrow-right" src="/src/assets/icons/arrow.svg" alt="arrow right icon">
+            </div>
+        </a>`;
+
+    if(pageNumber <= 3) {
+        if(maxPages >= 5) {
+            for (let index = 1; index <= 5; index++) {
+                listNavigation += `
+                <a href="/src/views/movie-filter.html?genreId=${genreId}&genreName=${genreName}&page=${index}" class="no-link-style">
+                    <div class="pagination ${pageNumber === index ? "selected-page" : ""}">
+                        ${index}
+                    </div>
+                </a>`;
+            }
+        } else {
+            for (let index = 1; index <= maxPages; index++) {
+                listNavigation += `
+                <a href="/src/views/movie-filter.html?genreId=${genreId}&genreName=${genreName}&page=${index}" class="no-link-style">
+                    <div class="pagination ${pageNumber === index ? "selected-page" : ""}">
+                        ${index}
+                    </div>
+                </a>`;
+            }
+        }
+    } else {
+        if((pageNumber + 2) <= maxPages) {
+            for (let index = -2; index <= 2; index++) {
+                listNavigation += `
+                <a href="/src/views/movie-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber + index}" class="no-link-style">
+                    <div class="pagination ${pageNumber === (pageNumber + index) ? "selected-page" : ""}">
+                        ${pageNumber + index}
+                    </div>
+                </a>`;
+            }
+        } else {
+            for (let index = -2; index <= (maxPages - pageNumber); index++) {
+                listNavigation += `
+                <a href="/src/views/movie-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber + index}" class="no-link-style">
+                    <div class="pagination ${pageNumber === (pageNumber + index) ? "selected-page" : ""}">
+                        ${pageNumber + index}
+                    </div>
+                </a>`;
+            }
+        }
+        
+    }
+
+    const arrowRightLink = `href="/src/views/movie-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber < maxPages ? (pageNumber + 1) : pageNumber}"`;
+    listNavigation += `
+        <a ${pageNumber < maxPages ? arrowRightLink : ""} class="no-link-style">
+            <div class="pagination auto-center">
+                <img class="arrow-left" src="/src/assets/icons/arrow.svg" alt="arrow right icon">
+            </div>
+        </a>`;
+
+    return listNavigation;
 }
 
 function observingMovies() {

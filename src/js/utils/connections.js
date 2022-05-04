@@ -49,10 +49,10 @@ async function getMovieGenres() {
     return data;
 }
 
-async function getMoviesByGenre(genreId) {
-    const endPoint = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`;
+async function getMoviesByGenre(genreId, pageNumber = 1) {
+    const endPoint = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${pageNumber}`;
     const data = await getFetchInfo(endPoint);
-    if(data?.results) return data.results;
+    return data;
 }
 
 async function queryWithWord(query, pageNumber, content) {
@@ -78,10 +78,10 @@ async function getTvGenres() {
     return data;
 }
 
-async function getTvByGenre(genreId) {
-    const endPoint = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=${genreId}`;
+async function getTvByGenre(genreId, pageNumber = 1) {
+    const endPoint = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=${genreId}&page=${pageNumber}`;
     const data = await getFetchInfo(endPoint);
-    if(data?.results) return data.results;
+    return data;
 }
 
 async function getFullTvInfo(tvId) {

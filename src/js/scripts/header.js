@@ -74,7 +74,7 @@ function generateCategoryList(data, genreId) {
         }
 
         categoryList += `
-        <a class="no-link-style" href="/src/views/${pageType}?genreId=${item.id}&genreName=${item.name}">
+        <a class="no-link-style" href="/src/views/${pageType}?genreId=${item.id}&genreName=${item.name}&page=1">
             <li class="category-item ${selectedGenre ? "selected-genre" : ""}" data-id="${item.id}">
                 ${item.name}
             </li>

@@ -76,35 +76,35 @@ function renderSeries(tvInfo) {
 
 async function renderActionAdventureTv() {
     const tvInfo = await getTvByGenre(GENRESTOSHOW.actionAndAdventure);
-    const actionTvSeries = renderSeries(tvInfo);
+    const actionTvSeries = renderSeries(tvInfo.results);
     
     divActionAdventureTv.innerHTML = actionTvSeries;
 }
 
 async function renderAnimationTv() {
     const tvInfo = await getTvByGenre(GENRESTOSHOW.animation);
-    const animationTvSeries = renderSeries(tvInfo);
+    const animationTvSeries = renderSeries(tvInfo.results);
     
     divAnimationTv.innerHTML = animationTvSeries;
 }
 
 async function renderComedyTv() {
     const tvInfo = await getTvByGenre(GENRESTOSHOW.comedy);
-    const comedyTvSeries = renderSeries(tvInfo);
+    const comedyTvSeries = renderSeries(tvInfo.results);
     
     divComedyTv.innerHTML = comedyTvSeries;
 }
 
 async function renderDramaTv() {
     const tvInfo = await getTvByGenre(GENRESTOSHOW.drama);
-    const dramaTvSeries = renderSeries(tvInfo);
+    const dramaTvSeries = renderSeries(tvInfo.results);
     
     divDrama.innerHTML = dramaTvSeries;
 }
 
 async function renderWarAndPoliticsTv() {
     const tvInfo = await getTvByGenre(GENRESTOSHOW.warAndPolitics);
-    const warAndPoliticsTvSeries = renderSeries(tvInfo);
+    const warAndPoliticsTvSeries = renderSeries(tvInfo.results);
     
     divWarAndPolitics.innerHTML = warAndPoliticsTvSeries;
 }

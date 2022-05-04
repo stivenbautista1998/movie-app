@@ -147,28 +147,28 @@ async function renderTopMovies() {
 
 async function renderRomanceMovies() {
     const moviesInfo = await getMoviesByGenre(GENRESTOSHOW.romance);
-    const romanceMovies = renderMovies(moviesInfo);
+    const romanceMovies = renderMovies(moviesInfo.results);
     
     divRomanticMovies.innerHTML = romanceMovies;
 }
 
 async function renderAnimationMovies() {
     const moviesInfo = await getMoviesByGenre(GENRESTOSHOW.animation);
-    const animationMovies = await renderMovies(moviesInfo);
+    const animationMovies = await renderMovies(moviesInfo.results);
 
     divAnimationMovies.innerHTML = animationMovies;
 }
 
 async function renderMysteryMovies() {
     const moviesInfo = await getMoviesByGenre(GENRESTOSHOW.mystery);
-    const mysteryMovies = await renderMovies(moviesInfo);
+    const mysteryMovies = await renderMovies(moviesInfo.results);
 
     divMysteryMovies.innerHTML = mysteryMovies;
 }
 
 async function renderHorrorMovies() {
     const moviesInfo = await getMoviesByGenre(GENRESTOSHOW.horror);
-    const horrorMovies = await renderMovies(moviesInfo);
+    const horrorMovies = await renderMovies(moviesInfo.results);
 
     divHorrorMovies.innerHTML = horrorMovies;
 }

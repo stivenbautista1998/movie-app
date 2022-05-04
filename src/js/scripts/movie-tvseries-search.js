@@ -158,7 +158,7 @@ function showSearchList(data) {
     `;
 }
 
-
+// function that returns the pagination elements as a string.
 function createPagination(maxPages) {
     const arrowLeftLink = `href="/src/views/${pageType}-search.html?query=${userRequest}&page=${pageNumber > 1 ? (pageNumber - 1) : pageNumber}"`;
     let listNavigation = `
