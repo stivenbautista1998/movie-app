@@ -46,6 +46,13 @@ function createDomMovieInfo(movie) {
         ${getMovieRelated(movie.similar.results)}
     </div>`;
 
+    const youtubeTrailer = 
+    `<div class="youtube-container">
+    <div class="close"></div>
+        <iframe class="youtube-video" width="320" height="180" src="https://www.youtube.com/embed/${movie.videos.results[0].key}" title="YouTube video player" frameborder="0" allowfullscreen>
+        </iframe>
+    </div>`;
+
     let htmlMovieInfo = `
         <section>
             <h2 class="movie-info__tittle">${movie.title}</h2>
@@ -55,6 +62,7 @@ function createDomMovieInfo(movie) {
                 </div>
                 <div class="image-bg">
                     ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
+                    ${youtubeTrailer}
                 </div>
             </div>
             <div class="movie-info__sub-info">                
