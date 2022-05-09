@@ -70,6 +70,11 @@ function createDomTvInfo(tvSerie) {
     `<div id="js-related-movies" class="movie-container">
         ${getTvSeriesRelated(tvSerie.similar.results)}
     </div>`;
+
+    const btnShowTrailer = 
+    `<button id="js-btn-trailer" class="btn-trailer">
+        <img class="icon-play" src="../assets/icons/play.svg" alt="play icon">
+    </button>`;
     
     let htmlTvSerieInfo = `
         <section>
@@ -82,9 +87,7 @@ function createDomTvInfo(tvSerie) {
                     <div class="image-bg">
                         ${tvSerie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
                     </div> 
-                    <button id="js-btn-trailer" class="btn-trailer">
-                        <img class="icon-play" src="../assets/icons/play.svg" alt="play icon">
-                    </button>
+                    ${tvSerie.videos.results.length !== 0 ? btnShowTrailer : ""}
                 </div>
             </div>
             <div class="movie-info__sub-info">                
@@ -117,7 +120,10 @@ function createDomTvInfo(tvSerie) {
             </article>
         </section>`;
     rootApp.innerHTML = htmlTvSerieInfo;
-    trailerOption(tvSerie.videos.results[0].key);
+
+    if(tvSerie.videos.results.length !== 0) {
+        trailerOption(tvSerie.videos.results[0].key);
+    }
 }
 
 function showSeasons(seasonsData) {

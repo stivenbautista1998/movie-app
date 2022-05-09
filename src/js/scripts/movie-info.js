@@ -72,6 +72,11 @@ function createDomMovieInfo(movie) {
         ${getMovieRelated(movie.similar.results)}
     </div>`;
 
+    const btnShowTrailer = 
+    `<button id="js-btn-trailer" class="btn-trailer">
+        <img class="icon-play" src="../assets/icons/play.svg" alt="play icon">
+    </button>`;
+
     let htmlMovieInfo = `
         <section>
             <h2 class="movie-info__tittle">${movie.title}</h2>
@@ -83,9 +88,7 @@ function createDomMovieInfo(movie) {
                     <div class="image-bg">
                         ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
                     </div> 
-                    <button id="js-btn-trailer" class="btn-trailer">
-                        <img class="icon-play" src="../assets/icons/play.svg" alt="play icon">
-                    </button>
+                    ${movie.videos.results.length !== 0 ? btnShowTrailer : ""}
                 </div>
             </div>
             <div class="movie-info__sub-info">                
@@ -112,7 +115,9 @@ function createDomMovieInfo(movie) {
             </article>
         </section>`;
     rootApp.innerHTML = htmlMovieInfo;
-    trailerOption(movie.videos.results[0].key);
+    if(movie.videos.results.length !== 0) {
+        trailerOption(movie.videos.results[0].key);
+    }
 }
 
 function movieGenreList(movieGenres) {
