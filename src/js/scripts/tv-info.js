@@ -4,7 +4,8 @@ import {
     IMAGE_URL 
 } from '../utils/connections.js';
 import { registerMovie as registerTvSerie  } from '../utils/observer.js'
-let rootApp, searchInput, searchResultContainer, showAllMovieInfo;
+let rootApp, searchInput, searchResultContainer, showAllMovieInfo, 
+btnTrailer, closeTrailer;
 
 window.addEventListener("load", () => {
     rootApp = document.querySelector("#app");
@@ -31,6 +32,31 @@ function getParameters( parameterName ) {
     return parameter.get(parameterName);
 }
 
+function trailerOption(idVideo) {
+
+    let youtubeTrailer = 
+    `<div id="js-youtube-section" class="youtube-container">
+        <div class="close">
+            <img id="js-close-trailer" class="icon-trailer" src="/src/assets/icons/close.svg" alt="close icon">
+        </div>
+        <iframe class="youtube-video" src="https://www.youtube.com/embed/${idVideo}?rel=0" title="YouTube video player" frameborder="0" allowfullscreen>
+        </iframe>
+    </div>`;
+
+    btnTrailer = document.querySelector("#js-btn-trailer");
+    console.log(btnTrailer);
+    btnTrailer.onclick = () => {
+        rootApp.innerHTML += youtubeTrailer;
+        console.log(youtubeTrailer);
+        closeTrailer = document.querySelector("#js-close-trailer");
+
+        closeTrailer.onclick = () => {
+            let youtubeSection = document.querySelector("#js-youtube-section");
+            rootApp.removeChild(youtubeSection);
+        }
+    }
+}
+
 function createDomTvInfo(tvSerie) {
     const mainImage = (tvSerie.poster_path ? `<img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL + tvSerie.poster_path}" alt="main movie image">` 
     : `<div class="empty-img"><span class="center-message medium-font-size">No Image</span></div>`);
@@ -52,8 +78,13 @@ function createDomTvInfo(tvSerie) {
                 <div>
                     ${mainImage}
                 </div>
-                <div class="image-bg">
-                    ${tvSerie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
+                <div class="container-btn-trailer">
+                    <div class="image-bg">
+                        ${tvSerie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
+                    </div> 
+                    <button id="js-btn-trailer" class="btn-trailer">
+                        <img class="icon-play" src="../assets/icons/play.svg" alt="play icon">
+                    </button>
                 </div>
             </div>
             <div class="movie-info__sub-info">                
@@ -86,6 +117,7 @@ function createDomTvInfo(tvSerie) {
             </article>
         </section>`;
     rootApp.innerHTML = htmlTvSerieInfo;
+    trailerOption(tvSerie.videos.results[0].key);
 }
 
 function showSeasons(seasonsData) {

@@ -35,15 +35,13 @@ function getParameters( parameterName ) {
 
 function trailerOption(idVideo) {
 
-    const youtubeTrailer = 
-    `<div class="youtube-shadow">
-        <div id="js-youtube-section" class="youtube-container">
-            <div class="close">
-                <img id="js-close-trailer" class="icon-trailer" src="/src/assets/icons/close.svg" alt="close icon">
-            </div>
-            <iframe class="youtube-video" src="https://www.youtube.com/embed/${idVideo}?rel=0" title="YouTube video player" frameborder="0" allowfullscreen>
-            </iframe>
+    let youtubeTrailer = 
+    `<div id="js-youtube-section" class="youtube-container">
+        <div class="close">
+            <img id="js-close-trailer" class="icon-trailer" src="/src/assets/icons/close.svg" alt="close icon">
         </div>
+        <iframe class="youtube-video" src="https://www.youtube.com/embed/${idVideo}?rel=0" title="YouTube video player" frameborder="0" allowfullscreen>
+        </iframe>
     </div>`;
 
     btnTrailer = document.querySelector("#js-btn-trailer");
@@ -54,8 +52,8 @@ function trailerOption(idVideo) {
         closeTrailer = document.querySelector("#js-close-trailer");
 
         closeTrailer.onclick = () => {
-            const closeTrailer = document.querySelector("#js-youtube-section");
-            rootApp.removeChild(closeTrailer);
+            let youtubeSection = document.querySelector("#js-youtube-section");
+            rootApp.removeChild(youtubeSection);
         }
     }
 }
