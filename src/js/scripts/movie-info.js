@@ -4,7 +4,8 @@ import {
     IMAGE_URL 
 } from '../utils/connections.js';
 import { registerMovie } from "../utils/observer.js";
-let rootApp, searchInput, searchResultContainer, showAllMovieInfo;
+let rootApp, searchInput, searchResultContainer, showAllMovieInfo, 
+btnTrailer, closeTrailer;
 
 window.addEventListener("load", () => {
     rootApp = document.querySelector("#app");
@@ -32,6 +33,33 @@ function getParameters( parameterName ) {
     return parameter.get(parameterName);
 }
 
+function trailerOption(idVideo) {
+
+    const youtubeTrailer = 
+    `<div class="youtube-shadow">
+        <div id="js-youtube-section" class="youtube-container">
+            <div class="close">
+                <img id="js-close-trailer" class="icon-trailer" src="/src/assets/icons/close.svg" alt="close icon">
+            </div>
+            <iframe class="youtube-video" src="https://www.youtube.com/embed/${idVideo}?rel=0" title="YouTube video player" frameborder="0" allowfullscreen>
+            </iframe>
+        </div>
+    </div>`;
+
+    btnTrailer = document.querySelector("#js-btn-trailer");
+    console.log(btnTrailer);
+    btnTrailer.onclick = () => {
+        rootApp.innerHTML += youtubeTrailer;
+        console.log(youtubeTrailer);
+        closeTrailer = document.querySelector("#js-close-trailer");
+
+        closeTrailer.onclick = () => {
+            const closeTrailer = document.querySelector("#js-youtube-section");
+            rootApp.removeChild(closeTrailer);
+        }
+    }
+}
+
 function createDomMovieInfo(movie) {
     const mainImage = (movie.poster_path ? `<img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL + movie.poster_path}" alt="main movie image">` 
     : `<div class="empty-img"><span class="center-message medium-font-size">No Image</span></div>`);
@@ -46,13 +74,6 @@ function createDomMovieInfo(movie) {
         ${getMovieRelated(movie.similar.results)}
     </div>`;
 
-    const youtubeTrailer = 
-    `<div class="youtube-container">
-    <div class="close"></div>
-        <iframe class="youtube-video" width="320" height="180" src="https://www.youtube.com/embed/${movie.videos.results[0].key}" title="YouTube video player" frameborder="0" allowfullscreen>
-        </iframe>
-    </div>`;
-
     let htmlMovieInfo = `
         <section>
             <h2 class="movie-info__tittle">${movie.title}</h2>
@@ -60,9 +81,13 @@ function createDomMovieInfo(movie) {
                 <div>
                     ${mainImage}
                 </div>
-                <div class="image-bg">
-                    ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
-                    ${youtubeTrailer}
+                <div class="container-btn-trailer">
+                    <div class="image-bg">
+                        ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
+                    </div> 
+                    <button id="js-btn-trailer" class="btn-trailer">
+                        <img class="icon-play" src="../assets/icons/play.svg" alt="play icon">
+                    </button>
                 </div>
             </div>
             <div class="movie-info__sub-info">                
@@ -89,6 +114,7 @@ function createDomMovieInfo(movie) {
             </article>
         </section>`;
     rootApp.innerHTML = htmlMovieInfo;
+    trailerOption(movie.videos.results[0].key);
 }
 
 function movieGenreList(movieGenres) {

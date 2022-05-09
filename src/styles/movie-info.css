@@ -206,11 +206,41 @@
 }
 
 .youtube-container {
-    position: relative;
-    bottom: 183px;
-    display: inline-block;
+    position: fixed;
+    top: calc(50% - 90px);
+    left: calc(50% - 160px);
 }
 
 .youtube-video {
-    
+    width: 320px;
+    height: 180px;
+}
+
+.close {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: var(--main-dark);
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 0.5em;
+}
+
+.btn-trailer {
+    position: absolute;
+    top: calc(50% - 9.7px);
+    left: calc(50% - 18.5px);
+    background-color: var(--white);
+    border: none;
+    padding: 0.1em;
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.youtube-shadow {
+    width: 100%;
+    height: 100%;
 }
