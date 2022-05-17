@@ -1,0 +1,28 @@
+.first-movie-section {
+    height: 450px;
+}
+
+.movie-container {
+    grid-template-rows: 205px;
+    grid-auto-columns: 110px;
+}
+
+.movie-image {
+    height: 165px;
+}
+
+.query-list-img {
+    height: 75px;
+}
+
+.query-list {
+    grid-template-columns: 60px 280px;
+}
+
+.tittle-section, .first-tittle {
+    font-size: 1.8rem;
+}
+
+.movie-search-items {
+    grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+}
