@@ -387,6 +387,10 @@ html {
     align-items: center;
 }
 
+.season-img-wrapper.movie-image {
+    height: auto;
+}
+
 @media (min-width: 370px) {
     .menu-tab {
         width: 333px;

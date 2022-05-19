@@ -77,6 +77,8 @@ function createDomMovieInfo(movie) {
         <img class="icon-play" src="../assets/icons/play.svg" alt="play icon">
     </button>`;
 
+    const styleBgImage = `style="height: auto;"`;
+
     let htmlMovieInfo = `
         <section>
             <h2 class="movie-info__tittle">${movie.title}</h2>
@@ -85,7 +87,7 @@ function createDomMovieInfo(movie) {
                     ${mainImage}
                 </div>
                 <div class="container-btn-trailer">
-                    <div class="image-bg">
+                    <div class="image-bg" ${movie?.backdrop_path ? styleBgImage : ""}>
                         ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
                     </div> 
                     ${movie.videos.results.length !== 0 ? btnShowTrailer : ""}

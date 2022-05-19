@@ -75,6 +75,8 @@ function createDomTvInfo(tvSerie) {
     `<button id="js-btn-trailer" class="btn-trailer">
         <img class="icon-play" src="../assets/icons/play.svg" alt="play icon">
     </button>`;
+
+    const styleBgImage = `style="height: auto;"`;
     
     let htmlTvSerieInfo = `
         <section>
@@ -84,7 +86,7 @@ function createDomTvInfo(tvSerie) {
                     ${mainImage}
                 </div>
                 <div class="container-btn-trailer">
-                    <div class="image-bg">
+                    <div class="image-bg" ${tvSerie?.backdrop_path ? styleBgImage : ""}>
                         ${tvSerie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
                     </div> 
                     ${tvSerie.videos.results.length !== 0 ? btnShowTrailer : ""}

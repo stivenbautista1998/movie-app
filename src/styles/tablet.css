@@ -7,6 +7,10 @@
     grid-auto-columns: 110px;
 }
 
+#js-cast-movies.movie-container {
+    grid-template-rows: 220px;
+}
+
 .movie-image {
     height: 165px;
 }
@@ -25,4 +29,15 @@
 
 .movie-search-items {
     grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+}
+
+
+.season-container {
+    grid-template-rows: 175px;
+    grid-auto-columns: 275px;
+}
+
+.season-item {
+    grid-template-columns: 115px 160px;
+    grid-template-rows: 175px;
 }
