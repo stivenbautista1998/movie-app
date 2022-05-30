@@ -3,7 +3,7 @@ let categoryList, menuBtn, menuTittle, searchBtn, closeBtn, closeSearch,
 menuTab, searchContainer, searchInput, headerPage;
 
 window.addEventListener("load", () => {
-    categoryList = document.querySelector("#js-category-list");
+    categoryList = document.querySelectorAll("#js-category-list");
     menuBtn = document.querySelector("#js-menu");
     menuTittle = document.querySelector("#js-nav-tittle");
     searchBtn = document.querySelector("#js-search-btn");
@@ -54,7 +54,8 @@ async function loadMenuGenres() {
     }
 
     const genresList = generateCategoryList(dataList.genres, genreId);
-    categoryList.innerHTML = genresList;
+    categoryList[0].innerHTML = genresList;
+    categoryList[1].innerHTML = genresList;
 }
 
 function generateCategoryList(data, genreId) {

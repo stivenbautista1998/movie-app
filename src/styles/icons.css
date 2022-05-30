@@ -57,3 +57,19 @@
     width: 2em;
     height: 2em;
 }
+
+.drop-down-icon {
+    width: 15px;
+    height: 15px;
+    transform: rotate(90deg);
+}
+
+.arrow-icon {
+    width: 15px;
+    height: 15px;
+    fill: #aaa;
+    vertical-align: bottom;
+}
+.drop-down-list:hover .arrow-icon {
+    fill: var(--white);
+}

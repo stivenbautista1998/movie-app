@@ -41,3 +41,20 @@
     grid-template-columns: 115px 160px;
     grid-template-rows: 175px;
 }
+
+.release-info {
+    font-size: 1.5rem;
+}
+
+.btn-trailer {
+    top: calc(50% - 20px);
+    left: calc(50% - 20px);
+    padding: 0.2em;
+    width: 40px;
+    height: 40px;
+}
+
+.icon-play {
+    width: 2.5em;
+    height: 2.5em;
+}

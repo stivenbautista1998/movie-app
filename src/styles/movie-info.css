@@ -229,8 +229,8 @@
 
 .btn-trailer {
     position: absolute;
-    top: calc(50% - 9.7px);
-    left: calc(50% - 18.5px);
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
     background-color: var(--white);
     border: none;
     padding: 0.1em;

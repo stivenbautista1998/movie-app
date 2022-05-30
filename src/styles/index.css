@@ -240,10 +240,6 @@ html {
     justify-content: center;
 }
 
-.selected-item {
-    color: var(--white);
-}
-
 .header-hidden {
     transform: translateY(-50px);
 }
@@ -390,6 +386,72 @@ html {
 .season-img-wrapper.movie-image {
     height: auto;
 }
+
+.nav-list-options {
+    display: none;
+}
+
+.header-list {
+    list-style: none;
+    font-size: 1.4rem;
+}
+
+.option-item {
+    display: inline-block;
+    position: relative;
+    padding: 0.3em;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.option-item:hover {
+    color: var(--white);
+}
+
+.header-list .selected-item {
+    color: var(--white);
+    background-color: var(--main-red);
+    border-radius: 5px;
+}
+
+.drop-down-list-box {
+    display: none;
+    position: absolute;
+    width: 220px;
+    left: -70px;
+    top: 40px;
+    border: 1px solid #555;
+    background-color: var(--second-dark);
+    border-radius: 5px;
+    padding: 0.5em;
+    transition: all 7s ease-in;
+}
+
+.option-item:hover > .drop-down-list-box {
+    transition: all 5s ease-in;
+    transition-delay: 2s;
+    display: block;
+
+
+    /* transition-duration: 7s;
+    transition-delay: 10s; */
+    /* animation: fade-in 4s;
+    animation-delay: 5s; */
+}
+
+.selected-item {
+    color: var(--white);
+}
+
+/* @keyframes fade-in {
+    from {
+        display: none;
+    }
+
+    to {
+        display: initial;
+    }
+} */
 
 @media (min-width: 370px) {
     .menu-tab {
