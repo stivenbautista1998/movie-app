@@ -5,3 +5,12 @@
 .nav-list-options {
     display: initial;
 }
+
+.search-container {
+    width: 40%;
+    margin: 0;
+}
+
+#js-nav-tittle.hide-element {
+    display:  inline-block;
+}
