@@ -10,10 +10,18 @@
     <link rel="stylesheet" href="../styles/icons.css">
     <link rel="stylesheet" href="../styles/movie-info.css">
     <link rel="stylesheet" media="(min-width: 480px)" href="/src/styles/tablet.css">
+    <link rel="stylesheet" media="(min-width: 768px)" href="/src/styles/laptops.css">
     <script src="../js/scripts/header.js" type="module"></script>
     <script src="../js/scripts/movie-tvseries-search.js" type="module"></script>
 </head>
 <body>
+    <svg display="none">
+        <defs>
+            <symbol id="icon-keyboard_arrow_down" viewBox="0 0 24 24">
+                <path d="M7.406 8.578l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z"></path>
+            </symbol>
+        </defs>
+    </svg>
     <div id="js-menu-tab" class="menu-tab">
         <div>
             <div class="menu-header">
@@ -70,19 +78,50 @@
         </div>
     </div>
     <div class="wrapper">
-        <header id="js-header" class="header-section">
+        <header id="js-header" class="header-section">            
+            <div class="header-menu">
+                <img id="js-menu" src="../assets/icons/menu.svg" alt="menu image">
+            </div>
+
+            <div id="js-nav-tittle" class="header-tittle">
+                <a class="no-link-style" href="/src/views/tv.html"><h1>Movie<span class="red-color">App</span></h1></a>
+            </div>
+
+            <div id="js-nav-list-options" class="nav-list-options">
+                <ul class="header-list">
+                    <a href="/" class="no-link-style">
+                        <li class="option-item">Movies</li>
+                    </a>
+                    <a href="/src/views/tv.html" class="no-link-style">
+                        <li class="option-item selected-item">Tv Shows</li>
+                    </a>
+                    <a href="#" class="no-link-style">
+                        <li class="option-item">Your List</li>
+                    </a>
+                    <li class="option-item drop-down-list">
+                        Categories
+                        <svg class="arrow-icon">
+                            <use xlink:href="#icon-keyboard_arrow_down" />
+                        </svg>
+                        
+                        <div class="drop-down-list-box">
+                            <ul id="js-category-list">
+                                <li class="category-item">Loading...</li>
+                                <li class="category-item">Loading...</li>
+                                <li class="category-item">Loading...</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
             <div id="js-search-container" class="search-container hide-element">
                 <img class="icon-search" src="../assets/icons/search.svg" alt="search image">
                 <input id="js-search-input" class="search-input" autocomplete="off" type="text" placeholder="search...">
                 <img id="js-close-search" class="icon-close" src="../assets/icons/close.svg" alt="close icon">
                 <div id="js-search-results" class="search-results"></div>
             </div>
-            <div class="header-menu">
-                <img id="js-menu" src="../assets/icons/menu.svg" alt="menu image">
-            </div>
-            <div id="js-nav-tittle" class="header-tittle">
-                <a class="no-link-style" href="/src/views/tv.html"><h1>MovieApp</h1></a>
-            </div>
+
             <div class="header-search">
                 <img id="js-search-btn" class="icon-search" src="../assets/icons/search.svg" alt="search image">
             </div>

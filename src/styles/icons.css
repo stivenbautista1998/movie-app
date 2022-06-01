@@ -35,6 +35,7 @@
 .icon-search, .icon-close {
     width: 2em;
     height: 2em;
+    cursor: pointer;
 }
 
 .not-found-image {

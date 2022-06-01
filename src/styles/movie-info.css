@@ -225,6 +225,7 @@
     right: 5px;
     top: 5px;
     padding: 0.5em;
+    cursor: pointer;
 }
 
 .btn-trailer {

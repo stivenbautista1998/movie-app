@@ -244,10 +244,14 @@ html {
     transform: translateY(-50px);
 }
 
+.header-menu {
+    cursor: pointer;
+}
+
 .search-container {
     width: 90%;
     height: 80%;
-    background-color: rgb(47 47 47 / 80%);
+    background-color: rgb(57 57 57 / 80%);
     display: flex;
     position: relative;
     justify-content: space-evenly;
@@ -324,6 +328,7 @@ html {
     font-size: 1.5rem;
     padding: 0.5em;
     text-align: center;
+    cursor: pointer;
 }
 
 .color-yellow {
