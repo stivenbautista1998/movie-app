@@ -21,11 +21,8 @@ html {
 
 .header-section {
     box-shadow: 0px 0px 3px #777;
-    display: flex;
     width: 100%;
     height: 50px;
-    align-items: center;
-    justify-content: space-around;
     font-size: 1rem;
     color: var(--white);
     position: fixed;
@@ -33,6 +30,15 @@ html {
     top: 0;
     z-index: 1;
     transition: transform .2s;
+}
+
+.header-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .first-movie-section, .movie-image {
@@ -461,6 +467,10 @@ html {
 
 .red-color {
     color: var(--main-red);
+}
+
+.desk-menu-icons {
+    display: none;
 }
 
 @media (min-width: 370px) {

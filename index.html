@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./src/styles/icons.css">
     <link rel="stylesheet" media="(min-width: 480px)" href="/src/styles/tablet.css">
     <link rel="stylesheet" media="(min-width: 768px)" href="/src/styles/laptops.css">
+    <link rel="stylesheet" media="(min-width: 1024px)" href="/src/styles/desktops.css">
     <script src="/src/js/scripts/header.js" type="module"></script>
     <script src="/src/js/scripts/home-script.js" type="module"></script>
 </head>
@@ -33,6 +34,11 @@
             </symbol>
             <symbol id="icon-switch" viewBox="0 0 32 32">
                 <path d="M20 4.581v4.249c1.131 0.494 2.172 1.2 3.071 2.099 1.889 1.889 2.929 4.4 2.929 7.071s-1.040 5.182-2.929 7.071c-1.889 1.889-4.4 2.929-7.071 2.929s-5.182-1.040-7.071-2.929c-1.889-1.889-2.929-4.4-2.929-7.071s1.040-5.182 2.929-7.071c0.899-0.899 1.94-1.606 3.071-2.099v-4.249c-5.783 1.721-10 7.077-10 13.419 0 7.732 6.268 14 14 14s14-6.268 14-14c0-6.342-4.217-11.698-10-13.419zM14 0h4v16h-4z"></path>
+            </symbol>
+            <symbol id="icon-books" viewBox="0 0 36 32">
+                <path d="M7 4h-6c-0.55 0-1 0.45-1 1v22c0 0.55 0.45 1 1 1h6c0.55 0 1-0.45 1-1v-22c0-0.55-0.45-1-1-1zM6 10h-4v-2h4v2z"></path>
+                <path d="M17 4h-6c-0.55 0-1 0.45-1 1v22c0 0.55 0.45 1 1 1h6c0.55 0 1-0.45 1-1v-22c0-0.55-0.45-1-1-1zM16 10h-4v-2h4v2z"></path>
+                <path d="M23.909 5.546l-5.358 2.7c-0.491 0.247-0.691 0.852-0.443 1.343l8.999 17.861c0.247 0.491 0.852 0.691 1.343 0.443l5.358-2.7c0.491-0.247 0.691-0.852 0.443-1.343l-8.999-17.861c-0.247-0.491-0.852-0.691-1.343-0.443z"></path>
             </symbol>
         </defs>
     </svg>
@@ -112,50 +118,70 @@
         </div>
     </div>
     <div class="wrapper">
-        <header id="js-header" class="header-section">            
-            <div class="header-menu">
-                <img id="js-menu" src="./src/assets/icons/menu.svg" alt="menu image">
-            </div>
-            <div id="js-nav-tittle" class="header-tittle">
-                <a class="no-link-style" href="/"><h1>Movie<span class="red-color">App</span></h1></a>
-            </div>
-            <div id="js-nav-list-options" class="nav-list-options">
-                <ul class="header-list">
-                    <a href="/" class="no-link-style">
-                        <li class="option-item selected-item">Movies</li>
-                    </a>
-                    <a href="/src/views/tv.html" class="no-link-style">
-                        <li class="option-item">Tv Shows</li>
-                    </a>
-                    <a href="#" class="no-link-style">
-                        <li class="option-item">Your List</li>
-                    </a>
-                    <li class="option-item drop-down-list">
-                        Categories
-                        <svg class="arrow-icon">
-                            <use xlink:href="#icon-keyboard_arrow_down" />
-                        </svg>
-                        
-                        <div class="drop-down-list-box">
-                            <ul id="js-category-list">
-                                <li class="category-item">Loading...</li>
-                                <li class="category-item">Loading...</li>
-                                <li class="category-item">Loading...</li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            
-            <div id="js-search-container" class="search-container hide-element">
-                <img class="icon-search" src="./src/assets/icons/search.svg" alt="search image">
-                <input id="js-search-input" class="search-input" autocomplete="off" type="text" placeholder="search...">
-                <img id="js-close-search" class="icon-close" src="./src/assets/icons/close.svg" alt="close icon">
-                <div id="js-search-results" class="search-results"></div>
-            </div>
-
-            <div class="header-search">
-                <img id="js-search-btn" class="icon-search" src="./src/assets/icons/search.svg" alt="search image">
+        <header id="js-header" class="header-section">
+            <div class="header-wrapper">
+                <div class="header-menu">
+                    <img id="js-menu" src="./src/assets/icons/menu.svg" alt="menu image">
+                </div>
+                <div id="js-nav-tittle" class="header-tittle">
+                    <a class="no-link-style" href="/"><h1>Movie<span class="red-color">App</span></h1></a>
+                </div>
+                <div id="js-nav-list-options" class="nav-list-options">
+                    <ul class="header-list">
+                        <a href="/" class="no-link-style">
+                            <li class="option-item selected-item">
+                                <svg class="icon-movies desk-menu-icons">
+                                    <use xlink:href="#icon-movie" />
+                                </svg>
+                                Movies
+                            </li>
+                        </a>
+                        <a href="/src/views/tv.html" class="no-link-style">
+                            <li class="option-item">
+                                <svg class="icon-tv desk-menu-icons">
+                                    <use xlink:href="#icon-airplayvideo" />
+                                </svg>
+                                Tv Shows
+                            </li>
+                        </a>
+                        <a href="#" class="no-link-style">
+                            <li class="option-item">
+                                <svg class="icon-favorite-menu desk-menu-icons">
+                                    <use xlink:href="#icon-bookmark-outline-add" />
+                                </svg>        
+                                Your List
+                            </li>
+                        </a>
+                        <li class="option-item drop-down-list">
+                            <svg class="icon-categories desk-menu-icons">
+                                <use xlink:href="#icon-books" />
+                            </svg>
+                            Categories
+                            <svg class="arrow-icon">
+                                <use xlink:href="#icon-keyboard_arrow_down" />
+                            </svg>
+                            
+                            <div class="drop-down-list-box">
+                                <ul id="js-category-list">
+                                    <li class="category-item">Loading...</li>
+                                    <li class="category-item">Loading...</li>
+                                    <li class="category-item">Loading...</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="js-search-container" class="search-container hide-element">
+                    <img class="icon-search" src="./src/assets/icons/search.svg" alt="search image">
+                    <input id="js-search-input" class="search-input" autocomplete="off" type="text" placeholder="search...">
+                    <img id="js-close-search" class="icon-close" src="./src/assets/icons/close.svg" alt="close icon">
+                    <div id="js-search-results" class="search-results"></div>
+                </div>
+    
+                <div class="header-search">
+                    <img id="js-search-btn" class="icon-search" src="./src/assets/icons/search.svg" alt="search image">
+                </div>
             </div>
         </header>
 

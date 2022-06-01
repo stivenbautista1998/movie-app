@@ -1,0 +1,18 @@
+.desk-menu-icons {
+    display: inline-block;
+    width: 1.1em;
+    height: 1.1em;
+    margin-right: 0;
+}
+
+.option-item {
+    margin-right: .2em;
+}
+
+.drop-down-list-box {
+    left: -55px;
+}
+
+.header-list .selected-item {
+    padding: 0.4em;
+}
