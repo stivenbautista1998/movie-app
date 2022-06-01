@@ -5,12 +5,16 @@
 }
 
 .icon-movies, .icon-tv, .icon-favorite-menu, .icon-user, .icon-log-out {
-    color: #AAA;
+    fill: #AAA;
+    width: 1.3em;
+    height: 1.3em;
+    vertical-align: bottom;
+    margin-right: 0.4em;
 }
 
-/* .selected-item .icon-movies {
-    color: #FFF;
-} */
+.selected-item .icon-movies, .menu-user__container:hover .icon-movies, .selected-item .icon-tv, .menu-user__container:hover .icon-tv, .menu-user__container:hover .icon-favorite-menu, .menu-user__container:hover .icon-user, .menu-user__container:hover .icon-log-out {
+    fill: #FFF;
+}
 
 .icon-star {
     width: 1em;
