@@ -44,7 +44,7 @@ const GENRESTOSHOW = {
 
 async function renderFirstTvSerie() {
     const data = await getTvById("1399"); // game of thrones.
-    divFirstTvSerie.style.backgroundImage = `url('${IMAGE_URL}${data.poster_path}')`;
+    divFirstTvSerie.style.backgroundImage = `url('${IMAGE_URL}${data.backdrop_path}')`;
 }
 
 function renderSeries(tvInfo) {

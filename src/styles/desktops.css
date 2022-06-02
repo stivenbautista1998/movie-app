@@ -1,3 +1,7 @@
+.first-movie-section {
+    height: 450px;
+}
+
 .desk-menu-icons {
     display: inline-block;
     width: 1.1em;
@@ -15,4 +19,21 @@
 
 .header-list .selected-item {
     padding: 0.4em;
+}
+
+.movie-container {
+    grid-template-rows: 227px;
+    grid-auto-columns: 125px;
+}
+
+#js-cast-movies.movie-container {
+    grid-template-rows: 242px;
+}
+
+.movie-image {
+    height: 187px;
+}
+
+.query-list-img {
+    height: 75px;
 }

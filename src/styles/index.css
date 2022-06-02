@@ -424,10 +424,6 @@ html {
     color: var(--white);
 }
 
-.option-item:hover .drop-down-list-box {
-    
-}
-
 .header-list .selected-item {
     color: var(--white);
     background-color: var(--main-red);
@@ -471,6 +467,11 @@ html {
 
 .desk-menu-icons {
     display: none;
+}
+
+.wrapper-content {
+    max-width: 1245px;
+    margin: 0 auto;
 }
 
 @media (min-width: 370px) {

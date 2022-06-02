@@ -104,8 +104,8 @@ function showSearchList(data) {
 }
 
 async function renderFirstMovie() {
-    const data = await getMovieById("406759"); // 76341 naruto: 317442
-    divFirstMovie.style.backgroundImage = `url('${IMAGE_URL}${data.poster_path}')`;
+    const data = await getMovieById("317442"); // strange: 453395, naruto: 317442  antes: 406759
+    divFirstMovie.style.backgroundImage = `url('${IMAGE_URL}${data.backdrop_path}')`;
 }
 
 function renderMovies(moviesInfo) {
