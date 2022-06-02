@@ -1,6 +1,6 @@
 import { getMovieGenres, getTvGenres } from '../utils/connections.js';
 let categoryList, menuBtn, menuTittle, searchBtn, closeBtn, closeSearch,
-menuTab, searchContainer, searchInput, headerPage;
+menuTab, searchContainer, searchInput, headerPage, btnCategory;
 
 window.addEventListener("load", () => {
     categoryList = document.querySelectorAll("#js-category-list");
@@ -13,6 +13,7 @@ window.addEventListener("load", () => {
     searchContainer = document.querySelector("#js-search-container");
     searchInput = document.querySelector("#js-search-input");
     headerPage = document.querySelector("#js-header");
+    btnCategory = document.querySelector("#js-category-btn");
 
     menuBtn.onclick = showMenu;
     closeBtn.onclick = closeMenu;
@@ -21,7 +22,23 @@ window.addEventListener("load", () => {
 
     loadMenuGenres();
     scrollHeader();
+
+    const element = btnCategory.querySelector(".drop-down-list-box");
+    btnCategory.onclick = () => showCategoryDropDownList(element);
 });
+
+
+function showCategoryDropDownList(element) {
+    if(element.classList.contains("show-element")) {
+        element.classList.remove("show-element");
+        element.classList.add("hide-element");
+        console.log("has it");
+    } else {
+        element.classList.remove("hide-element");
+        element.classList.add("show-element");
+        console.log("not has it");
+    }
+}
 
 function scrollHeader() {
     let lastScrollY = window.scrollY;

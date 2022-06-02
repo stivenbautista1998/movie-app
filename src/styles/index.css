@@ -431,8 +431,6 @@ html {
 }
 
 .drop-down-list-box {
-    /* display: none; */
-    opacity: 0;
     position: absolute;
     width: 220px;
     left: -70px;
@@ -441,15 +439,8 @@ html {
     background-color: var(--second-dark);
     border-radius: 5px;
     padding: 0.5em;
-    transition: opacity 400ms;
+    transition: all 400ms;
     transition-duration: 300ms;
-}
-
-.option-item:hover > .drop-down-list-box {
-    transition: opacity 400ms;
-    transition-duration: 300ms;
-    /* display: block; */
-    opacity: 1;
 }
 
 .group-drop-down-item {
@@ -472,6 +463,14 @@ html {
 .wrapper-content {
     max-width: 1245px;
     margin: 0 auto;
+}
+
+.show-element {
+    display: block;
+}
+
+.hide-element {
+    display: none;
 }
 
 @media (min-width: 370px) {
