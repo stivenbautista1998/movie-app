@@ -60,7 +60,7 @@ function trailerOption(idVideo) {
 
 function createDomMovieInfo(movie) {
     const mainImage = (movie.poster_path ? `<img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL + movie.poster_path}" alt="main movie image">` 
-    : `<div class="empty-img"><span class="center-message medium-font-size">No Image</span></div>`);
+    : `<div class="empty-img"><span class="center-position-short medium-font-size">No Image</span></div>`);
 
     const showCast = 
     `<div id="js-cast-movies" class="movie-container">
@@ -88,7 +88,7 @@ function createDomMovieInfo(movie) {
                 </div>
                 <div class="container-btn-trailer">
                     <div class="image-bg" ${movie?.backdrop_path ? styleBgImage : ""}>
-                        ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
+                        ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` : `<span class="center-position medium-font-size">No Poster Image</span>`}
                     </div> 
                     ${movie.videos.results.length !== 0 ? btnShowTrailer : ""}
                 </div>

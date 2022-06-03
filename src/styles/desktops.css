@@ -134,6 +134,7 @@
 
 .container-front-image {
     height: 180px;
+    position: relative;
 }
 
 .empty-img {

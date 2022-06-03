@@ -5,17 +5,37 @@ import {
 } from '../utils/connections.js';
 import { registerMovie as registerTvSerie  } from '../utils/observer.js'
 let rootApp, searchInput, searchResultContainer, showAllMovieInfo, 
-btnTrailer, closeTrailer;
+btnTrailer, closeTrailer, backPost, frontImage, frontImageLoaded, backImageLoaded;
 
 window.addEventListener("load", () => {
     rootApp = document.querySelector("#app");
     searchInput = document.querySelector("#js-search-input");
     searchResultContainer = document.querySelector("#js-search-results");
+    
     const tvSerieId = getParameters("tvId");
-    renderTvSeriesInfo(tvSerieId); // execute the whole movie info section.
+    renderTvSeriesInfo(tvSerieId).then(() => { // execute the whole movie info section.
+        
+        console.log({ frontImageLoaded });
+        console.log({ backImageLoaded });
+
+        if(frontImageLoaded === true && backImageLoaded === false) {
+            backPost = document.querySelector(".image-bg");
+            frontImage = document.querySelector("#js-image-movie");
+            frontImage.onload = function() {
+                backPost.style.height = this.height + "px";
+            }
+        }
+    });
 
     searchInput.addEventListener("keyup", searchTvSerie);
+    window.onresize = adjustBackground;
 });
+
+function adjustBackground() {
+    if(frontImageLoaded === true && backImageLoaded === false) {
+        backPost.style.height = frontImage.height + "px";
+    }
+}
 
 async function renderTvSeriesInfo(id) {
     if(id !== null) {
@@ -59,7 +79,7 @@ function trailerOption(idVideo) {
 
 function createDomTvInfo(tvSerie) {
     const mainImage = (tvSerie.poster_path ? `<img id="js-image-movie" class="movie-info__image" src="${IMAGE_URL + tvSerie.poster_path}" alt="main movie image">` 
-    : `<div class="empty-img"><span class="center-message medium-font-size">No Image</span></div>`);
+    : `<div class="empty-img"><span class="center-position-short medium-font-size">No Image</span></div>`);
 
     const showCast = 
     `<div id="js-cast-movies" class="movie-container">
@@ -77,6 +97,9 @@ function createDomTvInfo(tvSerie) {
     </button>`;
 
     const styleBgImage = `style="height: auto;"`;
+
+    frontImageLoaded = (tvSerie.poster_path ? true : false);
+    backImageLoaded = (tvSerie?.backdrop_path ? true : false);
     
     let htmlTvSerieInfo = `
         <section>
@@ -87,7 +110,7 @@ function createDomTvInfo(tvSerie) {
                 </div>
                 <div class="container-btn-trailer">
                     <div class="image-bg" ${tvSerie?.backdrop_path ? styleBgImage : ""}>
-                        ${tvSerie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">` : `<span class="center-message medium-font-size">No Poster Image</span>`}
+                        ${tvSerie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">` : `<span class="center-position medium-font-size">No Poster Image</span>`}
                     </div> 
                     ${tvSerie.videos.results.length !== 0 ? btnShowTrailer : ""}
                 </div>
@@ -290,7 +313,7 @@ function showSearchList(data) {
         <a class="no-link-style" href="/src/views/tv-info.html?tvId=${tvSerieInfo.id}">
             <div class="query-list">
                 <div class="movie-image query-list-img" ${tvSerieInfo.poster_path !== null ? datasetImage : ""}>
-                    ${tvSerieInfo.poster_path !== null ? "" : `<span class="center-message white-message">No Image</span>`}
+                    ${tvSerieInfo.poster_path !== null ? "" : `<span class="center-position white-message">No Image</span>`}
                 </div>
                 <div class="query-list-title">${tvSerieInfo.name}</div>
             </div>

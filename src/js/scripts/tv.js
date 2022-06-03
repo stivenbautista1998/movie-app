@@ -18,8 +18,6 @@ window.addEventListener("load", () => {
     divWarAndPolitics = document.querySelector("#js-war-politics");
     searchInput = document.querySelector("#js-search-input");
     searchResultContainer = document.querySelector("#js-search-results");
-    
-    // renderFirstTvSerie();
 
     Promise.all([
         renderActionAdventureTv(), 
@@ -41,11 +39,6 @@ const GENRESTOSHOW = {
     comedy: 35,
     warAndPolitics: 10768
 };
-
-/* async function renderFirstTvSerie() {
-    const data = await getTvById("1399"); // game of thrones.
-    divFirstTvSerie.style.backgroundImage = `url('${IMAGE_URL}${data.backdrop_path}')`;
-} */
 
 function renderSeries(tvInfo) {
     let tvList = "";
