@@ -31,7 +31,6 @@
     grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
 }
 
-
 .season-container {
     grid-template-rows: 175px;
     grid-auto-columns: 275px;
@@ -57,4 +56,14 @@
 .icon-play {
     width: 2.5em;
     height: 2.5em;
+}
+
+.youtube-container {
+    top: calc(50% - 107px);
+    left: calc(50% - 213px);
+}
+
+.youtube-video {
+    height: 214px;
+    width: 426px;    
 }

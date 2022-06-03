@@ -83,7 +83,7 @@ function createDomMovieInfo(movie) {
         <section>
             <h2 class="movie-info__tittle">${movie.title}</h2>
             <div class="movie-info__image-wrapper">
-                <div>
+                <div class="container-front-image">
                     ${mainImage}
                 </div>
                 <div class="container-btn-trailer">
@@ -94,7 +94,8 @@ function createDomMovieInfo(movie) {
                 </div>
             </div>
             <div class="movie-info__sub-info">                
-                <span class="release-info">${movie.release_date}</span>               
+                <span class="release-info">${movie.release_date}</span>
+                <span class="show-on-desktop language">Language: </span>
                 <span class="language-info">${movie.original_language}</span>                
                 <div class="start-vote">
                     <img class="icon-star" src="../assets/icons/star.svg" alt="star icon">

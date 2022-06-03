@@ -32,11 +32,9 @@ function showCategoryDropDownList(element) {
     if(element.classList.contains("show-element")) {
         element.classList.remove("show-element");
         element.classList.add("hide-element");
-        console.log("has it");
     } else {
         element.classList.remove("hide-element");
         element.classList.add("show-element");
-        console.log("not has it");
     }
 }
 

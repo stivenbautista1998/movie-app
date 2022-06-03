@@ -37,3 +37,93 @@
 .query-list-img {
     height: 75px;
 }
+
+.container-front-image {
+    display: inline-block;
+    width: 27%;
+}
+
+.movie-info__image {
+    width: 100%;
+    position: initial;
+    display: inline-block;
+}
+
+.container-btn-trailer {
+    display: inline-block;
+    width: 72%;
+    position: relative;
+}
+
+.image-bg {
+    width: 100%;
+    display: inline-block;
+    /* height: 180px; */
+}
+
+.movie-info__bg-image {
+    width: 100%;
+}
+
+.movie-info__tittle {
+    font-size: 2.8rem;
+}
+
+.tittle-section, .first-tittle {
+    font-size: 2.2rem;
+}
+
+.release-info {
+    font-size: 2rem;
+    margin-right: .5em;
+}
+
+.language-info {
+    font-size: 1.5rem;
+    margin-right: .5em;
+}
+
+.start-vote {
+    font-size: 2rem;
+}
+
+.movie-info__sub-info {
+    background-color: #222;
+    padding: 0.3em;
+    border-radius: 5px;
+}
+
+.show-on-desktop {
+    display: inline-block;
+}
+
+.language {
+    font-size: 2rem;
+}
+
+.general-section {
+    margin: 1.5em;
+}
+
+.season-item {
+    grid-template-columns: 125px 170px;
+    grid-template-rows: 187px;
+}
+
+.season-container {
+    grid-template-rows: 187px;
+}
+
+.season-img-wrapper.movie-image {
+    height: 187px;
+}
+
+.youtube-container {
+    top: calc(50% - 160px);
+    left: calc(50% - 320px);
+}
+
+.youtube-video {
+    min-height: 320px;
+    min-width: 640px;
+}

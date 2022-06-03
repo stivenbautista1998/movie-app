@@ -82,7 +82,7 @@ function createDomTvInfo(tvSerie) {
         <section>
             <h2 class="movie-info__tittle">${tvSerie.name}</h2>
             <div class="movie-info__image-wrapper">
-                <div>
+                <div class="container-front-image">
                     ${mainImage}
                 </div>
                 <div class="container-btn-trailer">
@@ -94,6 +94,7 @@ function createDomTvInfo(tvSerie) {
             </div>
             <div class="movie-info__sub-info">                
                 <span class="release-info">${tvSerie.first_air_date}</span>
+                <span class="show-on-desktop language">Language: </span>
                 <span class="language-info">${tvSerie.original_language}</span>                
                 <div class="start-vote">
                     <img class="icon-star" src="../assets/icons/star.svg" alt="star icon">
