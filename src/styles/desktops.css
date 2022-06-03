@@ -118,6 +118,10 @@
     height: 187px;
 }
 
+.movie-info__image {
+    box-shadow: none;
+}
+
 .youtube-container {
     top: calc(50% - 160px);
     left: calc(50% - 320px);
@@ -126,4 +130,15 @@
 .youtube-video {
     min-height: 320px;
     min-width: 640px;
+}
+
+.container-front-image {
+    height: 180px;
+}
+
+.empty-img {
+    width: 100%;
+    height: 100%;
+    position: static;
+    box-shadow: none;
 }

@@ -26,8 +26,6 @@ window.addEventListener("load", () => {
     divMysteryMovies = document.querySelector("#js-mystery-movies");
     searchInput = document.querySelector("#js-search-input");
     searchResultContainer = document.querySelector("#js-search-results");
-    
-    renderFirstMovie(); // first movie to show.
 
     // executing all the async functions that render the series cards and then running the observer function. 
     Promise.all([
@@ -103,11 +101,6 @@ function showSearchList(data) {
         ${queryList}
         <div id="js-view-all-btn" class="query-list-btn">View all results</div>
     `;
-}
-
-async function renderFirstMovie() {
-    const data = await getMovieById("317442"); // strange: 453395, naruto: 317442  antes: 406759
-    divFirstMovie.style.backgroundImage = `url('${IMAGE_URL}${data.backdrop_path}')`;
 }
 
 function renderMovies(moviesInfo) {

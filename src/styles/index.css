@@ -57,9 +57,20 @@ html {
     margin-bottom: 1.5em;
 }
 
-.first-movie-section {
+.first-movie-section {    
     height: 350px;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 50px;
     background-color: #22276b;
+}
+
+.movie.first-movie-section {
+    background-image: url("/src/assets/imgs/dr-strange.jpeg");
+}
+
+.serie.first-movie-section {
+    background-image: url("/src/assets/imgs/serie-img.webp");
 }
 
 .general-section {
@@ -304,7 +315,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    height: 90vh;
 }
 
 .search-results {

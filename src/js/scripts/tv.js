@@ -19,7 +19,7 @@ window.addEventListener("load", () => {
     searchInput = document.querySelector("#js-search-input");
     searchResultContainer = document.querySelector("#js-search-results");
     
-    renderFirstTvSerie();
+    // renderFirstTvSerie();
 
     Promise.all([
         renderActionAdventureTv(), 
@@ -42,10 +42,10 @@ const GENRESTOSHOW = {
     warAndPolitics: 10768
 };
 
-async function renderFirstTvSerie() {
+/* async function renderFirstTvSerie() {
     const data = await getTvById("1399"); // game of thrones.
     divFirstTvSerie.style.backgroundImage = `url('${IMAGE_URL}${data.backdrop_path}')`;
-}
+} */
 
 function renderSeries(tvInfo) {
     let tvList = "";

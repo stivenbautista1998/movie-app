@@ -1,5 +1,5 @@
 .first-movie-section {
-    height: 450px;
+    height: 450px;    
 }
 
 .movie-container {
@@ -66,4 +66,9 @@
 .youtube-video {
     height: 214px;
     width: 426px;    
+}
+
+.not-found-image {
+    width: 300px;
+    height: 300px;
 }

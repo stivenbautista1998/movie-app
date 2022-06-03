@@ -17,4 +17,17 @@
 
 .season-container {
     margin-bottom: 3em;
- }
+}
+
+.not-found-image {
+    width: 400px;
+    height: 400px;
+}
+
+.movie.first-movie-section {
+    background-image: url("/src/assets/imgs/movie-large-cover.jpeg");
+}
+
+.serie.first-movie-section {
+    background-image: url("/src/assets/imgs/series-large-cover.jpeg");
+}
