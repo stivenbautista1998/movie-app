@@ -246,7 +246,7 @@ async function searchTvSerie(event) {
         if(value !== "") {
             window.location.href = `/src/views/tv-search.html?query=${value}&page=1`;
         }
-    } else if(value !== "") {
+    } else if(value !== "" && value.length >= 4) {
         let queryResult = await queryOfInput(value, 5);
 
         if(queryResult !== null && queryResult !== undefined) {
@@ -260,6 +260,8 @@ async function searchTvSerie(event) {
                 };
             }
         }
+    } else if(value.length < 4) {
+        searchResultContainer.innerHTML = "";
     }
 }
 

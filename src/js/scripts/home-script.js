@@ -49,7 +49,7 @@ async function searchMovie(event) {
         if(value !== "") {
             window.location.href = `/src/views/movie-search.html?query=${value}&page=1`;
         }
-    } else if(value !== "") {
+    } else if(value !== "" && value.length >= 4) {
         let queryResult = await queryOfInput(value, 5);
 
         if(queryResult !== null && queryResult !== undefined) {
@@ -63,6 +63,8 @@ async function searchMovie(event) {
                 };
             }
         }
+    } else if(value.length < 4) {
+        searchResultContainer.innerHTML = "";
     }
 }
 
