@@ -5,7 +5,7 @@ import {
 } from '../utils/connections.js';
 import { registerMovie } from "../utils/observer.js";
 let rootApp, searchInput, searchResultContainer, showAllMovieInfo, 
-btnTrailer, closeTrailer;
+btnTrailer, closeTrailer, backPost, frontImage, frontImageLoaded, backImageLoaded;
 
 window.addEventListener("load", () => {
     rootApp = document.querySelector("#app");
@@ -13,10 +13,57 @@ window.addEventListener("load", () => {
     searchResultContainer = document.querySelector("#js-search-results");
 
     const movieId = getParameters("movieId");
-    renderMovieInfo(movieId); // execute the whole movie info section.
+    renderMovieInfo(movieId).then(() => { // execute the whole movie info section.
+        console.log({ frontImageLoaded });
+        console.log({ backImageLoaded });
+
+        if(frontImageLoaded === true && backImageLoaded === false) {
+            backPost = document.querySelector(".image-bg");
+            frontImage = document.querySelector("#js-image-movie");
+
+            frontImage.onload = function() {
+                if(window.innerWidth >= 1024) {
+                    backPost.style.height = this.height + "px";
+                } else {
+                    backPost.style.height = (this.height + (this.height * 20 / 100)) + "px";
+                }
+            }
+
+        } else if(frontImageLoaded === false && backImageLoaded === true) {
+            frontImage = document.querySelector(".empty-img");
+            backPost = document.querySelector("#js-image-bg");
+
+            backPost.onload = function() {
+                if(window.innerWidth >= 1024) {
+                    frontImage.style.height = this.height + "px";
+                } else {
+                    // we get the 80% of the height of the back-image and add it to the height of the front-image.
+                    frontImage.style.height = (backPost.height - (backPost.height * 20 / 100)) + "px";
+                }
+            }
+        }
+    }); 
 
     searchInput.addEventListener("keyup", searchMovie);
+    window.onresize = adjustBackground;
 });
+
+function adjustBackground(event) {
+    if(frontImageLoaded === true && backImageLoaded === false) {
+        if(window.innerWidth >= 1024) {
+            backPost.style.height = frontImage.height + "px";
+        } else {
+            backPost.style.height = (frontImage.height + (frontImage.height * 20 / 100)) + "px";
+        }
+    } else if(frontImageLoaded === false && backImageLoaded === true) {
+        if(window.innerWidth >= 1024) { // we ask if the screen width is >= 1024px.
+            frontImage.style.height = backPost.height + "px";
+        } else {
+            // we get the 80% of the height of the back-image and add it to the height of the front-image.
+            frontImage.style.height = (backPost.height - (backPost.height * 20 / 100)) + "px";
+        }
+    }
+}
 
 async function renderMovieInfo(id) {
     if(id !== null) {
@@ -78,6 +125,9 @@ function createDomMovieInfo(movie) {
     </button>`;
 
     const styleBgImage = `style="height: auto;"`;
+
+    frontImageLoaded = (movie.poster_path ? true : false);
+    backImageLoaded = (movie?.backdrop_path ? true : false);
 
     let htmlMovieInfo = `
         <section>
