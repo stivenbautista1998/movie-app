@@ -45,7 +45,7 @@ async function searchMovie(event) {
     let { value } = event.target; 
     if(event.keyCode === 13) {
         if(value !== "") {
-            window.location.href = `/src/views/movie-search.html?query=${value}&page=1`;
+            window.location.href = `./src/views/movie-search.html?query=${value}&page=1`;
         }
     } else if(value !== "" && value.length >= 4) {
         let queryResult = await queryOfInput(value, 5);
@@ -57,7 +57,7 @@ async function searchMovie(event) {
                 observingMovies();
                 showAllMovieInfo = document.querySelector("#js-view-all-btn");
                 showAllMovieInfo.onclick = () => {
-                    window.location.href = `/src/views/movie-search.html?query=${value}&page=1`;
+                    window.location.href = `./src/views/movie-search.html?query=${value}&page=1`;
                 };
             }
         }
@@ -88,7 +88,7 @@ function showSearchList(data) {
         let datasetImage = `data-img-url="url('${IMAGE_URL + movieInfo.poster_path}')"`;
 
         queryList += `
-        <a class="no-link-style" href="/src/views/movie-info.html?movieId=${movieInfo.id}">
+        <a class="no-link-style" href="./src/views/movie-info.html?movieId=${movieInfo.id}">
             <div class="query-list">
                 <div class="movie-image query-list-img" ${movieInfo.poster_path !== null ? datasetImage : ""}>
                     ${movieInfo.poster_path !== null ? "" : `<span class="center-message white-message">No Image</span>`}
@@ -111,7 +111,7 @@ function renderMovies(moviesInfo) {
             let datasetImage = `data-img-url="url('${IMAGE_URL}${movie.poster_path}')"`; // we add the img info to the dataset to use it with the Intersection Observer.
             movieList += 
             `<div class="movie-info">
-                <a href="/src/views/movie-info.html?movieId=${movie.id}">
+                <a href="./src/views/movie-info.html?movieId=${movie.id}">
                     <div ${movie.poster_path !== null ? datasetImage : ""} class="movie-image">
                         <img class="icon-watchlist" src="./src/assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="./src/assets/icons/favorite.svg" alt="favorite icon">
