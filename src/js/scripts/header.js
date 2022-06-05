@@ -54,16 +54,16 @@ function scrollHeader() {
 
 async function loadMenuGenres() {
     let dataList, genreId = null;
-    if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-info.html") || (window.location.pathname === "/src/views/movie-filter.html") || (window.location.pathname === "/src/views/movie-search.html")) {
+    if((window.location.pathname === "/movie-app/") || (window.location.pathname === "/movie-app/src/views/movie-info.html") || (window.location.pathname === "/movie-app/src/views/movie-filter.html") || (window.location.pathname === "/movie-app/src/views/movie-search.html")) {
         dataList = await getMovieGenres();
 
-        if(window.location.pathname === "/src/views/movie-filter.html") {
+        if(window.location.pathname === "/movie-app/src/views/movie-filter.html") {
             genreId = getParameters("genreId");
         }
-    } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-info.html") || (window.location.pathname === "/src/views/tv-filter.html") || (window.location.pathname === "/src/views/tv-search.html")) {
+    } else if((window.location.pathname === "/movie-app/src/views/tv.html") || (window.location.pathname === "/movie-app/src/views/tv-info.html") || (window.location.pathname === "/movie-app/src/views/tv-filter.html") || (window.location.pathname === "/movie-app/src/views/tv-search.html")) {
         dataList = await getTvGenres();
 
-        if(window.location.pathname === "/src/views/tv-filter.html") {
+        if(window.location.pathname === "/movie-app/src/views/tv-filter.html") {
             genreId = getParameters("genreId");
         }
     }
@@ -83,14 +83,14 @@ function generateCategoryList(data, genreId) {
             }
         }
 
-        if((window.location.pathname === "/") || (window.location.pathname === "/src/views/movie-filter.html") || (window.location.pathname === "/src/views/movie-info.html") || (window.location.pathname === "/src/views/movie-search.html")) {
+        if((window.location.pathname === "/movie-app/") || (window.location.pathname === "/movie-app/src/views/movie-filter.html") || (window.location.pathname === "/movie-app/src/views/movie-info.html") || (window.location.pathname === "/movie-app/src/views/movie-search.html")) {
             pageType = "movie-filter.html";
-        } else if((window.location.pathname === "/src/views/tv.html") || (window.location.pathname === "/src/views/tv-filter.html") || (window.location.pathname === "/src/views/tv-info.html") || (window.location.pathname === "/src/views/tv-search.html")) {
+        } else if((window.location.pathname === "/movie-app/src/views/tv.html") || (window.location.pathname === "/movie-app/src/views/tv-filter.html") || (window.location.pathname === "/movie-app/src/views/tv-info.html") || (window.location.pathname === "/movie-app/src/views/tv-search.html")) {
             pageType = "tv-filter.html";
         }
 
         categoryList += `
-        <a class="no-link-style" href="/src/views/${pageType}?genreId=${item.id}&genreName=${item.name}&page=1">
+        <a class="no-link-style" href="/movie-app/src/views/${pageType}?genreId=${item.id}&genreName=${item.name}&page=1">
             <li class="category-item ${selectedGenre ? "selected-genre" : ""}" data-id="${item.id}">
                 ${item.name}
             </li>

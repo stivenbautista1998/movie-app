@@ -48,7 +48,7 @@ function renderSeries(tvInfo) {
             let datasetImage = `data-img-url="url('${IMAGE_URL}${tv.poster_path}')"`; // we add the img info to the dataset to use it with the Intersection Observer.
             tvList += 
             `<div class="movie-info">
-                <a href="/src/views/tv-info.html?tvId=${tv.id}">
+                <a href="/movie-app/src/views/tv-info.html?tvId=${tv.id}">
                     <div ${tv.poster_path !== null ? datasetImage : ""} class="movie-image">
                         <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
@@ -149,7 +149,7 @@ function showSearchList(data) {
         let datasetImage = `data-img-url="url('${IMAGE_URL + tvSerieInfo.poster_path}')"`;
 
         queryList += `
-        <a class="no-link-style" href="/src/views/tv-info.html?tvId=${tvSerieInfo.id}">
+        <a class="no-link-style" href="/movie-app/src/views/tv-info.html?tvId=${tvSerieInfo.id}">
             <div class="query-list">
                 <div class="movie-image query-list-img" ${tvSerieInfo.poster_path !== null ? datasetImage : ""}>
                     ${tvSerieInfo.poster_path !== null ? "" : `<span class="center-message white-message">No Image</span>`}

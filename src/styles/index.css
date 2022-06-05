@@ -66,11 +66,11 @@ html {
 }
 
 .movie.first-movie-section {
-    background-image: url("/src/assets/imgs/dr-strange.jpeg");
+    background-image: url("/movie-app/src/assets/imgs/dr-strange.jpeg");
 }
 
 .serie.first-movie-section {
-    background-image: url("/src/assets/imgs/serie-img.webp");
+    background-image: url("/movie-app/src/assets/imgs/serie-img.webp");
 }
 
 .general-section {

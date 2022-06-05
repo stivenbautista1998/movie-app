@@ -66,7 +66,7 @@ function showSearchList(data) {
         let datasetImage = `data-img-url="url('${IMAGE_URL + tvSerieInfo.poster_path}')"`;
 
         queryList += `
-        <a class="no-link-style" href="/src/views/tv-info.html?tvId=${tvSerieInfo.id}">
+        <a class="no-link-style" href="/movie-app/src/views/tv-info.html?tvId=${tvSerieInfo.id}">
             <div class="query-list">
                 <div class="movie-image query-list-img" ${tvSerieInfo.poster_path !== null ? datasetImage : ""}>
                     ${tvSerieInfo.poster_path !== null ? "" : `<span class="center-message white-message">No Image</span>`}
@@ -116,7 +116,7 @@ function renderSeries(tvInfo) {
             let datasetImage = `data-img-url="url('${IMAGE_URL}${tv.poster_path}')"`; // we add the img info to the dataset to use it with the Intersection Observer.
             tvList += 
             `<div class="movie-info">
-                <a href="/src/views/tv-info.html?tvId=${tv.id}">
+                <a href="/movie-app/src/views/tv-info.html?tvId=${tv.id}">
                     <div ${tv.poster_path !== null ? datasetImage : ""} class="movie-image">
                         <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
@@ -137,11 +137,11 @@ function renderSeries(tvInfo) {
 
 // function that returns the pagination elements as a string.
 function createPagination(maxPages) {
-    const arrowLeftLink = `href="/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber > 1 ? (pageNumber - 1) : pageNumber}"`;
+    const arrowLeftLink = `href="/movie-app/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber > 1 ? (pageNumber - 1) : pageNumber}"`;
     let listNavigation = `
         <a ${pageNumber > 1 ? arrowLeftLink : ""} class="no-link-style">
             <div class="pagination auto-center">
-                <img class="arrow-right" src="/src/assets/icons/arrow.svg" alt="arrow right icon">
+                <img class="arrow-right" src="/movie-app/src/assets/icons/arrow.svg" alt="arrow right icon">
             </div>
         </a>`;
 
@@ -149,7 +149,7 @@ function createPagination(maxPages) {
         if(maxPages >= 5) {
             for (let index = 1; index <= 5; index++) {
                 listNavigation += `
-                <a href="/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${index}" class="no-link-style">
+                <a href="/movie-app/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${index}" class="no-link-style">
                     <div class="pagination ${pageNumber === index ? "selected-page" : ""}">
                         ${index}
                     </div>
@@ -158,7 +158,7 @@ function createPagination(maxPages) {
         } else {
             for (let index = 1; index <= maxPages; index++) {
                 listNavigation += `
-                <a href="/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${index}" class="no-link-style">
+                <a href="/movie-app/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${index}" class="no-link-style">
                     <div class="pagination ${pageNumber === index ? "selected-page" : ""}">
                         ${index}
                     </div>
@@ -169,7 +169,7 @@ function createPagination(maxPages) {
         if((pageNumber + 2) <= maxPages) {
             for (let index = -2; index <= 2; index++) {
                 listNavigation += `
-                <a href="/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber + index}" class="no-link-style">
+                <a href="/movie-app/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber + index}" class="no-link-style">
                     <div class="pagination ${pageNumber === (pageNumber + index) ? "selected-page" : ""}">
                         ${pageNumber + index}
                     </div>
@@ -178,7 +178,7 @@ function createPagination(maxPages) {
         } else {
             for (let index = -2; index <= (maxPages - pageNumber); index++) {
                 listNavigation += `
-                <a href="/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber + index}" class="no-link-style">
+                <a href="/movie-app/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber + index}" class="no-link-style">
                     <div class="pagination ${pageNumber === (pageNumber + index) ? "selected-page" : ""}">
                         ${pageNumber + index}
                     </div>
@@ -188,11 +188,11 @@ function createPagination(maxPages) {
         
     }
 
-    const arrowRightLink = `href="/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber < maxPages ? (pageNumber + 1) : pageNumber}"`;
+    const arrowRightLink = `href="/movie-app/src/views/tv-filter.html?genreId=${genreId}&genreName=${genreName}&page=${pageNumber < maxPages ? (pageNumber + 1) : pageNumber}"`;
     listNavigation += `
         <a ${pageNumber < maxPages ? arrowRightLink : ""} class="no-link-style">
             <div class="pagination auto-center">
-                <img class="arrow-left" src="/src/assets/icons/arrow.svg" alt="arrow right icon">
+                <img class="arrow-left" src="/movie-app/src/assets/icons/arrow.svg" alt="arrow right icon">
             </div>
         </a>`;
 

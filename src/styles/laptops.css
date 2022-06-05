@@ -25,9 +25,9 @@
 }
 
 .movie.first-movie-section {
-    background-image: url("/src/assets/imgs/movie-large-cover.jpeg");
+    background-image: url("/movie-app/src/assets/imgs/movie-large-cover.jpeg");
 }
 
 .serie.first-movie-section {
-    background-image: url("/src/assets/imgs/series-large-cover.jpeg");
+    background-image: url("/movie-app/src/assets/imgs/series-large-cover.jpeg");
 }

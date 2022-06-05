@@ -127,7 +127,7 @@ function trailerOption(idVideo) {
     let youtubeTrailer = 
     `<div id="js-youtube-section" class="youtube-container">
         <div class="close">
-            <img id="js-close-trailer" class="icon-trailer" src="/src/assets/icons/close.svg" alt="close icon">
+            <img id="js-close-trailer" class="icon-trailer" src="/movie-app/src/assets/icons/close.svg" alt="close icon">
         </div>
         <iframe class="youtube-video" src="https://www.youtube.com/embed/${idVideo}?rel=0" title="YouTube video player" frameborder="0" allowfullscreen>
         </iframe>
@@ -255,7 +255,7 @@ function getMovieRelated(data) {
             let datasetImage = `data-img-url="url('${IMAGE_URL}${movie.poster_path}')"`;
             movieList += 
             `<div class="movie-info">
-                <a href="/src/views/movie-info.html?movieId=${movie.id}">
+                <a href="/movie-app/src/views/movie-info.html?movieId=${movie.id}">
                     <div ${movie.poster_path !== null ? datasetImage : ""} class="movie-image">
                         <img class="icon-watchlist" src="../assets/icons/watchlist-ribbon.svg" alt="watchlist icon">
                         <img class="icon-favorite" src="../assets/icons/favorite.svg" alt="favorite icon">
@@ -328,7 +328,7 @@ function showSearchList(data) {
         let datasetImage = `data-img-url="url('${IMAGE_URL + movieInfo.poster_path}')"`;
 
         queryList += `
-        <a class="no-link-style" href="/src/views/movie-info.html?movieId=${movieInfo.id}">
+        <a class="no-link-style" href="/movie-app/src/views/movie-info.html?movieId=${movieInfo.id}">
             <div class="query-list">
                 <div class="movie-image query-list-img" ${movieInfo.poster_path !== null ? datasetImage : ""}>
                     ${movieInfo.poster_path !== null ? "" : `<span class="center-message white-message">No Image</span>`}
