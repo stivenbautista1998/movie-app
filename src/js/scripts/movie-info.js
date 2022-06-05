@@ -41,6 +41,28 @@ window.addEventListener("load", () => {
                     frontImage.style.height = (backPost.height - (backPost.height * 20 / 100)) + "px";
                 }
             }
+        } else if(frontImageLoaded === false && backImageLoaded === false) {
+            frontImage = document.querySelector(".empty-img");
+            backPost = document.querySelector(".image-bg");
+
+            if(window.innerWidth >= 1024) {
+                frontImage.style.height = "415px";
+                backPost.style.height = "415px";
+            } else {
+                if(window.innerWidth <= 480) {
+                    frontImage.style.height = "144px";
+                    frontImage.style.width = "96px";
+                    backPost.style.height = "180px";
+                } else if(window.innerWidth <= 768) {
+                    frontImage.style.height = "270px";
+                    frontImage.style.width = "180px";
+                    backPost.style.height = "337px";
+                } else {
+                    frontImage.style.height = "321px";
+                    frontImage.style.width = "214px";
+                    backPost.style.height = "400px";
+                }
+            }
         }
     }); 
 
@@ -61,6 +83,26 @@ function adjustBackground(event) {
         } else {
             // we get the 80% of the height of the back-image and add it to the height of the front-image.
             frontImage.style.height = (backPost.height - (backPost.height * 20 / 100)) + "px";
+        }
+    } else if(frontImageLoaded === false && backImageLoaded === false) {
+        if(window.innerWidth >= 1024) {
+            frontImage.style.height = "415px";
+            frontImage.style.width = "100%";
+            backPost.style.height = "415px";
+        } else {
+            if(window.innerWidth <= 480) {
+                frontImage.style.height = "144px";
+                frontImage.style.width = "96px";
+                backPost.style.height = "180px";
+            } else if(window.innerWidth <= 768) {
+                frontImage.style.height = "270px";
+                frontImage.style.width = "180px";
+                backPost.style.height = "337px";
+            } else {
+                frontImage.style.height = "321px";
+                frontImage.style.width = "214px";
+                backPost.style.height = "400px";
+            }
         }
     }
 }
