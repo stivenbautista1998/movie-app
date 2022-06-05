@@ -180,7 +180,8 @@ function createDomMovieInfo(movie) {
                 </div>
                 <div class="container-btn-trailer">
                     <div class="image-bg" ${movie?.backdrop_path ? styleBgImage : ""}>
-                        ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` : `<span class="center-position medium-font-size">No Poster Image</span>`}
+                        ${movie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${movie.backdrop_path}" alt="trailer image">` 
+                        : `<span class="${movie.videos.results.length !== 0 ? "center-position" : "total-center"} medium-font-size">No Poster Image</span>`}
                     </div> 
                     ${movie.videos.results.length !== 0 ? btnShowTrailer : ""}
                 </div>

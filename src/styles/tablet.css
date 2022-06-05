@@ -33,7 +33,7 @@
 
 .season-container {
     grid-template-rows: 175px;
-    grid-auto-columns: 275px;
+    grid-auto-columns: 295px;
 }
 
 .season-item {
@@ -75,4 +75,8 @@
 
 .center-position {
     top: calc(50% - 40px);
+}
+
+.season-text-content {
+    max-height: 130px;
 }

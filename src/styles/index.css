@@ -500,6 +500,12 @@ html {
     display: none;
 }
 
+.total-center {
+    position: absolute;
+    top: calc(50% - 14.5px);
+    left: calc(50% - 49px);
+}
+
 @media (min-width: 370px) {
     .menu-tab {
         width: 333px;

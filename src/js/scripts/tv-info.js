@@ -180,7 +180,8 @@ function createDomTvInfo(tvSerie) {
                 </div>
                 <div class="container-btn-trailer">
                     <div class="image-bg" ${tvSerie?.backdrop_path ? styleBgImage : ""}>
-                        ${tvSerie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">` : `<span class="center-position medium-font-size">No Poster Image</span>`}
+                        ${tvSerie?.backdrop_path ? `<img id="js-image-bg" class="movie-info__bg-image" src="${IMAGE_URL}${tvSerie.backdrop_path}" alt="trailer image">` 
+                        : `<span class="${tvSerie.videos.results.length !== 0 ? "center-position" : "total-center"} medium-font-size">No Poster Image</span>`}
                     </div> 
                     ${tvSerie.videos.results.length !== 0 ? btnShowTrailer : ""}
                 </div>

@@ -79,10 +79,10 @@
 
 .genres-section {
     margin: 0 auto;
-    margin-top: 3em;
+    margin-top: 3.5em;
     padding: 1em;
     overflow-x: scroll;
-    width: 90%;
+    width: 95%;
     white-space: nowrap;
 }
 
@@ -104,6 +104,9 @@
     border-radius: 10px;
     margin: 0.5em;
     padding: 0.5em;
+    background-color: var(--main-yellow);
+    color: var(--back-content);
+    font-weight: 700;
 }
 
 .overview-section {
@@ -168,6 +171,8 @@
     display: grid;
     grid-template-columns: 90px 140px;
     grid-template-rows: 135px;
+    background-color: #222;
+    border-radius: 5px;
 }
 
 .season-text-content {
