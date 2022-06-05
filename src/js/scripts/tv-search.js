@@ -36,7 +36,7 @@ async function searchMovie(event) {
     let { value } = event.target; 
     if(event.keyCode === 13) {
         if(value !== "") {
-            window.location.href = `/src/views/tv-search.html?query=${value}&page=1`;
+            window.location.href = `/movie-app/src/views/tv-search.html?query=${value}&page=1`;
         }
     } else if(value !== "" && value.length >= 4) {
         let queryResult = await queryOfInput(value, 5);
@@ -49,7 +49,7 @@ async function searchMovie(event) {
                 showAllMovieInfo = document.querySelector("#js-view-all-btn");
                 showAllMovieInfo.onclick = () => {
                     console.log("it has been clicked!!");
-                    window.location.href = `/src/views/tv-search.html?query=${value}&page=1`;
+                    window.location.href = `/movie-app/src/views/tv-search.html?query=${value}&page=1`;
                 };
             }
         }
